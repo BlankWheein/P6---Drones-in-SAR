@@ -1,0 +1,100 @@
+{
+  "version": 3,
+  "targets": {
+    "net7.0": {
+      "TelloSharp/1.0.3": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/TelloSharp.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/TelloSharp.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "TelloSharp/1.0.3": {
+      "sha512": "Lv8qf41UpWjJ4h9CoXGke+Hy/n71PhehRTcWDEoZghfihv1kcQnxmT46SsQeBl9hRUF9u4jZY3FWRj1n4K5bqQ==",
+      "type": "package",
+      "path": "tellosharp/1.0.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "icon.jpeg",
+        "lib/net6.0/TelloSharp.dll",
+        "tellosharp.1.0.3.nupkg.sha512",
+        "tellosharp.nuspec"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    "net7.0": [
+      "TelloSharp >= 1.0.3"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\noobs\\.nuget\\packages\\": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\noobs\\OneDrive\\Documents\\GitHub\\P6---DROOONNEEESSS\\C# Drone test\\DroneTest\\DroneTest.csproj",
+      "projectName": "DroneTest",
+      "projectPath": "C:\\Users\\noobs\\OneDrive\\Documents\\GitHub\\P6---DROOONNEEESSS\\C# Drone test\\DroneTest\\DroneTest.csproj",
+      "packagesPath": "C:\\Users\\noobs\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\noobs\\OneDrive\\Documents\\GitHub\\P6---DROOONNEEESSS\\C# Drone test\\DroneTest\\obj\\",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "C:\\Users\\noobs\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net7.0"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "net7.0": {
+        "targetAlias": "net7.0",
+        "dependencies": {
+          "TelloSharp": {
+            "target": "Package",
+            "version": "[1.0.3, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48",
+          "net481"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}
