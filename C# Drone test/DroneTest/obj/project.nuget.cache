@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "Rg9f5MyvYVYb1anesJUPPoES/4HpZUXEQtV0Pk29dnJ02JoPmRDx+IILiVgiziGMW8nW4CT0gS+oH1w5u1Gv2w==",
+  "dgSpecHash": "smEJlJlUHfHAM8I1AYczOkxY8TqdN00yNHjZsblokN9utEbONy9sAWDNRp1la3H4YpT8u71qzFAduNyeSQ6t0Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\noobs\\OneDrive\\Documents\\GitHub\\P6---DROOONNEEESSS\\C# Drone test\\DroneTest\\DroneTest.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\noobs\\.nuget\\packages\\tellocommander\\1.0.0.6\\tellocommander.1.0.0.6.nupkg.sha512",
     "C:\\Users\\noobs\\.nuget\\packages\\tellosharp\\1.0.3\\tellosharp.1.0.3.nupkg.sha512"
   ],
   "logs": []

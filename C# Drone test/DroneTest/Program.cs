@@ -1,7 +1,6 @@
-﻿using TelloSharp;
-
-var drone = new Tello();
-drone.Connect();
-drone.Takeoff();
-Thread.Sleep(5000);
-drone.Land();
+﻿using System.Net;
+using System.Net.Sockets;
+using System.Text;
+var tello = new TelloLib.Tello();
+TelloLib.Tello.startConnecting();
+tello.SendToDrone("EXT tof?", true);

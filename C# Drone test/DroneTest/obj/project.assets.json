@@ -2,6 +2,37 @@
   "version": 3,
   "targets": {
     "net7.0": {
+      "TelloCommander/1.0.0.6": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.1/TelloCommander.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/TelloCommander.dll": {}
+        },
+        "contentFiles": {
+          "contentFiles/any/netstandard2.1/Content/CommandDictionary-1.3.0.0.xml": {
+            "buildAction": "Content",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          },
+          "contentFiles/any/netstandard2.1/Content/CommandDictionary-2.0.0.0.xml": {
+            "buildAction": "Content",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          },
+          "contentFiles/any/netstandard2.1/Content/CommandDictionary.xsd": {
+            "buildAction": "Content",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          },
+          "contentFiles/any/netstandard2.1/Content/TelloCommander.License.txt": {
+            "buildAction": "Content",
+            "codeLanguage": "any",
+            "copyToOutput": false
+          }
+        }
+      },
       "TelloSharp/1.0.3": {
         "type": "package",
         "compile": {
@@ -14,6 +45,26 @@
     }
   },
   "libraries": {
+    "TelloCommander/1.0.0.6": {
+      "sha512": "2UFSGxK08MbMPwLfQvh7fVQg3gDisFvI3tpjDjng8WU6le5s+cx38nIshx0oA6bCL1PoIx+dJFe1Xcgk9byKig==",
+      "type": "package",
+      "path": "tellocommander/1.0.0.6",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "content/Content/CommandDictionary-1.3.0.0.xml",
+        "content/Content/CommandDictionary-2.0.0.0.xml",
+        "content/Content/CommandDictionary.xsd",
+        "content/Content/TelloCommander.License.txt",
+        "contentFiles/any/netstandard2.1/Content/CommandDictionary-1.3.0.0.xml",
+        "contentFiles/any/netstandard2.1/Content/CommandDictionary-2.0.0.0.xml",
+        "contentFiles/any/netstandard2.1/Content/CommandDictionary.xsd",
+        "contentFiles/any/netstandard2.1/Content/TelloCommander.License.txt",
+        "lib/netstandard2.1/TelloCommander.dll",
+        "tellocommander.1.0.0.6.nupkg.sha512",
+        "tellocommander.nuspec"
+      ]
+    },
     "TelloSharp/1.0.3": {
       "sha512": "Lv8qf41UpWjJ4h9CoXGke+Hy/n71PhehRTcWDEoZghfihv1kcQnxmT46SsQeBl9hRUF9u4jZY3FWRj1n4K5bqQ==",
       "type": "package",
@@ -30,6 +81,7 @@
   },
   "projectFileDependencyGroups": {
     "net7.0": [
+      "TelloCommander >= 1.0.0.6",
       "TelloSharp >= 1.0.3"
     ]
   },
@@ -72,6 +124,10 @@
       "net7.0": {
         "targetAlias": "net7.0",
         "dependencies": {
+          "TelloCommander": {
+            "target": "Package",
+            "version": "[1.0.0.6, )"
+          },
           "TelloSharp": {
             "target": "Package",
             "version": "[1.0.3, )"
