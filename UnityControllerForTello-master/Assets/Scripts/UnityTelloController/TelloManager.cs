@@ -63,6 +63,9 @@ namespace UnityControllerForTello
         private bool startingProps = false;
         private int startUpCount = 0, startUpLimit = 300;
 
+
+        private bool instatiatePoints = false;
+
         public SceneManager sceneManager;
         private InputController inputController;
 
@@ -105,8 +108,8 @@ namespace UnityControllerForTello
         /// </summary>
         public void AutoTakeOff()
         {
-            tracking = false;
-            drawFlightPath = false;
+            tracking = true;
+            drawFlightPath = true;
             Debug.Log("TakeOff!");
             var preFlightPanel = GameObject.Find("Pre Flight Panel");
             if (preFlightPanel)
@@ -117,9 +120,9 @@ namespace UnityControllerForTello
         }
         IEnumerator ExecuteAfterTime(float time)
         {
-            tracking = false;
             yield return new WaitForSeconds(time);
-            //Offset = new Vector3(posX, posY, posZ);
+            Offset = new Vector3(posX /5, posY /2, posZ /5);
+            instatiatePoints = true;
             tracking = true;
             drawFlightPath = true;
         }
@@ -150,8 +153,6 @@ namespace UnityControllerForTello
             Debug.Log("Land");
             Tello.land();
             Offset = Vector3.zero;
-            sceneManager.flightStatus = SceneManager.FlightStatus.Landing;
-            CreateFlightPoint();
             sceneManager.flightStatus = SceneManager.FlightStatus.PreLaunch;
 
 
@@ -256,6 +257,7 @@ namespace UnityControllerForTello
         /// </summary>
         void CreateFlightPoint()
         {
+            if (!instatiatePoints) return;
             var newPoint = Instantiate(GameObject.Find("FlightPoint")).GetComponent<FlightPoint>();
             newPoint.transform.position = transform.position;
             newPoint.transform.SetParent(flightPointsParent);
@@ -291,7 +293,7 @@ namespace UnityControllerForTello
             posY = -Tello.state.posZ;
             posZ = Tello.state.posX;
 
-            transform.position = new Vector3((posX / 10) - Offset.x, (posY / 10) - Offset.y, (posZ / 10) - Offset.z) - Offset;
+            transform.position = new Vector3((posX / 5) - Offset.x, (posY / 2) - Offset.y, (posZ / 5) - Offset.z);
 
             quatW = state.quatW;
             quatX = state.quatW;
