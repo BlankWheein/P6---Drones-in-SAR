@@ -73,14 +73,18 @@ namespace TelloLib
             return connection;
         }
 
-        public void Send(string message)
+        public void Send(string message, IPEndPoint ip)
         {
             var datagram = Encoding.ASCII.GetBytes(message);
-            Client.Send(datagram, datagram.Length);
+            Client.Send(datagram, datagram.Length, ip);
         }
         public void Send(byte[] message)
         {
             Client.Send(message, message.Length);
+        }
+        public byte[] RecieveNew(ref IPEndPoint ipep)
+        {
+            return Client.Receive(ref ipep);
         }
     }
 }

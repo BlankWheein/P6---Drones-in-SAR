@@ -16,7 +16,6 @@ namespace TelloLib
 {
     public class Tello
     {
-        private static UdpClient Udpclient = new System.Net.Sockets.UdpClient();
 
         private static UdpUser client;
         private static DateTime lastMessageTime;//for connection timeouts.
@@ -62,16 +61,14 @@ namespace TelloLib
             setPacketCRCs(packet);
             client.Send(packet);
         }
-        private string SendToDrone(string message, bool printresults = false)
+        public static string SendToDrone(string message, bool printresults = false)
         {
-            //Udpclient.Send(Encoding.UTF8.GetBytes(message));
-            //IPEndPoint remoteEP = new IPEndPoint(IPAddress.Any, 8889);
-            //byte[] bytes = Udpclient.Receive(ref remoteEP);
-            //string @string = Encoding.UTF8.GetString(bytes);
-            //if (printresults)
-            //    Console.WriteLine(@string);
-            //return @string;
-            return "42";
+            var x = Encoding.UTF8.GetBytes(message);
+            IPEndPoint remoteEP = new IPEndPoint(IPAddress.Parse("255.255.255.255"), 8889);
+            client.Send(x, remoteEP);
+            byte[] bytes = client.RecieveNew(ref remoteEP);
+            string @string = Encoding.ASCII.GetString(bytes);
+            return @string;
         }
         public static void StartMotors()
         {

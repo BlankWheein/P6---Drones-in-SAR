@@ -506,7 +506,7 @@ MonoBehaviour:
   roll: 0
   height: 0
   posUncertainty: 0
-  EXTTof: 0
+  EXTTof: 
   wifiStrength: 0
   state: 
 --- !u!114 &111827015

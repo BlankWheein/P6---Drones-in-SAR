@@ -17,7 +17,7 @@ namespace UnityControllerForTello
         public float yaw, pitch, roll;
         public int height;
         public float posUncertainty;
-        public int EXTTof;
+        public string EXTTof;
         public int wifiStrength;
         public string state;
 
@@ -249,6 +249,8 @@ namespace UnityControllerForTello
         //This just saves all the tello variables locally for viewing in the inspector
         public void UpdateLocalState()
         {
+            EXTTof = Tello.SendToDrone("time?");
+            Debug.Log(EXTTof);
             var state = Tello.state;
 
             posX = Tello.state.posY;
