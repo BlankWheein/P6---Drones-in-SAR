@@ -11,69 +11,64 @@ namespace UnityControllerForTello
     /// </summary>
     public class TelloManager : MonoBehaviour
     {
-        public Vector3 Offset = Vector3.zero;
-        public string state;
-        public int EXTToF;
-        public bool drawFlightPath = true;
-        public bool limitPathDistance = false;
-        private TelloVideoTexture telloVideoTexture;
-        public float yaw, pitch, roll;
-
+        public int batteryPercent;
         public float posX = 0, posY, posZ;
-        public float quatW;
-        public float quatX;
-        public float quatY;
-        public float quatZ;
-        public Vector3 toEuler;
-        public Quaternion onTrackStartRot;
-        public Vector3 originPoint, originEuler;
+        public Vector3 Offset = Vector3.zero;
+        public float yaw, pitch, roll;
+        public int height;
+        public float posUncertainty;
+        public int EXTTof;
+        public int wifiStrength;
+        public string state;
 
-        public bool flying = false, hovering = false;
-        public bool tracking = false;
 
-        private List<FlightPoint> flightPoints;
+
+        private bool limitPathDistance = false;
+        private TelloVideoTexture telloVideoTexture;
+        private float quatW;
+        private float quatX;
+        private float quatY;
+        private float quatZ;
+        private Vector3 toEuler;
+        private Quaternion onTrackStartRot;
+        private Vector3 originPoint, originEuler;
+        private bool flying = false, hovering = false;
         private float prevPosX, prevPosY, prevPosZ;
         private Transform ground, telloGround, telloModel, flightPointsParent;
         private bool updateReceived = false;
 
         //Tello api
-        public float posUncertainty;
-        public bool batteryLow;
-        public int batteryPercent;
-        public int cameraState;
-        public bool downVisualState;
-        public int telloBatteryLeft;
-        public int telloFlyTimeLeft;
-        public int flymode;
-        public int flyspeed;
-        public int flyTime;
-        public bool gravityState;
-        public int height;
-        public int imuCalibrationState;
-        public bool imuState;
-        public int lightStrength;
-        public bool onGround = true;
-        public bool powerState;
-        public bool pressureState;
-        public int temperatureHeight;
-        public int wifiDisturb;
-        public int wifiStrength;
-        public bool windState;
+        private bool batteryLow;
+        private int cameraState;
+        private bool downVisualState;
+        private int telloBatteryLeft;
+        private int telloFlyTimeLeft;
+        private int flymode;
+        private int flyspeed;
+        private int flyTime;
+        private bool gravityState;
+        private int imuCalibrationState;
+        private bool imuState;
+        private int lightStrength;
+        private bool onGround = true;
+        private bool powerState;
+        private bool pressureState;
+        private int temperatureHeight;
+        private int wifiDisturb;
+        private bool windState;
 
         private bool startingProps = false;
         private int startUpCount = 0, startUpLimit = 300;
-
-
-        private bool instatiatePoints = false;
-
-        public SceneManager sceneManager;
+        private SceneManager sceneManager;
         private InputController inputController;
+        private FlightPathController flightPathController;
+        private int telloFrameCount = 0;
 
-        public int telloFrameCount = 0;
         public void CustomAwake(SceneManager sceneManager, InputController inputController)
         {
             this.sceneManager = sceneManager;
             this.inputController = inputController;
+            this.flightPathController = GetComponent<FlightPathController>();
             try
             {
                 telloModel = transform.Find("Tello Model");
@@ -108,23 +103,17 @@ namespace UnityControllerForTello
         /// </summary>
         public void AutoTakeOff()
         {
-            tracking = true;
-            drawFlightPath = true;
             Debug.Log("TakeOff!");
             var preFlightPanel = GameObject.Find("Pre Flight Panel");
             if (preFlightPanel)
                 preFlightPanel.SetActive(false);
             Tello.takeOff();
             sceneManager.flightStatus = SceneManager.FlightStatus.Launching;
-            StartCoroutine(ExecuteAfterTime(3));
+            flightPathController.TakeOff(this);
         }
-        IEnumerator ExecuteAfterTime(float time)
+        public void SetOffset()
         {
-            yield return new WaitForSeconds(time);
-            Offset = new Vector3(posX /5, posY /2, posZ /5);
-            instatiatePoints = true;
-            tracking = true;
-            drawFlightPath = true;
+            Offset = new Vector3(posX / 5, posY / 2, posZ / 5);
         }
         public void PrimeProps()
         {
@@ -148,28 +137,22 @@ namespace UnityControllerForTello
 
         public void OnLand()
         {
-            tracking = false;
-            drawFlightPath = false;
             Debug.Log("Land");
+            flightPathController.Land();
             Tello.land();
             Offset = Vector3.zero;
-            sceneManager.flightStatus = SceneManager.FlightStatus.PreLaunch;
-
-
+            sceneManager.flightStatus = SceneManager.FlightStatus.Landing;
         }
 
         public void CheckForUpdate()
         {
             if (updateReceived)
             {
-
                 UpdateLocalState();
                 sceneManager.RunFrame();
                 SendTelloInputs();
                 updateReceived = false;
-                if (sceneManager.flightStatus == SceneManager.FlightStatus.Flying) {
-                    CreateFlightPoint();
-                }
+                
             }
         }
 
@@ -200,9 +183,6 @@ namespace UnityControllerForTello
                 originEuler = new Vector3(pitch, yaw, roll);
                 // onTrackStartRot = new Quaternion(quatW, quatX, quatY, quatZ);
                 ground.position -= new Vector3(0, height * .1f, 0);
-                flightPoints = new List<FlightPoint>();
-                CreateFlightPoint();
-
                 Debug.Log("tello height set to " + height * .1f);
                 telloGround.position = transform.position - new Vector3(0, height * .1f, 0);
                 elevationOffset = height * .1f;
@@ -227,11 +207,6 @@ namespace UnityControllerForTello
             {
                 transform.position += new Vector3(0, elevationOffset, 0);
                 prevDeltaPos = dif;
-                Vector3 flightPointDif = flightPoints[flightPoints.Count - 1].transform.position - currentPos;
-                if (flightPointDif.magnitude > .001f)
-                {
-                    CreateFlightPoint();
-                }
                 yaw = yaw * (180 / Mathf.PI);
                 transform.eulerAngles = new Vector3(0, yaw, 0);
                 pitch = pitch * (180 / Mathf.PI);
@@ -255,20 +230,7 @@ namespace UnityControllerForTello
         /// <summary>
         /// Create a point for tracking
         /// </summary>
-        void CreateFlightPoint()
-        {
-            if (!instatiatePoints) return;
-            var newPoint = Instantiate(GameObject.Find("FlightPoint")).GetComponent<FlightPoint>();
-            newPoint.transform.position = transform.position;
-            newPoint.transform.SetParent(flightPointsParent);
-            newPoint.CustomStart();
-
-            if (flightPoints.Count > 0 & drawFlightPath)
-            {
-                newPoint.SetPointOne(flightPoints[flightPoints.Count - 1].transform.position);
-            }
-            flightPoints.Add(newPoint);
-        }
+        
         private void Tello_onConnection(Tello.ConnectionState newState)
         {
             if (newState == Tello.ConnectionState.Connected)

@@ -15,11 +15,13 @@ namespace UnityControllerForTello
         public float inputDrag, drag;
         public Camera followCam;
         private SceneManager sceneManager;
+        private FlightPathController flightPathController;
         
 
         public void CustomStart(SceneManager sceneManager)
         {
             this.sceneManager = sceneManager;
+            flightPathController = GetComponent<FlightPathController>();
             rigidBody = GetComponent<Rigidbody>();
             inputController = sceneManager.inputController;
         }
@@ -37,6 +39,7 @@ namespace UnityControllerForTello
             gameObject.GetComponent<Rigidbody>().useGravity = true;
             sceneManager.SetHomePoint(transform.position);
             sceneManager.flightStatus = SceneManager.FlightStatus.Flying;
+            flightPathController.TakeOff(this);
         }
         public void FixedUpdate()
         {
@@ -91,6 +94,7 @@ namespace UnityControllerForTello
             transform.position = sceneManager.telloManager.transform.position;
             rigidBody.velocity = Vector3.zero;
             rigidBody.angularVelocity = Vector3.zero;
+            flightPathController.Land();
 
         }
     }
