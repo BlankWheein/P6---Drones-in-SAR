@@ -18,6 +18,7 @@ namespace TelloLib
     {
 
         private static UdpUser client;
+        private static UdpClient UdpClient;
         private static DateTime lastMessageTime;//for connection timeouts.
 
         public static FlyData state = new FlyData();
@@ -56,18 +57,16 @@ namespace TelloLib
 
         public static void takeOff()
         {
-            var packet = new byte[] { 0xcc, 0x58, 0x00, 0x7c, 0x68, 0x54, 0x00, 0xe4, 0x01, 0xc2, 0x16 };
+            var packet = new byte[]     { 0xcc, 0x58, 0x00, 0x7c, 0x68, 0x54, 0x00, 0xe4, 0x01, 0xc2, 0x16 };
             setPacketSequence(packet);
             setPacketCRCs(packet);
             client.Send(packet);
         }
         public static string SendToDrone(string message, bool printresults = false)
         {
-            var x = Encoding.UTF8.GetBytes(message);
-            IPEndPoint remoteEP = new IPEndPoint(IPAddress.Parse("255.255.255.255"), 8889);
-            client.Send(x, remoteEP);
+            IPEndPoint remoteEP = new (IPAddress.Any, 8889);
             byte[] bytes = client.RecieveNew(ref remoteEP);
-            string @string = Encoding.ASCII.GetString(bytes);
+            string @string = Encoding.UTF8.GetString(bytes);
             return @string;
         }
         public static void StartMotors()
@@ -487,9 +486,11 @@ namespace TelloLib
         }
         private static void connect()
         {
-            //Console.WriteLine("Connecting to tello.");
-            client = UdpUser.ConnectTo("192.168.10.1", 8889);
+            ////Console.WriteLine("Connecting to tello.");
+            //UdpClient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Debug, 15000);
+            //UdpClient.Connect("192.168.10.1", 8889);
             
+            client = UdpUser.ConnectTo("192.168.10.1", 8889);
             connectionState = ConnectionState.Connecting;
             //send event
             onConnection(connectionState);
@@ -499,10 +500,6 @@ namespace TelloLib
             connectPacket[connectPacket.Length - 1] = 0x17;
             client.Send(connectPacket);
 
-
-            //Udpclient.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Debug, 15000);
-            //Udpclient.Connect("192.168.10.1", 8889);
-            
         }
 
         //Pause connections. Used by aTello when app paused.
@@ -827,6 +824,8 @@ namespace TelloLib
                     {
                         if (token.IsCancellationRequested)
                             break;
+                        
+
 
                         if (connectionState == ConnectionState.Connected)//only send if not paused
                         {
@@ -994,6 +993,8 @@ namespace TelloLib
             try
             {
                 client.Send(packet);
+                byte[] tofPacket = Encoding.UTF8.GetBytes("tof?P");
+                client.Send(tofPacket);
             }
             catch (Exception ex)
             {
@@ -1115,6 +1116,10 @@ namespace TelloLib
             public float quatY;
             public float quatZ;
             public float quatW;
+            public float _22;
+            public float _23;
+            public float _24;
+            public float _25;
 
             public void set(byte[] data)
             {
@@ -1165,7 +1170,8 @@ namespace TelloLib
                 frontLSC = (data[index] >> 2 & 0x1) == 1 ? true : false;
                 index += 1;
                 temperatureHeight = (data[index] >> 0 & 0x1);//23
-
+                index += 1;
+                _24 = data[index] | (data[index + 1] << 8);
                 wifiStrength = Tello.wifiStrength;//Wifi str comes in a cmd.
             }
 

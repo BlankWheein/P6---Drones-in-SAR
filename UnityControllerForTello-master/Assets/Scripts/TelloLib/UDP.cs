@@ -23,6 +23,8 @@ namespace TelloLib
         protected UdpBase()
         {
             Client = new UdpClient();
+            Client.Client.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Debug, 15000);
+
         }
 
         public async Task<Received> Receive()
@@ -73,13 +75,19 @@ namespace TelloLib
             return connection;
         }
 
-        public void Send(string message, IPEndPoint ip)
+        public void Send(string message)
         {
-            var datagram = Encoding.ASCII.GetBytes(message);
-            Client.Send(datagram, datagram.Length, ip);
+            var datagram = Encoding.UTF8.GetBytes(message);
+            Client.Send(datagram, datagram.Length);
+
         }
         public void Send(byte[] message)
         {
+            var mstr = Encoding.ASCII.GetString(message);
+            if (mstr == "tof?")
+            {
+
+            }
             Client.Send(message, message.Length);
         }
         public byte[] RecieveNew(ref IPEndPoint ipep)

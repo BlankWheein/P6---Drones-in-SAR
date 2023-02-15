@@ -252,6 +252,7 @@ namespace UnityControllerForTello
             EXTTof = Tello.SendToDrone("time?");
             Debug.Log(EXTTof);
             var state = Tello.state;
+            this.state = state.ToString();
 
             posX = Tello.state.posY;
             posY = -Tello.state.posZ;
