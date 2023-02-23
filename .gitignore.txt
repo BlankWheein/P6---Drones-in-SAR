@@ -11,7 +11,7 @@
 [Uu]ser[Ss]ettings/
 # Meta Files built by Visual Studio
 *.meta
-
+*\.vs
 # Unity3D generated meta files
 *.pidb.meta
 *.pdb.meta
