@@ -9,19 +9,10 @@ namespace BetterTelloLib.Commander
 {
     public class BetterTello : IDisposable
     {
+        public TelloState State { get; set; } = new();
         public const string DefaultTelloAddress = "192.168.10.1";
         public const int DefaultTelloPort = 8889;
-
-        private readonly string _address;
-        private readonly int _port;
-        private readonly TelloUdpClient _client = new ();
-        private const string HeightUnits = "dm";
-        public TelloState State { get; set; } = new();
-
-        private static CancellationTokenSource cancelTokens = new ();
-
-        private static CancellationTokenSource masterCancelTokens = new ();
-        private const string ApiModeCommand = "command";
+        public TelloSdk30ControlCommands Commands { get; set; }
         public const string LandCommand = "land";
         public const string DownCommand = "down";
         public const string GetHeightCommand = "height?";
@@ -32,15 +23,33 @@ namespace BetterTelloLib.Commander
         public const string ForceFailCommand = "forcefail";
         public const string ReceiveTimeoutCommand = "receivetimeout";
         public const string SendTimeoutCommand = "sendtimeout";
-        private static DateTime lastMessageTime;//for connection timeouts.
+
+        private static CancellationTokenSource cancelTokens = new();
+        private const string ApiModeCommand = "command";
+        private readonly string _address;
+        private readonly int _port;
+        private readonly TelloUdpClient _client = new();
+        private const string HeightUnits = "dm";
+        private readonly IPEndPoint ipep;
+        private readonly UdpClient stateServer;
+        private IPEndPoint sender;
+
+        public BetterTello()
+        {
+            _address = DefaultTelloAddress;
+            ipep = new IPEndPoint(IPAddress.Any, 8890);
+            _port = DefaultTelloPort;
+            stateServer = new UdpClient(ipep);
+            sender = new IPEndPoint(IPAddress.Any, 0);
+            Commands = new(_client);
+        }
 
 
         public void StartListeners()
         {
             cancelTokens = new CancellationTokenSource();
             CancellationToken token = cancelTokens.Token;
-            // State factory
-            Task.Factory.StartNew(() =>
+            Task.Factory.StartNew(() => // State factory
             {
                 while (true)
                 {
@@ -70,8 +79,7 @@ namespace BetterTelloLib.Commander
                 }
             });
 
-            // Command response Factory
-            Task.Factory.StartNew(() =>
+            Task.Factory.StartNew(() => // Command response Factory
             {
                 while (true)
                 {
@@ -94,29 +102,19 @@ namespace BetterTelloLib.Commander
             });
         }
 
-
-
-        public BetterTello()
-        {
-            _address = DefaultTelloAddress;
-            _port = DefaultTelloPort;
-        }
-        private IPEndPoint ipep;
-        private UdpClient stateServer;
-        private IPEndPoint sender;
+        
+        
         public void Connect()
         {
             _client.Connect(IPAddress.Parse(_address), _port);
             _client.Send(ApiModeCommand);
-            ipep = new IPEndPoint(IPAddress.Any, 8890);
-            stateServer = new UdpClient(ipep);
-            sender = new IPEndPoint(IPAddress.Any, 0);
             StartListeners();
         }
 
         public void Dispose()
         {
             SendCommand("quit");
+            GC.SuppressFinalize(this);
             _client.Close();
         }
 
@@ -127,14 +125,6 @@ namespace BetterTelloLib.Commander
             if (print)
             Console.WriteLine(command + ": " + response);
             return response;
-        }
-        public int GetHeight()
-        {
-            string response = SendCommand(GetHeightCommand, true).Replace(HeightUnits, "");
-            int.TryParse(response, out int height);
-            height *= 10;
-            //Console.WriteLine($"Height is: {height} ");
-            return height;
         }
     }
 }
