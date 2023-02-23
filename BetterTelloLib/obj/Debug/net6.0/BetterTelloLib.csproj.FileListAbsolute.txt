@@ -1,0 +1,15 @@
+C:\Users\noobs\OneDrive\Documents\GitHub\P6---DROOONNEEESSS\BetterTelloLib\obj\Debug\net6.0\BetterTelloLib.csproj.AssemblyReference.cache
+C:\Users\noobs\OneDrive\Documents\GitHub\P6---DROOONNEEESSS\BetterTelloLib\obj\Debug\net6.0\BetterTelloLib.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\noobs\OneDrive\Documents\GitHub\P6---DROOONNEEESSS\BetterTelloLib\obj\Debug\net6.0\BetterTelloLib.AssemblyInfoInputs.cache
+C:\Users\noobs\OneDrive\Documents\GitHub\P6---DROOONNEEESSS\BetterTelloLib\obj\Debug\net6.0\BetterTelloLib.AssemblyInfo.cs
+C:\Users\noobs\OneDrive\Documents\GitHub\P6---DROOONNEEESSS\BetterTelloLib\obj\Debug\net6.0\BetterTelloLib.csproj.CoreCompileInputs.cache
+C:\Users\noobs\OneDrive\Documents\GitHub\P6---DROOONNEEESSS\BetterTelloLib\bin\Debug\net6.0\BetterTelloLib.exe
+C:\Users\noobs\OneDrive\Documents\GitHub\P6---DROOONNEEESSS\BetterTelloLib\bin\Debug\net6.0\BetterTelloLib.deps.json
+C:\Users\noobs\OneDrive\Documents\GitHub\P6---DROOONNEEESSS\BetterTelloLib\bin\Debug\net6.0\BetterTelloLib.runtimeconfig.json
+C:\Users\noobs\OneDrive\Documents\GitHub\P6---DROOONNEEESSS\BetterTelloLib\bin\Debug\net6.0\BetterTelloLib.dll
+C:\Users\noobs\OneDrive\Documents\GitHub\P6---DROOONNEEESSS\BetterTelloLib\bin\Debug\net6.0\BetterTelloLib.pdb
+C:\Users\noobs\OneDrive\Documents\GitHub\P6---DROOONNEEESSS\BetterTelloLib\obj\Debug\net6.0\BetterTelloLib.dll
+C:\Users\noobs\OneDrive\Documents\GitHub\P6---DROOONNEEESSS\BetterTelloLib\obj\Debug\net6.0\refint\BetterTelloLib.dll
+C:\Users\noobs\OneDrive\Documents\GitHub\P6---DROOONNEEESSS\BetterTelloLib\obj\Debug\net6.0\BetterTelloLib.pdb
+C:\Users\noobs\OneDrive\Documents\GitHub\P6---DROOONNEEESSS\BetterTelloLib\obj\Debug\net6.0\BetterTelloLib.genruntimeconfig.cache
+C:\Users\noobs\OneDrive\Documents\GitHub\P6---DROOONNEEESSS\BetterTelloLib\obj\Debug\net6.0\ref\BetterTelloLib.dll

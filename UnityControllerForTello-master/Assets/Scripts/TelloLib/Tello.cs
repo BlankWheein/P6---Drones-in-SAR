@@ -500,6 +500,9 @@ namespace TelloLib
             connectPacket[connectPacket.Length - 1] = 0x17;
             client.Send(connectPacket);
 
+            client.Send("command");
+
+
         }
 
         //Pause connections. Used by aTello when app paused.

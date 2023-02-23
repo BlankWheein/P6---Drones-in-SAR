@@ -249,7 +249,7 @@ namespace UnityControllerForTello
         //This just saves all the tello variables locally for viewing in the inspector
         public void UpdateLocalState()
         {
-            //EXTTof = Tello.SendToDrone("time?");
+            EXTTof = Tello.SendToDrone("EXT tof?");
             Debug.Log(EXTTof);
             var state = Tello.state;
             this.state = state.ToString();
