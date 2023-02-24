@@ -4,6 +4,14 @@ namespace BetterTelloLib.Commander
 {
     public class TelloState
     {
+        internal BetterTello bt;
+
+        public TelloState(BetterTello bt)
+        {
+            this.bt = bt;
+        }
+
+        public static int ProximityLimit = 1000;
         public string RawState = "";
         public int MId = 0;
         public int X = 0;
@@ -27,21 +35,36 @@ namespace BetterTelloLib.Commander
         public float Agy = 0;
         public float Agz = 0;
         public int ExtTof = -1;
+        public bool ObstacleTooCloseInFront;
 
 
         public void ParseExtTof(string state)
         {
-            if (state.Contains("tof"))
+            if (state.Contains("tof "))
             {
-                ExtTof = int.Parse(state.Split("tof ")[1]);
-                Console.WriteLine($"EXTTof: {ExtTof}");
+                var x = state.Split("tof ")?.LastOrDefault();
+
+                if (x != null && int.TryParse(x, out int _tof))
+                {
+                    ExtTof = (int)_tof;
+                    if (ExtTof < TelloState.ProximityLimit)
+                    {
+                        if (!ObstacleTooCloseInFront)
+                            bt.Commands.Stop();
+                        ObstacleTooCloseInFront = true;
+                    }
+                    else
+                        ObstacleTooCloseInFront = false;
+                    Console.WriteLine($"{ExtTof}: {ObstacleTooCloseInFront}");
+                }
             }
+                
+                
         }
 
         public void ParseState(string state)
         {
             RawState = state;
-            Console.WriteLine($"Parsing state: {state}");
             ParseState("mid", ref MId);
             ParseState("x", ref X);
             ParseState("y", ref Y);

@@ -10,9 +10,11 @@ using BetterTelloLib.Commander.Events;
 
 BetterTello commander = new();
 commander.Connect();
+commander.Commands.Takeoff();
 while (true)
 {
-    Task.Delay(10);
+    Task.Delay(50);
+    commander.Commands.Forward(20);
 }
 
 commander.Dispose();

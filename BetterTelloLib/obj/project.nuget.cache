@@ -1,8 +1,16 @@
 {
   "version": 2,
-  "dgSpecHash": "p5V56ZS3b9GYt9keqR3BhxYErjOkLeNGN1vJzsGRDkLF1MPcDxvyBft53WyiNNAfs4dc+y+IDxzFttjNXhEV/w==",
+  "dgSpecHash": "aTBwRT1815XbfoM12v0CdWkW3p6u5cokWYcoBUcyBF6RuUgN1X9ZqsjoiTIUemdzHY2xD3G9dZFqZnLQ6v7T2Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\noobs\\OneDrive\\Documents\\GitHub\\P6---DROOONNEEESSS\\BetterTelloLib\\BetterTelloLib.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\noobs\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\7.0.0\\microsoft.extensions.dependencyinjection.7.0.0.nupkg.sha512",
+    "C:\\Users\\noobs\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\7.0.0\\microsoft.extensions.dependencyinjection.abstractions.7.0.0.nupkg.sha512",
+    "C:\\Users\\noobs\\.nuget\\packages\\microsoft.extensions.logging\\7.0.0\\microsoft.extensions.logging.7.0.0.nupkg.sha512",
+    "C:\\Users\\noobs\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\7.0.0\\microsoft.extensions.logging.abstractions.7.0.0.nupkg.sha512",
+    "C:\\Users\\noobs\\.nuget\\packages\\microsoft.extensions.options\\7.0.0\\microsoft.extensions.options.7.0.0.nupkg.sha512",
+    "C:\\Users\\noobs\\.nuget\\packages\\microsoft.extensions.primitives\\7.0.0\\microsoft.extensions.primitives.7.0.0.nupkg.sha512",
+    "C:\\Users\\noobs\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+  ],
   "logs": []
 }
