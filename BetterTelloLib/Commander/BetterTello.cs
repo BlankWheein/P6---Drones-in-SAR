@@ -1,54 +1,62 @@
 ﻿using System.Data;
 using System.Data.Common;
+using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using BetterTelloLib.Udp;
+using Microsoft.Extensions.Logging;
 
 namespace BetterTelloLib.Commander
 {
     public class BetterTello : IDisposable
     {
         public TelloState State { get; set; } = new();
+        public TelloSdk30ControlCommands Commands;
         public const string DefaultTelloAddress = "192.168.10.1";
         public const int DefaultTelloPort = 8889;
-        public TelloSdk30ControlCommands Commands { get; set; }
-        public const string LandCommand = "land";
-        public const string DownCommand = "down";
-        public const string GetHeightCommand = "height?";
-        public const string RunScriptCommand = "runscript";
-        public const string HistoryCommand = "history";
-        public const string WriteHistoryCommand = "writehistory";
-        public const string WaitCommand = "wait";
-        public const string ForceFailCommand = "forcefail";
-        public const string ReceiveTimeoutCommand = "receivetimeout";
-        public const string SendTimeoutCommand = "sendtimeout";
+
+        internal ILogger log;
 
         private static CancellationTokenSource cancelTokens = new();
-        private const string ApiModeCommand = "command";
         private readonly string _address;
         private readonly int _port;
         private readonly TelloUdpClient _client = new();
-        private const string HeightUnits = "dm";
-        private readonly IPEndPoint ipep;
+        private readonly IPEndPoint ipep = new(IPAddress.Any, 8890);
         private readonly UdpClient stateServer;
-        private IPEndPoint sender;
-
+        private IPEndPoint sender = new(IPAddress.Any, 0);
         public BetterTello()
         {
             _address = DefaultTelloAddress;
-            ipep = new IPEndPoint(IPAddress.Any, 8890);
             _port = DefaultTelloPort;
             stateServer = new UdpClient(ipep);
-            sender = new IPEndPoint(IPAddress.Any, 0);
             Commands = new(_client);
+            using var loggerFactory = LoggerFactory.Create(builder =>
+            {
+                builder
+                    .AddFilter("Microsoft", LogLevel.Warning)
+                    .AddFilter("System", LogLevel.Warning)
+                    .AddFilter("LoggingConsoleApp.Program", LogLevel.Debug);
+            });
+            log = loggerFactory.CreateLogger<BetterTello>();
         }
-
-
-        public void StartListeners()
+        public void Connect()
+        {
+            _client.Connect(IPAddress.Parse(_address), _port);
+            _client.Send("command");
+            StartFactories();
+        }
+        public void StartFactories()
         {
             cancelTokens = new CancellationTokenSource();
             CancellationToken token = cancelTokens.Token;
+            StateFactory(token);
+            EXTTofFactory(token);
+            CommandFactory(token);
+        }
+
+        private void StateFactory(CancellationToken token)
+        {
             Task.Factory.StartNew(() => // State factory
             {
                 while (true)
@@ -58,12 +66,16 @@ namespace BetterTelloLib.Commander
                         if (token.IsCancellationRequested)
                             break;
                         var received = stateServer.Receive(ref sender);
-                        State.ParseState(Encoding.ASCII.GetString(received, 0, received.Length));
+                        var state = Encoding.ASCII.GetString(received, 0, received.Length);
+                        log.LogDebug("Reciewed raw state: {}", state);
+                        State.ParseState(state);
                     }
                     catch (Exception e) { Console.WriteLine(e); }
                 }
-            });
-
+            }, token);
+        }
+        private void EXTTofFactory(CancellationToken token)
+        {
             Task.Factory.StartNew(async () =>
             {
                 while (true)
@@ -73,12 +85,16 @@ namespace BetterTelloLib.Commander
                         if (token.IsCancellationRequested)
                             break;
                         _client.Send("EXT tof?");
+                        log.LogDebug($"Sent command: EXT tof?");
+
                     }
                     catch (Exception e) { Console.WriteLine(e); }
-                    await Task.Delay(1000);
+                    await Task.Delay(100);
                 }
-            });
-
+            }, token);
+        }
+        private void CommandFactory(CancellationToken token)
+        {
             Task.Factory.StartNew(() => // Command response Factory
             {
                 while (true)
@@ -88,43 +104,24 @@ namespace BetterTelloLib.Commander
                         if (token.IsCancellationRequested)
                             break;
                         string response = _client.Read();
+                        log.LogInformation("Got response: {}", response);
 
                         if (response.Contains("tof"))
                             State.ParseExtTof(response);
-
-                        if (response.Contains("unknown"))
-                        {
-
-                        }
                     }
                     catch (Exception e) { Console.WriteLine(e); }
                 }
-            });
+            }, token);
         }
-
         
-        
-        public void Connect()
-        {
-            _client.Connect(IPAddress.Parse(_address), _port);
-            _client.Send(ApiModeCommand);
-            StartListeners();
-        }
 
         public void Dispose()
         {
-            SendCommand("quit");
+            //SendCommand("quit");
             GC.SuppressFinalize(this);
             _client.Close();
         }
 
-        public string SendCommand(string command, bool print = true)
-        {
-            _client.Send(command);
-            string response = _client.Read();
-            if (print)
-            Console.WriteLine(command + ": " + response);
-            return response;
-        }
+        public int SendCommand(string command) => _client.Send(command);
     }
 }
