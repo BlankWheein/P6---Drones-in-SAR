@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TelloLib;
 
 namespace UnityControllerForTello
 {
@@ -32,22 +31,8 @@ namespace UnityControllerForTello
 
         public void GetFlightCommmands()
         {
-            if (Input.GetKeyDown(KeyCode.P))
-            {
-                sceneManager.ToggleAutoPilot(true);
-            }
-            if (Input.GetKeyDown(KeyCode.T))
-            {
-                sceneManager.TakeOff();
-            }
-            else if (Input.GetKeyDown(KeyCode.V))
-            {
-                sceneManager.PrimeProps();
-            }
-            else if (Input.GetKeyDown(KeyCode.L))
-            {
-                sceneManager.Land();
-            }
+            if (Input.GetKeyDown(KeyCode.Escape))
+                sceneManager.EmergencyStop();
         }
 
         /// <summary>

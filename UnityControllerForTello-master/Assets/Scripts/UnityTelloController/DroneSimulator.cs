@@ -37,13 +37,10 @@ namespace UnityControllerForTello
         {
             transform.position += new Vector3(0, .8f, 0);
             gameObject.GetComponent<Rigidbody>().useGravity = true;
-            sceneManager.SetHomePoint(transform.position);
-            sceneManager.flightStatus = SceneManager.FlightStatus.Flying;
             flightPathController.TakeOff(this);
         }
         public void FixedUpdate()
         {
-            if(sceneManager.flightStatus == SceneManager.FlightStatus.Flying)
             {
                 rigidBody.AddForce(transform.up * 9.81f);
                 bool receivingInput = false;
@@ -78,14 +75,13 @@ namespace UnityControllerForTello
                 if (receivingInput & rigidBody.drag != inputDrag)
                 {
                     rigidBody.drag = inputDrag;
-                    rigidBody.angularDrag = inputDrag ;
+                    rigidBody.angularDrag = inputDrag;
                 }
                 else if (!receivingInput & rigidBody.drag != drag)
                 {
                     rigidBody.drag = drag;
                     rigidBody.angularDrag = drag * .9f;
                 }
-
             }
         }
 

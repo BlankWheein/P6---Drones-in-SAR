@@ -55,6 +55,7 @@ namespace BetterTelloLib.Commander
                 if (x != null && int.TryParse(x, out int _tof))
                 {
                     ExtTof = (int)_tof;
+                    bt.Events.ExtTofRecieved(new Events.EventArgs.ExtTofEventArgs(ExtTof));
                     if (ExtTof < TelloState.ProximityLimit)
                     {
                         if (!ObstacleTooCloseInFront)
@@ -63,7 +64,6 @@ namespace BetterTelloLib.Commander
                     }
                     else
                         ObstacleTooCloseInFront = false;
-                    Console.WriteLine($"{ExtTof}: {ObstacleTooCloseInFront}");
                 }
             }
                 

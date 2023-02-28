@@ -54,7 +54,7 @@ namespace BetterTelloLib.Commander.Factories
                             break;
                         var received = tello.stateServer.Receive(ref tello.sender);
                         var state = Encoding.ASCII.GetString(received, 0, received.Length);
-                        tello.log.LogDebug("Reciewed raw state: {}", state);
+                        //tello.log.LogDebug("Reciewed raw state: {}", state);
                         tello.State.ParseState(state);
                     }
                     catch (Exception e) { Console.WriteLine(e); }
@@ -72,7 +72,7 @@ namespace BetterTelloLib.Commander.Factories
                         if (token.IsCancellationRequested)
                             break;
                         tello.SendCommand("EXT tof?");
-                        tello.log.LogDebug($"Sent command: EXT tof?");
+                        //tello.log.LogDebug($"Sent command: EXT tof?");
 
                     }
                     catch (Exception e) { Console.WriteLine(e); }
@@ -91,7 +91,7 @@ namespace BetterTelloLib.Commander.Factories
                         if (token.IsCancellationRequested)
                             break;
                         string response = tello._client.Read();
-                        tello.log.LogInformation("Got response: {}", response);
+                        //tello.log.LogInformation("Got response: {}", response);
 
                         if (response.Contains("tof"))
                             tello.State.ParseExtTof(response);

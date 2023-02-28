@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityControllerForTello;
 using System.Collections.Generic;
 using UnityEngine;
-using TelloLib;
 using System.Collections;
 
 public class FlightPathController : MonoBehaviour
@@ -13,7 +12,7 @@ public class FlightPathController : MonoBehaviour
     public List<FlightPoint> flightPoints;
     public SceneManager sm;
     Transform ground, telloGround, telloModel, flightPointsParent;
-    TelloManager telloManager;
+    BetterTelloManager telloManager;
     DroneSimulator droneSimulator;
     Transform tf;
     private void Awake()
@@ -22,7 +21,7 @@ public class FlightPathController : MonoBehaviour
 
         if (sm.sceneType == SceneManager.SceneType.FlyOnly)
         {
-            this.telloManager = GetComponent<TelloManager>();
+            this.telloManager = GetComponent<BetterTelloManager>();
             tf = telloManager.GetComponent<Transform>();
         }
         else
@@ -33,15 +32,14 @@ public class FlightPathController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (sm.flightStatus == SceneManager.FlightStatus.Flying)
+        if (drawFlightPath)
             CreateFlightPoint();
     }
     public void CreateFlightPoint()
     {
         if (!drawFlightPath) return;
 
-        if ( sm.sceneType == SceneManager.SceneType.FlyOnly 
-            && Mathf.Abs(telloManager.posX) < 0.2 && Mathf.Abs(telloManager.posY) < 0.2 && Mathf.Abs(telloManager.posZ) < 0.2) return;
+        if ( sm.sceneType == SceneManager.SceneType.FlyOnly ) return;
         
         if (flightPoints.Count > 0)
         {
@@ -63,7 +61,12 @@ public class FlightPathController : MonoBehaviour
     {
         drawFlightPath = false;
     }
-    public void TakeOff(TelloManager tm)
+    //public void TakeOff(TelloManager tm)
+    //{
+    //    flightPoints = new List<FlightPoint>();
+    //    StartCoroutine(ExecuteAfterTakeoff(tm));
+    //}
+    public void TakeOff(BetterTelloManager tm)
     {
         flightPoints = new List<FlightPoint>();
         StartCoroutine(ExecuteAfterTakeoff(tm));
@@ -73,10 +76,15 @@ public class FlightPathController : MonoBehaviour
         flightPoints = new List<FlightPoint>();
         drawFlightPath = true;
     }
-    IEnumerator ExecuteAfterTakeoff(TelloManager tm)
+    //IEnumerator ExecuteAfterTakeoff(TelloManager tm)
+    //{
+    //    yield return new WaitForSeconds(5);
+    //    tm.SetOffset();
+    //    drawFlightPath = true;
+    //}
+    IEnumerator ExecuteAfterTakeoff(BetterTelloManager tm)
     {
         yield return new WaitForSeconds(5);
-        tm.SetOffset();
         drawFlightPath = true;
     }
 }

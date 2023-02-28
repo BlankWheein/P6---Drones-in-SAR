@@ -16,7 +16,7 @@ public class Orbit : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.R))
         {
             orbit = true;
-            transform.position = FindObjectOfType<UnityControllerForTello.TelloManager>().transform.position;
+            //transform.position = FindObjectOfType<UnityControllerForTello.TelloManager>().transform.position;
            // FindObjectOfType<UnityControllerForTello.InputController>().autoPilotTarget = target;
         }
             
