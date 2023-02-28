@@ -26,9 +26,9 @@ namespace BetterTelloLib.Commander
 
         private readonly string _address;
         private readonly int _port;
-        internal readonly UdpClient _client = new();
-        internal readonly UdpListener stateServer;
-        internal readonly UdpListener videoServer;
+        internal static UdpUser _client = new();
+        internal static UdpListener stateServer;
+        internal static UdpListener videoServer;
         internal IPEndPoint sender = new(IPAddress.Any, 0);
         internal static CancellationTokenSource cancelTokens;
 
@@ -38,13 +38,13 @@ namespace BetterTelloLib.Commander
             _port = DefaultTelloPort;
             State = new(this);
             stateServer = new (DefaultTelloStatePort);
-            videoServer = new(DefaultTelloVideoPort);
+            videoServer = new (DefaultTelloVideoPort);
             Commands = new(_client, this);
             Factories = new(this);
         }
         public void Connect()
         {
-            _client.Connect(IPAddress.Parse(_address), _port);
+            UdpUser.ConnectTo(_address, _port);
             Commands.Command();
             Commands.StreamOn();
             Factories.StartFactories();
@@ -52,8 +52,6 @@ namespace BetterTelloLib.Commander
 
         public void Dispose()
         {
-            //SendCommand("quit");
-            _client.Close();
         }
 
         internal int SendCommand(string command) => _client.Send(command);

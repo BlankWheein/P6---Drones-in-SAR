@@ -5,10 +5,10 @@ namespace BetterTelloLib.Commander
 {
     public class TelloSdk30ControlCommands
     {
-        private readonly TelloUdpClient _client;
+        private readonly UdpUser _client;
         private readonly BetterTello bt;
 
-        public TelloSdk30ControlCommands(TelloUdpClient client, BetterTello bt)
+        public TelloSdk30ControlCommands(UdpUser client, BetterTello bt)
         {
             _client = client;
             this.bt = bt;

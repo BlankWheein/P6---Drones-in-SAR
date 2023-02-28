@@ -1,3 +1,9 @@
+using System.Linq;
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
+using System.Threading.Tasks;
+
 public struct Received
 {
     public IPEndPoint Sender;
@@ -55,7 +61,7 @@ public class UdpListener : UdpBase
 //Client
 public class UdpUser : UdpBase
 {
-    private UdpUser() { }
+    public UdpUser() { }
 
     public static UdpUser ConnectTo(string hostname, int port)
     {
@@ -64,11 +70,11 @@ public class UdpUser : UdpBase
         return connection;
     }
 
-    public void Send(string message)
+    public int Send(string message)
     {
         var datagram = Encoding.UTF8.GetBytes(message);
         Client.Send(datagram, datagram.Length);
-
+        return 1;
     }
     public void Send(byte[] message)
     {
