@@ -5,7 +5,7 @@ namespace BetterTelloLib.Commander
 {
     public class TelloSdk30ControlCommands
     {
-        private readonly UdpUser _client;
+        private static UdpUser _client;
         private readonly BetterTello bt;
 
         public TelloSdk30ControlCommands(UdpUser client, BetterTello bt)
@@ -29,7 +29,6 @@ namespace BetterTelloLib.Commander
         /// <returns></returns>
         public int Takeoff()
         {
-            return 0;
             return _client.Send("takeoff");
         }
 

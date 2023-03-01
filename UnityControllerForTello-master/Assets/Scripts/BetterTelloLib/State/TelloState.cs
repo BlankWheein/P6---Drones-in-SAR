@@ -96,6 +96,7 @@ namespace BetterTelloLib.Commander
             ParseState("agy", ref Agy);
             ParseState("agz", ref Agz);
             FlyingState = CalculateFlyingState();
+            bt.Events.StateRecieved(new Events.EventArgs.StateEventArgs(this));
         }
         private FlyingState CalculateFlyingState()
         {

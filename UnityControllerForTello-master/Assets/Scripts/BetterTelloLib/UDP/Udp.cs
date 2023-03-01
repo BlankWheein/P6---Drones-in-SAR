@@ -58,6 +58,29 @@ public class UdpListener : UdpBase
 
 }
 
+
+public class UdpListenerVideo : UdpBase
+{
+    private IPEndPoint _listenOn;
+
+    public UdpListenerVideo(int port) : this(new IPEndPoint(IPAddress.Any, port))
+    {
+    }
+
+    public UdpListenerVideo(IPEndPoint endpoint)
+    {
+        _listenOn = endpoint;
+        Client = new UdpClient(_listenOn);
+    }
+
+    public void Reply(string message, IPEndPoint endpoint)
+    {
+        var datagram = Encoding.ASCII.GetBytes(message);
+        Client.Send(datagram, datagram.Length, endpoint);
+    }
+
+}
+
 //Client
 public class UdpUser : UdpBase
 {

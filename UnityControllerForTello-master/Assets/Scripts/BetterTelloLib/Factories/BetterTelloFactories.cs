@@ -26,6 +26,7 @@ namespace BetterTelloLib.Commander.Factories
         }
         private void VideoFeedFactory(CancellationToken token)
         {
+
             tello.SendCommand("streamon");
             Task.Factory.StartNew(async () => // Video Feed Factory
             {
@@ -35,7 +36,7 @@ namespace BetterTelloLib.Commander.Factories
                     {
                         if (token.IsCancellationRequested)
                             break;
-                        var received = tello._client.Receive();
+                        var received = await BetterTello.videoServer.Receive();
                         VideoDataRecievedEventArgs eventArgs = new(received.bytes);
                         tello.Events.VideoDataRecieved(eventArgs);
                     }
@@ -54,7 +55,7 @@ namespace BetterTelloLib.Commander.Factories
                     {
                         if (token.IsCancellationRequested)
                             break;
-                        var received = await tello.stateServer.Receive();
+                        var received = await BetterTello.stateServer.Receive();
                         //tello.log.LogDebug("Reciewed raw state: {}", state);
                         tello.State.ParseState(received.Message);
                     }
@@ -91,7 +92,7 @@ namespace BetterTelloLib.Commander.Factories
                     {
                         if (token.IsCancellationRequested)
                             break;
-                        string response = (await tello._client.Receive()).Message;
+                        string response = (await BetterTello.Client.Receive()).Message;
                         //tello.log.LogInformation("Got response: {}", response);
 
                         if (response.Contains("tof"))
