@@ -24,16 +24,11 @@ public class CameraDirections : MonoBehaviour
         if (DroneCam.fieldOfView >= 10 && DroneCam.fieldOfView <= 50)
         {
             DroneCam.fieldOfView += Input.GetAxis("Mouse ScrollWheel") * -10;
-        }else if (DroneCam.fieldOfView <= 10)
-        {
-            DroneCam.fieldOfView = 10;
         }
-        else
+        if(DroneCam.fieldOfView < 10 || DroneCam.fieldOfView > 50)
         {
-            DroneCam.fieldOfView = 50;
+            DroneCam.fieldOfView += Input.GetAxis("Mouse ScrollWheel") * 10;
         }
-        
-       
     }
 
     void RotateCamera()
@@ -43,37 +38,8 @@ public class CameraDirections : MonoBehaviour
 
         if (Input.GetMouseButton(1))
         {
-
-
             yAxis = Input.GetAxis("Mouse Y") * 10;
             transform.RotateAround(drone.position, Vector3.right, yAxis);
-
-
-            //does not work properly
-           /* if (rotValY >= -90 && rotValY <= 0)
-            {
-                // xAxis = Input.GetAxis("Mouse X") * -10;
-                //  transform.RotateAround(drone.position, Vector3.down, xAxis);
-
-                yAxis = Input.GetAxis("Mouse Y") * 10;
-                rotValY += yAxis;
-                transform.RotateAround(drone.position, Vector3.right, yAxis);
-
-            }
-            else if (rotValY < -90)
-            {
-
-                yAxis = Mathf.Abs(Input.GetAxis("Mouse Y") * 10);
-                rotValY += yAxis;
-                transform.RotateAround(drone.position, Vector3.right, yAxis);
-            }
-            else
-            {
-                yAxis = Mathf.Abs(Input.GetAxis("Mouse Y") * 10);
-                rotValY -= yAxis;
-                transform.RotateAround(drone.position, Vector3.right, -yAxis);
-            }*/
-
 
         }
         if (Input.GetMouseButton(0))
@@ -81,8 +47,6 @@ public class CameraDirections : MonoBehaviour
 
             xAxis = Input.GetAxis("Mouse X") * -10;
             transform.RotateAround(drone.position, Vector3.down, xAxis);
-
-
 
         }
     }

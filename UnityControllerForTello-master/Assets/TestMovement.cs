@@ -14,20 +14,30 @@ public class TestMovement : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown("w"))
+        if (Input.GetKey("w"))
         {
-            transform.position += new Vector3(0, 0, 10);
+            transform.position += new Vector3(0, 0, 1);
         }
 
 
-        if (Input.GetKeyDown("d"))
+        if (Input.GetKey("d"))
         {
-            transform.position += new Vector3(10, 0, 0);
+            transform.position += new Vector3(1, 0, 0);
         }
 
-        if (Input.GetKeyDown("a"))
+        if (Input.GetKey("a"))
         {
-            transform.position += new Vector3(-10, 0, 0);
+            transform.position += new Vector3(-1, 0, 0);
+        }
+
+
+        if (Input.GetKey("up"))
+        {
+            transform.position += new Vector3(0, 1, 0);
+        }
+        if (Input.GetKey("down"))
+        {
+            transform.position += new Vector3(0, -1, 0);
         }
     }
 }
