@@ -9,7 +9,7 @@ public class ExtTofSensor : MonoBehaviour
     private BetterTelloManager tello;
     public Obstacle? Prefab;
     private Transform telloTransform;
-    GameObject Parent;
+    public GameObject Parent;
 
     private bool UpdateRecieved = false;
     private int ExtTof;
@@ -18,7 +18,6 @@ public class ExtTofSensor : MonoBehaviour
     {
         tello = GetComponent<BetterTelloManager>();
         telloTransform = GetComponent<Transform>();
-        Parent = FindAnyObjectByType<Obstacle>().gameObject;
     }
 
 

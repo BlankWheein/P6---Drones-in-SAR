@@ -63,7 +63,6 @@ namespace BetterTelloLib.Commander.Factories
                         if (token.IsCancellationRequested)
                             break;
                         var received = await BetterTello.stateServer.Receive();
-                        //tello.log.LogDebug("Reciewed raw state: {}", state);
                         tello.State.ParseState(received.Message);
                     }
                     catch (Exception e) { Console.WriteLine(e); }
@@ -81,8 +80,6 @@ namespace BetterTelloLib.Commander.Factories
                         if (token.IsCancellationRequested)
                             break;
                         tello.SendCommand("EXT tof?");
-                        //tello.log.LogDebug($"Sent command: EXT tof?");
-
                     }
                     catch (Exception e) { Console.WriteLine(e); }
                     await Task.Delay(100);

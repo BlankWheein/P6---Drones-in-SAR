@@ -688,12 +688,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ConnectionState: 0
+  FlyingState: 0
   Height: 0
   PositionVel: {x: 0, y: 0, z: 0}
   PositionAcc: {x: 0, y: 0, z: 0}
-  Position: {x: 0, y: 0, z: 0}
+  PositionMissionPad: {x: 0, y: 0, z: 0}
+  TempH: 0
+  TempL: 0
   ExtTof: 200
   Bat: 0
+  Tof: 0
   PYR: {x: 0, y: 0, z: 0, w: 0}
   Transform: {fileID: 0}
 --- !u!114 &849881868
@@ -708,7 +712,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3db1d1e9ecfff3a4c908f7431b1d5217, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  drawFlightPath: 1
+  drawFlightPath: 0
   Magnitude: 0.05
   flightPoints: []
 --- !u!114 &849881869
@@ -724,6 +728,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Prefab: {fileID: 1853969834}
+  Parent: {fileID: 1152671201}
+--- !u!1 &1152671201
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1152671202}
+  m_Layer: 0
+  m_Name: ObstaclesGroup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1152671202
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1152671201}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.147769, y: 4.8477764, z: -1.0414616}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1853969833
 GameObject:
   m_ObjectHideFlags: 0

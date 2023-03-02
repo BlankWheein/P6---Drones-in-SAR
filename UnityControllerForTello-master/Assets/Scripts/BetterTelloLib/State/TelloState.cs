@@ -1,5 +1,6 @@
 ﻿using System.Globalization;
 using System.Linq;
+using UnityEngine;
 
 namespace BetterTelloLib.Commander
 {
@@ -100,7 +101,7 @@ namespace BetterTelloLib.Commander
         }
         private FlyingState CalculateFlyingState()
         {
-            if (Agx + Agy + Agz > 0.05f)
+            if (Tof > 10)
                 return FlyingState.Flying;
             return FlyingState.Grounded;
         }
