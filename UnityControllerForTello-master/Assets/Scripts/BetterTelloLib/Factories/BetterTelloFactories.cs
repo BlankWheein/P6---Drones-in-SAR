@@ -15,6 +15,13 @@ namespace BetterTelloLib.Commander.Factories
             this.tello = tello;
         }
 
+        public event EventHandler<TaskRecievedEventArgs>? OnTaskRecieved;
+        internal virtual void TaskRecieved(TaskRecievedEventArgs e)
+        {
+            OnTaskRecieved?.Invoke(this, e);
+        }
+
+
         internal void StartFactories()
         {
             BetterTello.cancelTokens = new CancellationTokenSource();
@@ -93,8 +100,10 @@ namespace BetterTelloLib.Commander.Factories
                         if (token.IsCancellationRequested)
                             break;
                         string response = (await BetterTello.Client.Receive()).Message;
-                        //tello.log.LogInformation("Got response: {}", response);
-
+                        TaskRecieved(new TaskRecievedEventArgs()
+                        {
+                            Received = response
+                        });
                         if (response.Contains("tof"))
                             tello.State.ParseExtTof(response);
                     }
@@ -102,5 +111,10 @@ namespace BetterTelloLib.Commander.Factories
                 }
             }, token);
         }
+    }
+
+    public class TaskRecievedEventArgs : EventArgs
+    {
+        public string Received { get; set; }
     }
 }

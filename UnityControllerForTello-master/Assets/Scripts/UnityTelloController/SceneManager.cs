@@ -67,9 +67,9 @@ namespace UnityControllerForTello
                 display2Cam = trackingCamObject.GetComponent<Camera>();
             if (sceneType != SceneType.SimOnly)
             {
-                telloManager.CustomAwake(this, inputController);
-                if (display2Cam)
-                    display2Cam.transform.SetParent(telloManager.transform);
+                //telloManager.CustomAwake(this, inputController);
+                //if (display2Cam)
+                //    display2Cam.transform.SetParent(telloManager.transform);
             }
             else
                 telloManager.gameObject.SetActive(false);

@@ -7,10 +7,9 @@ using System.Collections;
 
 public class FlightPathController : MonoBehaviour
 {
-    bool drawFlightPath = false;
+    public bool drawFlightPath = true;
     public float Magnitude = 0.05f;
     public List<FlightPoint> flightPoints;
-    public SceneManager sm;
     Transform ground, telloGround, telloModel, flightPointsParent;
     BetterTelloManager telloManager;
     DroneSimulator droneSimulator;
@@ -19,15 +18,20 @@ public class FlightPathController : MonoBehaviour
     {
         flightPointsParent = GameObject.Find("Track Points").transform;
 
-        if (sm.sceneType == SceneManager.SceneType.FlyOnly)
-        {
+        try {
             this.telloManager = GetComponent<BetterTelloManager>();
             tf = telloManager.GetComponent<Transform>();
-        }
-        else
+        } catch
         {
+            try
+            {
             this.droneSimulator = GetComponent<DroneSimulator>();
             tf = droneSimulator.GetComponent<Transform>();
+            }
+            catch
+            {
+                throw new System.Exception("Could not find drone simulator or BetterTelloManager!!!");
+            }
         }
     }
     private void FixedUpdate()
@@ -39,8 +43,6 @@ public class FlightPathController : MonoBehaviour
     {
         if (!drawFlightPath) return;
 
-        if ( sm.sceneType == SceneManager.SceneType.FlyOnly ) return;
-        
         if (flightPoints.Count > 0)
         {
             Vector3 flightPointDif = flightPoints[flightPoints.Count - 1].transform.position - tf.position;
