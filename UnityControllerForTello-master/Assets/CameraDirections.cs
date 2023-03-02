@@ -39,14 +39,14 @@ public class CameraDirections : MonoBehaviour
         if (Input.GetMouseButton(1))
         {
             yAxis = Input.GetAxis("Mouse Y") * 10;
-            transform.RotateAround(drone.position, Vector3.right, yAxis);
+            DroneCam.transform.RotateAround(drone.position, Vector3.right, yAxis);
 
         }
         if (Input.GetMouseButton(0))
         {
 
             xAxis = Input.GetAxis("Mouse X") * -10;
-            transform.RotateAround(drone.position, Vector3.down, xAxis);
+            DroneCam.transform.RotateAround(drone.position, Vector3.down, xAxis);
 
         }
     }
