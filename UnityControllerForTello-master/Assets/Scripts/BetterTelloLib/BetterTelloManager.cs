@@ -56,7 +56,6 @@ public class BetterTelloManager : MonoBehaviour
         ConnectionState = TelloConnectionState.Connected;
         BetterTello.Factories.OnTaskRecieved += TaskRecieved;
         BetterTello.Commands.SetBitrate(0);
-        Task.Factory.StartNew(async ()=> await Run());
     }
 
     private void TaskRecieved(object? sender, TaskRecievedEventArgs e)
@@ -92,6 +91,8 @@ public class BetterTelloManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.L))
             BetterTello.Commands.Land();
+        if (Input.GetKeyDown(KeyCode.T))
+            Task.Factory.StartNew(async () => await Run());
         UpdateTransform();
         if (BetterTello?.State != null)
             FlyingState = BetterTello.State.FlyingState;
@@ -127,7 +128,7 @@ public class BetterTelloManager : MonoBehaviour
     public async Task Scan()
     {
         for (int i = 0; i < 100; i++)
-            await Cw(5);
+            await Cw(180);
     }
     public async Task<int> RunCommand(Func<int, int> Function, int x)
     {

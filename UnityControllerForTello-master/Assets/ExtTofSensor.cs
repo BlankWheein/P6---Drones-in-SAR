@@ -2,6 +2,8 @@ using BetterTelloLib.Commander.Events.EventArgs;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing.Text;
+using System.Linq;
 using UnityEngine;
 
 public class ExtTofSensor : MonoBehaviour
@@ -10,6 +12,7 @@ public class ExtTofSensor : MonoBehaviour
     public Obstacle? Prefab;
     private Transform telloTransform;
     public GameObject Parent;
+    List<Obstacle> Obstacles = new();
 
     private bool UpdateRecieved = false;
     private int ExtTof;
@@ -41,6 +44,22 @@ public class ExtTofSensor : MonoBehaviour
             //s.GetComponent<Transform>().parent = Parent.GetComponent<Transform>().transform;
         }
     }
+    public List<Obstacle> GetPointsForHull(Obstacle main)
+    {
+        Obstacles.Clear();
+        FindRelatedObstacles(main);
+        return Obstacles;
+    }
+    private void FindRelatedObstacles(Obstacle main)
+    {
+        Obstacles.Add(main);
+        float distance = 100000f;
+        List<Obstacle> AllObstacles = FindObjectsOfType<Obstacle>().ToList();
+        foreach (var ob in AllObstacles.Where(p => !Obstacles.Select(p => p.Transform.position).Contains(main.transform.position) 
+            && Vector3.Distance(p.Transform.position, main.Transform.position) <= distance))
+            FindRelatedObstacles(ob);
+    }
+    public 
 
     void OnApplicationQuit()
     {
