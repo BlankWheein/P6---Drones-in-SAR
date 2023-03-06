@@ -225,6 +225,28 @@ namespace BetterTelloLib.Commander
         }
 
         /// <summary>
+        /// Fly to the coordinate point (x, y, z) in the coordinate
+        /// system of the mission pad with the specified ID at the
+        /// set speed(m/s)(* Note 2).
+        /// x: -500 - 500
+        /// y: -500 - 500
+        /// z: 0 - 500
+        /// speed: 10-100 (cm/s)
+        /// x, y, and z cannot be between -20 and 20 at the same
+        /// time
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="z"></param>
+        /// <param name="speed"></param>
+        /// <param name="mid"></param>
+        /// <returns></returns>
+        public int GoMid(int x, int y, int z, int speed, int mid)
+        {
+            return _client.Send($"curve {x} {y} {z} {speed} {mid}");
+        }
+
+        /// <summary>
         /// Fly in a curve from point (x1,y1,z1) to point (x2,y2,z2)
         /// in the coordinate system of the mission pad with the
         /// set mid at the set speed(cm/s).
