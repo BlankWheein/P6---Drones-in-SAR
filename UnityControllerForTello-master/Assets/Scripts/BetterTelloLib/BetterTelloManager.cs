@@ -196,7 +196,7 @@ public class BetterTelloManager : MonoBehaviour
             PositionVel = new Vector3()
             {
                 x = localvel.Select(p => p.y).Sum() / 100,
-                y = localvel.Select(p => p.z).Sum() / 100,
+                y = 1, //localvel.Select(p => p.z).Sum() / 100,
                 z = localvel.Select(p => p.x).Sum() / 100,
             };
         }

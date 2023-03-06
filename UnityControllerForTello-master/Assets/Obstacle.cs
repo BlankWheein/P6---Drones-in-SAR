@@ -14,20 +14,5 @@ public class Obstacle : MonoBehaviour
     private void Awake()
     {
         Transform = GetComponent<Transform>();
-        transform.localScale = new Vector3(0, 0, 0);
     }
-
-    private void Start()
-    {
-        obstacles = FindObjectsOfType<Obstacle>().Where(p => Vector3.Distance(p.GetComponent<Transform>().position, transform.position) < distance).ToList();
-    }
-
-    void FixedUpdate()
-    {
-        foreach (var item in obstacles)
-        {
-            Debug.DrawLine(transform.position, item.transform.position, Color.green);
-        }
-    }
-
 }

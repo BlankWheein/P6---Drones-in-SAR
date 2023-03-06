@@ -38,26 +38,11 @@ public class ExtTofSensor : MonoBehaviour
             Vector3 playerDirection = telloTransform.forward;
             Quaternion playerRotation = telloTransform.rotation;
             Vector3 spawnPos = playerPos + playerDirection * ExtTof / 10;
-            Obstacle s = Instantiate(Prefab, spawnPos, playerRotation, Parent.GetComponent<Transform>().transform);
+            Obstacle s = Instantiate(Prefab, new Vector3(spawnPos.x, 0, spawnPos.z), playerRotation, Parent.GetComponent<Transform>().transform);
             s.ExtTof = ExtTof;
             s.Transform = telloTransform;
             //s.GetComponent<Transform>().parent = Parent.GetComponent<Transform>().transform;
         }
-    }
-    public List<Obstacle> GetPointsForHull(Obstacle main)
-    {
-        Obstacles.Clear();
-        FindRelatedObstacles(main);
-        return Obstacles;
-    }
-    private void FindRelatedObstacles(Obstacle main)
-    {
-        Obstacles.Add(main);
-        float distance = 100000f;
-        List<Obstacle> AllObstacles = FindObjectsOfType<Obstacle>().ToList();
-        foreach (var ob in AllObstacles.Where(p => !Obstacles.Select(p => p.Transform.position).Contains(main.transform.position) 
-            && Vector3.Distance(p.Transform.position, main.Transform.position) <= distance))
-            FindRelatedObstacles(ob);
     }
     public 
 
