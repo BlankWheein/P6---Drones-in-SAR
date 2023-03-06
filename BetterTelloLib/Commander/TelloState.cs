@@ -15,7 +15,7 @@ namespace BetterTelloLib.Commander
         {
             this.bt = bt;
         }
-        public static int ProximityLimit = 600;
+        public static int ProximityLimit = 450;
         public FlyingState FlyingState = FlyingState.Grounded;
         public string RawState = "";
         public int MId = 0;
