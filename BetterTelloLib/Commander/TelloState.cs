@@ -15,7 +15,7 @@ namespace BetterTelloLib.Commander
         {
             this.bt = bt;
         }
-        public static int ProximityLimit = 1000;
+        public static int ProximityLimit = 600;
         public FlyingState FlyingState = FlyingState.Grounded;
         public string RawState = "";
         public int MId = 0;
@@ -56,11 +56,12 @@ namespace BetterTelloLib.Commander
                 {
                     ExtTof = (int)_tof;
                     bt.Events.ExtTofRecieved(new Events.EventArgs.ExtTofEventArgs(ExtTof));
-                    if (ExtTof < TelloState.ProximityLimit)
+                    Console.WriteLine(ExtTof);
+                    if (ExtTof <= TelloState.ProximityLimit)
                     {
-                        if (!ObstacleTooCloseInFront)
-                            bt.Commands.Stop();
                         ObstacleTooCloseInFront = true;
+                        bt.Commands.Back(40);
+                        Console.WriteLine("Command back called");
                     }
                     else
                         ObstacleTooCloseInFront = false;

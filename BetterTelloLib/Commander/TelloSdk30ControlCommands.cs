@@ -123,6 +123,7 @@ namespace BetterTelloLib.Commander
         /// <returns></returns>
         public int Forward(int x)
         {
+            if (x > 70) { x = 70; }
             if (!bt.State.ObstacleTooCloseInFront)
                 return _client.Send($"forward {x}");
             return -1;
