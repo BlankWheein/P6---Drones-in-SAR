@@ -31,7 +31,7 @@ public class ExtTofSensor : MonoBehaviour
 
     private void Update()
     {
-        if (UpdateRecieved && Prefab != null && ExtTof < 8190)
+        if (UpdateRecieved && Prefab != null && ExtTof < 4000)
         {
             UpdateRecieved = false;
             Vector3 playerPos = telloTransform.position;
@@ -41,7 +41,6 @@ public class ExtTofSensor : MonoBehaviour
             Obstacle s = Instantiate(Prefab, new Vector3(spawnPos.x, 0, spawnPos.z), playerRotation, Parent.GetComponent<Transform>().transform);
             s.ExtTof = ExtTof;
             s.Transform = telloTransform;
-            //s.GetComponent<Transform>().parent = Parent.GetComponent<Transform>().transform;
         }
     }
     public 

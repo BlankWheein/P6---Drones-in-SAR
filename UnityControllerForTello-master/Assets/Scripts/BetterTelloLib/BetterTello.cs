@@ -37,7 +37,10 @@ namespace BetterTelloLib.Commander
         {
             _address = DefaultTelloAddress;
             _port = DefaultTelloPort;
-            
+        }
+        public void CreateFactories()
+        {
+            Factories = new(this);
         }
         public void Connect()
         {
@@ -46,7 +49,6 @@ namespace BetterTelloLib.Commander
             Commands.Command();
             Commands.StreamOn();
             State = new(this);
-            Factories = new(this);
             stateServer = new (8890);
             videoServer = new (11111);
             Factories.StartFactories();

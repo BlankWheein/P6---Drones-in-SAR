@@ -9,6 +9,7 @@ namespace BetterTelloLib.Commander.Factories
     public class BetterTelloFactories
     {
         private BetterTello tello;
+        public int ExtTofDelay = 100;
 
         public BetterTelloFactories(BetterTello tello)
         {
@@ -19,6 +20,14 @@ namespace BetterTelloLib.Commander.Factories
         internal virtual void TaskRecieved(TaskRecievedEventArgs e)
         {
             OnTaskRecieved?.Invoke(this, e);
+            if (e.Received == "ok")
+                OkRecieved(e);
+        }
+
+        public event EventHandler<TaskRecievedEventArgs>? OnOkRecieved;
+        internal virtual void OkRecieved(TaskRecievedEventArgs e)
+        {
+            OnOkRecieved?.Invoke(this, e);
         }
 
 

@@ -43,7 +43,7 @@ NavMeshProjectSettings:
     cost: 1
   - name: 
     cost: 1
-  - name: 
+  - name: Drone
     cost: 1
   - name: 
     cost: 1

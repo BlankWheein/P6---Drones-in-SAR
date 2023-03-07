@@ -392,7 +392,7 @@ namespace BetterTelloLib.Commander
         /// <exception cref="NotImplementedException"></exception>
         public int Port()
         {
-            throw new NotImplementedException("do not need this command");
+            throw new NotImplementedException("wtf is this");
         }
 
         /// <summary>

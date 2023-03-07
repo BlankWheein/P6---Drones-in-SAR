@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using UnityControllerForTello;
 using UnityEngine;
@@ -29,8 +30,6 @@ public class BetterTelloManager : MonoBehaviour
     private float Roll = 0;
     private float Yaw = 0;
     private TelloVideoTexture telloVideoTexture;
-    private SceneManager sceneManager;
-    private InputController inputController;
     private FlightPathController flightPathController;
     public Transform Transform;
 
@@ -52,24 +51,24 @@ public class BetterTelloManager : MonoBehaviour
         ConnectionState = TelloConnectionState.Connecting;
         BetterTello.Events.OnStateRecieved += OnStateUpdate;
         BetterTello.Events.OnVideoDataRecieved += Tello_onVideoData;
+        BetterTello.CreateFactories();
+        BetterTello.Factories.OnOkRecieved += OkRecieved;
         BetterTello.Connect();
-        ConnectionState = TelloConnectionState.Connected;
-        BetterTello.Factories.OnTaskRecieved += TaskRecieved;
         BetterTello.Commands.SetBitrate(0);
     }
 
-    private void TaskRecieved(object? sender, TaskRecievedEventArgs e)
+    private void OkRecieved(object? sender, TaskRecievedEventArgs e)
     {
-        Debug.Log($"{e.Received}");
-        if (e.Received.Contains("ok"))
-            waitingForOk = false;
+        waitingForOk = false;
+        ConnectionState = TelloConnectionState.Connected;
+        BetterTello.Factories.ExtTofDelay = 100;
     }
 
     public void CustomOnApplicationQuit()
     {
         BetterTello.Events.OnStateRecieved -= OnStateUpdate;
         BetterTello.Events.OnVideoDataRecieved -= Tello_onVideoData;
-        BetterTello.Factories.OnTaskRecieved -= TaskRecieved;
+        BetterTello.Factories.OnTaskRecieved -= OkRecieved;
         Timestamps.Clear();
         BetterTello.Dispose();
     }
@@ -114,7 +113,12 @@ public class BetterTelloManager : MonoBehaviour
         return r;
     }
     public async Task<int> Up(int x) => await RunCommand(BetterTello.Commands.Up, x);
-    public async Task<int> Cw(int x) => await RunCommand(BetterTello.Commands.Cw, x);
+    public async Task<int> Cw(int x)
+    {
+        BetterTello.Factories.ExtTofDelay = 10;
+        var res = await RunCommand(BetterTello.Commands.Cw, x);
+        return res;
+    }
     public async Task<int> Forward(int x) => await RunCommand(BetterTello.Commands.Forward, x);
     public async Task<int> Back(int x) => await RunCommand(BetterTello.Commands.Back, x);
     public async Task Run()

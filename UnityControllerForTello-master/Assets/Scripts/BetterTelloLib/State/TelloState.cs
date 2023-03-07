@@ -20,6 +20,9 @@ namespace BetterTelloLib.Commander
         public static int ProximityLimit = 1000;
         public FlyingState FlyingState = FlyingState.Grounded;
         public string RawState = "";
+        public int ExtTof = -1;
+        public bool ObstacleTooCloseInFront;
+
         public int MId = 0;
         public int X = 0;
         public int Y = 0;
@@ -41,12 +44,6 @@ namespace BetterTelloLib.Commander
         public float Agx = 0;
         public float Agy = 0;
         public float Agz = 0;
-        public int ExtTof = -1;
-        public bool ObstacleTooCloseInFront;
-
-        private float _prevAgx = 0f;
-        private float _prevAgy = 0f;
-        private float _prevAgz = 0f;
 
         public void ParseExtTof(string state)
         {
@@ -56,16 +53,16 @@ namespace BetterTelloLib.Commander
 
                 if (x != null && int.TryParse(x, out int _tof))
                 {
-                    ExtTof = (int)_tof;
+                    ExtTof = _tof;
                     bt.Events.ExtTofRecieved(new Events.EventArgs.ExtTofEventArgs(ExtTof));
-                    if (ExtTof < TelloState.ProximityLimit)
-                    {
-                        if (!ObstacleTooCloseInFront)
-                            bt.Commands.Stop();
-                        ObstacleTooCloseInFront = true;
-                    }
-                    else
-                        ObstacleTooCloseInFront = false;
+                    //if (ExtTof < TelloState.ProximityLimit)
+                    //{
+                    //    if (!ObstacleTooCloseInFront)
+                    //        bt.Commands.Stop();
+                    //    ObstacleTooCloseInFront = true;
+                    //}
+                    //else
+                    //    ObstacleTooCloseInFront = false;
                 }
             }
                 
@@ -113,12 +110,6 @@ namespace BetterTelloLib.Commander
         {
             var culture = (CultureInfo)CultureInfo.CurrentCulture.Clone();
             culture.NumberFormat.NumberDecimalSeparator = ".";
-            if (id == "agx")
-                _prevAgx = Agx;
-            else if (id == "agy")
-                _prevAgy = Agy;
-            else if (id == "agz")
-                _prevAgz = Agz;
             Prop = float.Parse(GetStateStringValue(id), culture);
         }
         private void ParseState(string id, ref string Prop)
