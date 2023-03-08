@@ -1,4 +1,5 @@
 ﻿using BetterTelloLib.Commander.Events.EventArgs;
+using BetterTelloLib.Commander.Factories;
 using System;
 
 namespace BetterTelloLib.Commander.Events
@@ -9,6 +10,12 @@ namespace BetterTelloLib.Commander.Events
         internal virtual void VideoDataRecieved(VideoDataRecievedEventArgs e)
         {
             OnVideoDataRecieved?.Invoke(this, e);
+        }
+
+        public event EventHandler<TaskRecievedEventArgs>? OnOkRecieved;
+        internal virtual void OkRecieved(TaskRecievedEventArgs e)
+        {
+            OnOkRecieved?.Invoke(this, e);
         }
 
         public event EventHandler<System.EventArgs>? OnTakeOff;

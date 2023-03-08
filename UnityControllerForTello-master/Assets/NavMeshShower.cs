@@ -8,11 +8,11 @@ public class NavMeshShower : MonoBehaviour
 {
     void Start()
     {
-        ShowMesh();
+        //ShowMesh();
     }
 
     // Generates the NavMesh shape and assigns it to the MeshFilter component.
-    void ShowMesh()
+    void FixedUpdate()
     {
         // NavMesh.CalculateTriangulation returns a NavMeshTriangulation object.
         NavMeshTriangulation meshData = NavMesh.CalculateTriangulation();

@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using UnityControllerForTello;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -29,7 +28,7 @@ public class BetterTelloManager : MonoBehaviour
     private float Pitch = 0;
     private float Roll = 0;
     private float Yaw = 0;
-    private TelloVideoTexture telloVideoTexture;
+    private RenderVideoStream telloVideoTexture;
     private FlightPathController flightPathController;
     public Transform Transform;
 
@@ -51,8 +50,8 @@ public class BetterTelloManager : MonoBehaviour
         ConnectionState = TelloConnectionState.Connecting;
         BetterTello.Events.OnStateRecieved += OnStateUpdate;
         BetterTello.Events.OnVideoDataRecieved += Tello_onVideoData;
-        BetterTello.CreateFactories();
-        BetterTello.Factories.OnOkRecieved += OkRecieved;
+        BetterTello.Events.OnOkRecieved += OkRecieved;
+        ConnectionState = TelloConnectionState.Connected;
         BetterTello.Connect();
         BetterTello.Commands.SetBitrate(0);
     }
@@ -69,6 +68,8 @@ public class BetterTelloManager : MonoBehaviour
         BetterTello.Events.OnStateRecieved -= OnStateUpdate;
         BetterTello.Events.OnVideoDataRecieved -= Tello_onVideoData;
         BetterTello.Factories.OnTaskRecieved -= OkRecieved;
+        BetterTello.Events.OnOkRecieved -= OkRecieved;
+
         Timestamps.Clear();
         BetterTello.Dispose();
     }
@@ -76,9 +77,9 @@ public class BetterTelloManager : MonoBehaviour
     {
         this.flightPathController = GetComponent<FlightPathController>();
         if (telloVideoTexture == null)
-            telloVideoTexture = FindObjectOfType<TelloVideoTexture>();
+            telloVideoTexture = FindObjectOfType<RenderVideoStream>();
     }
-
+        
     public void EmergencyStop()
     {
         BetterTello.Commands.Stop();
@@ -119,20 +120,19 @@ public class BetterTelloManager : MonoBehaviour
         var res = await RunCommand(BetterTello.Commands.Cw, x);
         return res;
     }
-    public async Task<int> Forward(int x) => await RunCommand(BetterTello.Commands.Forward, x);
+    public async Task<int> Forward(int x) => await RunCommand(BetterTello.Commands.Forward, Math.Clamp(x, 1, 70));
     public async Task<int> Back(int x) => await RunCommand(BetterTello.Commands.Back, x);
     public async Task Run()
     {
         await Takeoff();
         await Scan();
-        await Land();
         //BetterTello.Commands.Emergency();
     }
 
     public async Task Scan()
     {
         for (int i = 0; i < 100; i++)
-            await Cw(180);
+            await Cw(30);
     }
     public async Task<int> RunCommand(Func<int, int> Function, int x)
     {
@@ -220,6 +220,9 @@ public class BetterTelloManager : MonoBehaviour
     private void Tello_onVideoData(object? sender, VideoDataRecievedEventArgs data)
     {
         if (telloVideoTexture != null)
-            telloVideoTexture.PutVideoData(data.Data);
+        {
+            //telloVideoTexture.PutVideoData(data.Data);
+            telloVideoTexture.UpdateStream(data.Data);
+        }
     }
 }

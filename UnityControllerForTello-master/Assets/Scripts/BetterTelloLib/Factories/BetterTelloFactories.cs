@@ -21,15 +21,8 @@ namespace BetterTelloLib.Commander.Factories
         {
             OnTaskRecieved?.Invoke(this, e);
             if (e.Received == "ok")
-                OkRecieved(e);
+                tello.Events.OkRecieved(e);
         }
-
-        public event EventHandler<TaskRecievedEventArgs>? OnOkRecieved;
-        internal virtual void OkRecieved(TaskRecievedEventArgs e)
-        {
-            OnOkRecieved?.Invoke(this, e);
-        }
-
 
         internal void StartFactories()
         {
@@ -91,7 +84,7 @@ namespace BetterTelloLib.Commander.Factories
                         tello.SendCommand("EXT tof?");
                     }
                     catch (Exception e) { Console.WriteLine(e); }
-                    await Task.Delay(100);
+                    await Task.Delay(ExtTofDelay);
                 }
             }, token);
         }

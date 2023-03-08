@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityControllerForTello;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
@@ -12,7 +11,6 @@ public class FlightPathController : MonoBehaviour
     public List<FlightPoint> flightPoints;
     Transform ground, telloGround, telloModel, flightPointsParent;
     BetterTelloManager telloManager;
-    DroneSimulator droneSimulator;
     Transform tf;
     private void Awake()
     {
@@ -23,15 +21,6 @@ public class FlightPathController : MonoBehaviour
             tf = telloManager.GetComponent<Transform>();
         } catch
         {
-            try
-            {
-            this.droneSimulator = GetComponent<DroneSimulator>();
-            tf = droneSimulator.GetComponent<Transform>();
-            }
-            catch
-            {
-                throw new System.Exception("Could not find drone simulator or BetterTelloManager!!!");
-            }
         }
     }
     private void FixedUpdate()
@@ -72,11 +61,6 @@ public class FlightPathController : MonoBehaviour
     {
         flightPoints = new List<FlightPoint>();
         StartCoroutine(ExecuteAfterTakeoff(tm));
-    }
-    public void TakeOff(DroneSimulator ds)
-    {
-        flightPoints = new List<FlightPoint>();
-        drawFlightPath = true;
     }
     //IEnumerator ExecuteAfterTakeoff(TelloManager tm)
     //{

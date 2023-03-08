@@ -38,14 +38,11 @@ namespace BetterTelloLib.Commander
             _address = DefaultTelloAddress;
             _port = DefaultTelloPort;
         }
-        public void CreateFactories()
-        {
-            Factories = new(this);
-        }
         public void Connect()
         {
             Client = UdpUser.ConnectTo(_address, _port);
             Commands = new(Client, this);
+            Factories = new(this);
             Commands.Command();
             Commands.StreamOn();
             State = new(this);
