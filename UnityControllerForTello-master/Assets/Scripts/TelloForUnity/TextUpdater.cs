@@ -12,6 +12,5 @@ public class TextUpdater : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		GetComponent<Text>().text = string.Format("Battery {0} %", ((TelloLib.Tello.state != null) ? ("" + TelloLib.Tello.state.batteryPercentage) : " - "));
 	}
 }

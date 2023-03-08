@@ -3,7 +3,9 @@ using System.Data.Common;
 using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
+using System.Reflection;
+using BetterTelloLib.Commander.Events;
+using BetterTelloLib.Commander.Factories;
 using BetterTelloLib.Udp;
 using Microsoft.Extensions.Logging;
 
@@ -11,109 +13,53 @@ namespace BetterTelloLib.Commander
 {
     public class BetterTello : IDisposable
     {
-        public TelloState State { get; set; } = new();
+        public TelloState State;
         public TelloSdk30ControlCommands Commands;
+        public BetterTelloEvents Events = new();
+        public BetterTelloFactories Factories;
         public const string DefaultTelloAddress = "192.168.10.1";
         public const int DefaultTelloPort = 8889;
+        public const int DefaultTelloStatePort = 8890;
+        public const int DefaultTelloVideoPort = 11111;
+
 
         internal ILogger log;
 
-        private static CancellationTokenSource cancelTokens = new();
+        internal static CancellationTokenSource cancelTokens = new();
         private readonly string _address;
         private readonly int _port;
-        private readonly TelloUdpClient _client = new();
-        private readonly IPEndPoint ipep = new(IPAddress.Any, 8890);
-        private readonly UdpClient stateServer;
-        private IPEndPoint sender = new(IPAddress.Any, 0);
+        internal readonly TelloUdpClient _client = new();
+        internal readonly IPEndPoint stateIpEp = new(IPAddress.Any, DefaultTelloStatePort);
+        internal readonly IPEndPoint videoIpEp = new(IPAddress.Any, DefaultTelloVideoPort);
+        internal readonly UdpClient stateServer;
+        internal readonly UdpClient videoServer;
+        internal IPEndPoint sender = new(IPAddress.Any, 0);
         public BetterTello()
         {
             _address = DefaultTelloAddress;
             _port = DefaultTelloPort;
-            stateServer = new UdpClient(ipep);
-            Commands = new(_client);
+            State = new(this);
+            stateServer = new UdpClient(stateIpEp);
+            videoServer = new UdpClient(videoIpEp);
+            Commands = new(_client, this);
+            Factories = new(this);
             using var loggerFactory = LoggerFactory.Create(builder =>
             {
                 builder
                     .AddFilter("Microsoft", LogLevel.Warning)
                     .AddFilter("System", LogLevel.Warning)
-                    .AddFilter("LoggingConsoleApp.Program", LogLevel.Debug);
+                    .AddFilter("LoggingConsoleApp.Program", LogLevel.Warning);
             });
-            log = loggerFactory.CreateLogger<BetterTello>();
+            log = loggerFactory.CreateLogger<Program>();
         }
         public void Connect()
         {
+            log.LogInformation("Trying to connect to Tello");
             _client.Connect(IPAddress.Parse(_address), _port);
             _client.Send("command");
-            StartFactories();
+            _client.Send("streamoff");
+            Factories.StartFactories();
         }
-        public void StartFactories()
-        {
-            cancelTokens = new CancellationTokenSource();
-            CancellationToken token = cancelTokens.Token;
-            StateFactory(token);
-            EXTTofFactory(token);
-            CommandFactory(token);
-        }
-
-        private void StateFactory(CancellationToken token)
-        {
-            Task.Factory.StartNew(() => // State factory
-            {
-                while (true)
-                {
-                    try
-                    {
-                        if (token.IsCancellationRequested)
-                            break;
-                        var received = stateServer.Receive(ref sender);
-                        var state = Encoding.ASCII.GetString(received, 0, received.Length);
-                        log.LogDebug("Reciewed raw state: {}", state);
-                        State.ParseState(state);
-                    }
-                    catch (Exception e) { Console.WriteLine(e); }
-                }
-            }, token);
-        }
-        private void EXTTofFactory(CancellationToken token)
-        {
-            Task.Factory.StartNew(async () =>
-            {
-                while (true)
-                {
-                    try
-                    {
-                        if (token.IsCancellationRequested)
-                            break;
-                        _client.Send("EXT tof?");
-                        log.LogDebug($"Sent command: EXT tof?");
-
-                    }
-                    catch (Exception e) { Console.WriteLine(e); }
-                    await Task.Delay(100);
-                }
-            }, token);
-        }
-        private void CommandFactory(CancellationToken token)
-        {
-            Task.Factory.StartNew(() => // Command response Factory
-            {
-                while (true)
-                {
-                    try
-                    {
-                        if (token.IsCancellationRequested)
-                            break;
-                        string response = _client.Read();
-                        log.LogInformation("Got response: {}", response);
-
-                        if (response.Contains("tof"))
-                            State.ParseExtTof(response);
-                    }
-                    catch (Exception e) { Console.WriteLine(e); }
-                }
-            }, token);
-        }
-        
 
         public void Dispose()
         {
@@ -122,6 +68,6 @@ namespace BetterTelloLib.Commander
             _client.Close();
         }
 
-        public int SendCommand(string command) => _client.Send(command);
+        internal int SendCommand(string command) => _client.Send(command);
     }
 }

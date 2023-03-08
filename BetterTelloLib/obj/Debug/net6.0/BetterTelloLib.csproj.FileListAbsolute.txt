@@ -13,3 +13,10 @@ C:\Users\noobs\OneDrive\Documents\GitHub\P6---DROOONNEEESSS\BetterTelloLib\obj\D
 C:\Users\noobs\OneDrive\Documents\GitHub\P6---DROOONNEEESSS\BetterTelloLib\obj\Debug\net6.0\BetterTelloLib.pdb
 C:\Users\noobs\OneDrive\Documents\GitHub\P6---DROOONNEEESSS\BetterTelloLib\obj\Debug\net6.0\BetterTelloLib.genruntimeconfig.cache
 C:\Users\noobs\OneDrive\Documents\GitHub\P6---DROOONNEEESSS\BetterTelloLib\obj\Debug\net6.0\ref\BetterTelloLib.dll
+C:\Users\noobs\OneDrive\Documents\GitHub\P6---DROOONNEEESSS\BetterTelloLib\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\noobs\OneDrive\Documents\GitHub\P6---DROOONNEEESSS\BetterTelloLib\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\noobs\OneDrive\Documents\GitHub\P6---DROOONNEEESSS\BetterTelloLib\bin\Debug\net6.0\Microsoft.Extensions.Logging.dll
+C:\Users\noobs\OneDrive\Documents\GitHub\P6---DROOONNEEESSS\BetterTelloLib\bin\Debug\net6.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\noobs\OneDrive\Documents\GitHub\P6---DROOONNEEESSS\BetterTelloLib\bin\Debug\net6.0\Microsoft.Extensions.Options.dll
+C:\Users\noobs\OneDrive\Documents\GitHub\P6---DROOONNEEESSS\BetterTelloLib\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
+C:\Users\noobs\OneDrive\Documents\GitHub\P6---DROOONNEEESSS\BetterTelloLib\obj\Debug\net6.0\BetterTelloLib.csproj.CopyComplete

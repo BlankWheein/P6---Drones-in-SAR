@@ -236,8 +236,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneType: 0
-  flightStatus: 0
-  connectionState: 0
   activeDrone: {fileID: 0}
   elv: 0
   yaw: 0
@@ -456,8 +454,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 111827013}
-  - component: {fileID: 111827014}
   - component: {fileID: 111827015}
+  - component: {fileID: 111827016}
   m_Layer: 0
   m_Name: Tello Manager
   m_TagString: Untagged
@@ -472,7 +470,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 111827012}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -484,31 +482,6 @@ Transform:
   m_Father: {fileID: 13445132}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &111827014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 111827012}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9bdde6dcc358fa94887c2ae6aa9b3200, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  batteryPercent: 0
-  posX: 0
-  posY: 0
-  posZ: 0
-  Offset: {x: 0, y: 0, z: 0}
-  yaw: 0
-  pitch: 0
-  roll: 0
-  height: 0
-  posUncertainty: 0
-  EXTTof: 
-  wifiStrength: 0
-  state: 
 --- !u!114 &111827015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -524,6 +497,22 @@ MonoBehaviour:
   Magnitude: 0.05
   flightPoints: []
   sm: {fileID: 13445131}
+--- !u!114 &111827016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 111827012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20f5aa9d4fd509b4f81060f5918154b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Position: {x: 0, y: 0, z: 0}
+  ExtTof: 0
+  Bat: 0
+  PYR: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1001 &112926913
 PrefabInstance:
   m_ObjectHideFlags: 0
