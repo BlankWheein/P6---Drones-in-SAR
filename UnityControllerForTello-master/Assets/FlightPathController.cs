@@ -1,48 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityControllerForTello;
 using System.Collections.Generic;
 using UnityEngine;
-using TelloLib;
 using System.Collections;
 
 public class FlightPathController : MonoBehaviour
 {
-    bool drawFlightPath = false;
+    public bool drawFlightPath = true;
     public float Magnitude = 0.05f;
     public List<FlightPoint> flightPoints;
-    public SceneManager sm;
     Transform ground, telloGround, telloModel, flightPointsParent;
-    TelloManager telloManager;
-    DroneSimulator droneSimulator;
+    BetterTelloManager telloManager;
     Transform tf;
     private void Awake()
     {
         flightPointsParent = GameObject.Find("Track Points").transform;
 
-        if (sm.sceneType == SceneManager.SceneType.FlyOnly)
-        {
-            this.telloManager = GetComponent<TelloManager>();
+        try {
+            this.telloManager = GetComponent<BetterTelloManager>();
             tf = telloManager.GetComponent<Transform>();
-        }
-        else
+        } catch
         {
-            this.droneSimulator = GetComponent<DroneSimulator>();
-            tf = droneSimulator.GetComponent<Transform>();
         }
     }
     private void FixedUpdate()
     {
-        if (sm.flightStatus == SceneManager.FlightStatus.Flying)
+        if (drawFlightPath)
             CreateFlightPoint();
     }
     public void CreateFlightPoint()
     {
         if (!drawFlightPath) return;
 
-        if ( sm.sceneType == SceneManager.SceneType.FlyOnly 
-            && Mathf.Abs(telloManager.posX) < 0.2 && Mathf.Abs(telloManager.posY) < 0.2 && Mathf.Abs(telloManager.posZ) < 0.2) return;
-        
         if (flightPoints.Count > 0)
         {
             Vector3 flightPointDif = flightPoints[flightPoints.Count - 1].transform.position - tf.position;
@@ -63,20 +52,25 @@ public class FlightPathController : MonoBehaviour
     {
         drawFlightPath = false;
     }
-    public void TakeOff(TelloManager tm)
+    //public void TakeOff(TelloManager tm)
+    //{
+    //    flightPoints = new List<FlightPoint>();
+    //    StartCoroutine(ExecuteAfterTakeoff(tm));
+    //}
+    public void TakeOff(BetterTelloManager tm)
     {
         flightPoints = new List<FlightPoint>();
         StartCoroutine(ExecuteAfterTakeoff(tm));
     }
-    public void TakeOff(DroneSimulator ds)
-    {
-        flightPoints = new List<FlightPoint>();
-        drawFlightPath = true;
-    }
-    IEnumerator ExecuteAfterTakeoff(TelloManager tm)
+    //IEnumerator ExecuteAfterTakeoff(TelloManager tm)
+    //{
+    //    yield return new WaitForSeconds(5);
+    //    tm.SetOffset();
+    //    drawFlightPath = true;
+    //}
+    IEnumerator ExecuteAfterTakeoff(BetterTelloManager tm)
     {
         yield return new WaitForSeconds(5);
-        tm.SetOffset();
         drawFlightPath = true;
     }
 }

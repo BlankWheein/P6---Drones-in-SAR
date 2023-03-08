@@ -14,9 +14,12 @@ namespace BetterTelloLib.Commander
     public class TelloSdk30ControlCommands
     {
         private readonly TelloUdpClient _client;
-        public TelloSdk30ControlCommands(TelloUdpClient client)
+        private readonly BetterTello bt;
+
+        public TelloSdk30ControlCommands(TelloUdpClient client, BetterTello bt)
         {
             _client = client;
+            this.bt = bt;
         }
 
         /// <summary>
@@ -120,7 +123,10 @@ namespace BetterTelloLib.Commander
         /// <returns></returns>
         public int Forward(int x)
         {
-            return _client.Send($"forward {x}");
+            if (x > 70) { x = 70; }
+            if (!bt.State.ObstacleTooCloseInFront)
+                return _client.Send($"forward {x}");
+            return -1;
         }
 
         /// <summary>
@@ -216,6 +222,28 @@ namespace BetterTelloLib.Commander
         public int Stop()
         {
             return _client.Send("stop");
+        }
+
+        /// <summary>
+        /// Fly to the coordinate point (x, y, z) in the coordinate
+        /// system of the mission pad with the specified ID at the
+        /// set speed(m/s)(* Note 2).
+        /// x: -500 - 500
+        /// y: -500 - 500
+        /// z: 0 - 500
+        /// speed: 10-100 (cm/s)
+        /// x, y, and z cannot be between -20 and 20 at the same
+        /// time
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="z"></param>
+        /// <param name="speed"></param>
+        /// <param name="mid"></param>
+        /// <returns></returns>
+        public int GoMid(int x, int y, int z, int speed, int mid)
+        {
+            return _client.Send($"curve {x} {y} {z} {speed} {mid}");
         }
 
         /// <summary>

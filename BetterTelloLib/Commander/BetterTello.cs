@@ -13,7 +13,7 @@ namespace BetterTelloLib.Commander
 {
     public class BetterTello : IDisposable
     {
-        public TelloState State = new();
+        public TelloState State;
         public TelloSdk30ControlCommands Commands;
         public BetterTelloEvents Events = new();
         public BetterTelloFactories Factories;
@@ -38,16 +38,17 @@ namespace BetterTelloLib.Commander
         {
             _address = DefaultTelloAddress;
             _port = DefaultTelloPort;
+            State = new(this);
             stateServer = new UdpClient(stateIpEp);
             videoServer = new UdpClient(videoIpEp);
-            Commands = new(_client);
+            Commands = new(_client, this);
             Factories = new(this);
             using var loggerFactory = LoggerFactory.Create(builder =>
             {
                 builder
                     .AddFilter("Microsoft", LogLevel.Warning)
                     .AddFilter("System", LogLevel.Warning)
-                    .AddFilter("LoggingConsoleApp.Program", LogLevel.Debug);
+                    .AddFilter("LoggingConsoleApp.Program", LogLevel.Warning);
             });
             log = loggerFactory.CreateLogger<Program>();
         }

@@ -12,7 +12,12 @@ BetterTello commander = new();
 commander.Connect();
 while (true)
 {
-    Task.Delay(10);
+    var string_ = Console.ReadLine();
+    if (string_.Contains("t"))
+    {
+        Console.WriteLine($"{string_.Replace("t", "")}: {commander.State.ExtTof}");
+    }
+    Task.Delay(5);
 }
 
 commander.Dispose();

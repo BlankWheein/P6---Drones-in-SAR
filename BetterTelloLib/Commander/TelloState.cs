@@ -2,8 +2,21 @@
 
 namespace BetterTelloLib.Commander
 {
+    public enum FlyingState
+    {
+        Grounded,
+        Flying,
+    }
     public class TelloState
     {
+        internal BetterTello bt;
+
+        public TelloState(BetterTello bt)
+        {
+            this.bt = bt;
+        }
+        public static int ProximityLimit = 450;
+        public FlyingState FlyingState = FlyingState.Grounded;
         public string RawState = "";
         public int MId = 0;
         public int X = 0;
@@ -27,21 +40,40 @@ namespace BetterTelloLib.Commander
         public float Agy = 0;
         public float Agz = 0;
         public int ExtTof = -1;
+        public bool ObstacleTooCloseInFront;
 
+        private float _prevAgx = 0f;
+        private float _prevAgy = 0f;
+        private float _prevAgz = 0f;
 
         public void ParseExtTof(string state)
         {
-            if (state.Contains("tof"))
+            if (state.Contains("tof "))
             {
-                ExtTof = int.Parse(state.Split("tof ")[1]);
-                Console.WriteLine($"EXTTof: {ExtTof}");
+                var x = state.Split("tof ")?.LastOrDefault();
+
+                if (x != null && int.TryParse(x, out int _tof))
+                {
+                    ExtTof = (int)_tof;
+                    bt.Events.ExtTofRecieved(new Events.EventArgs.ExtTofEventArgs(ExtTof));
+                    Console.WriteLine(ExtTof);
+                    if (ExtTof <= TelloState.ProximityLimit)
+                    {
+                        ObstacleTooCloseInFront = true;
+                        bt.Commands.Back(40);
+                        Console.WriteLine("Command back called");
+                    }
+                    else
+                        ObstacleTooCloseInFront = false;
+                }
             }
+                
+                
         }
 
         public void ParseState(string state)
         {
             RawState = state;
-            Console.WriteLine($"Parsing state: {state}");
             ParseState("mid", ref MId);
             ParseState("x", ref X);
             ParseState("y", ref Y);
@@ -63,6 +95,13 @@ namespace BetterTelloLib.Commander
             ParseState("agx", ref Agx);
             ParseState("agy", ref Agy);
             ParseState("agz", ref Agz);
+            FlyingState = CalculateFlyingState();
+        }
+        private FlyingState CalculateFlyingState()
+        {
+            if (Agx + Agy + Agz > 0.05f)
+                return FlyingState.Flying;
+            return FlyingState.Grounded;
         }
         private void ParseState(string id, ref int Prop)
         {
@@ -72,6 +111,12 @@ namespace BetterTelloLib.Commander
         {
             var culture = (CultureInfo)CultureInfo.CurrentCulture.Clone();
             culture.NumberFormat.NumberDecimalSeparator = ".";
+            if (id == "agx")
+                _prevAgx = Agx;
+            else if (id == "agy")
+                _prevAgy = Agy;
+            else if (id == "agz")
+                _prevAgz = Agz;
             Prop = float.Parse(GetStateStringValue(id), culture);
         }
         private void ParseState(string id, ref string Prop)

@@ -56,3 +56,12 @@ The following packages were updated:
   com.unity.textmeshpro from version 3.0.1 to 3.0.6
   com.unity.timeline from version 1.4.6 to 1.7.2
   com.unity.xr.legacyinputhelpers from version 2.1.7 to 2.1.10
+
+=== Wed Mar  8 09:27:49 2023
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were updated:
+  com.unity.purchasing from version 4.5.2 to 4.6.0
+  com.unity.timeline from version 1.7.2 to 1.7.3
