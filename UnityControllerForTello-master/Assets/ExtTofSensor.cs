@@ -12,11 +12,11 @@ public class ExtTofSensor : MonoBehaviour
     public float Dist = 10;
     public Obstacle? Prefab;
     private Transform telloTransform;
+    public LayerMask ObstacleMask;
     public GameObject Parent;
-    List<Obstacle> Obstacles = new();
 
     private bool UpdateRecieved = false;
-    private int ExtTof;
+    public int ExtTof;
 
     private void Awake()
     {
@@ -24,6 +24,10 @@ public class ExtTofSensor : MonoBehaviour
         telloTransform = GetComponent<Transform>();
     }
 
+    void FixedUpdate()
+    {
+        
+    }
 
     private void Start()
     {
@@ -42,7 +46,22 @@ public class ExtTofSensor : MonoBehaviour
             Obstacle s = Instantiate(Prefab, new Vector3(spawnPos.x, 0, spawnPos.z), playerRotation, Parent.GetComponent<Transform>().transform);
             s.ExtTof = ExtTof;
             s.Transform = telloTransform;
+
         }
+
+        RaycastHit[] hit = Physics.RaycastAll(transform.position, transform.TransformDirection(Vector3.forward), maxDistance: 1.2f * 100, layerMask: ObstacleMask);
+        if (hit.Length > 0)
+        {
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit[0].distance, Color.green);
+            if (ExtTof >= 4000)
+                foreach (var item in hit)
+                    Destroy(item.collider.gameObject);
+        }
+        else
+        {
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1.2f * 10f, Color.red);
+        }
+
     }
     public 
 
