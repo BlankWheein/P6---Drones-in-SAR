@@ -13,12 +13,15 @@ public class StartRunning : MonoBehaviour
     public TMP_Text yVal;
     public TMP_Text zVal;
     public Transform drone;
+    public GameObject LowBatteryWarning;
+    public float batteryPercent = 100;
+
+    private bool isWarningDisabled = false;
     private bool onPlay = false;
     private float xValInitial;
     private float yValInitial;
     private float zValInitial;
-
-    public float batteryPercent = 100;
+  
     private float initialBatteryPercent;
 
     // Start is called before the first frame update
@@ -26,6 +29,9 @@ public class StartRunning : MonoBehaviour
     {
         //Set the battery percent of the drone when it started 
         initialBatteryPercent = batteryPercent;
+
+        //Disable the Warning panel from showing
+        LowBatteryWarning.SetActive(false);
 
         //set the start coordinates of the drone
         xValInitial = drone.transform.position.x;
@@ -38,10 +44,11 @@ public class StartRunning : MonoBehaviour
     {
         batteryVal.SetText(batteryPercent.ToString());
 
-        if (batteryPercent == initialBatteryPercent / 2 || batteryPercent < 20)
+        if (batteryPercent <= initialBatteryPercent / 2 || batteryPercent <= 20 && isWarningDisabled == false)
         {
-
+            LowBatteryWarning.SetActive(true);
         }
+        else { LowBatteryWarning.SetActive(false); }
 
         if (onPlay)
         {
