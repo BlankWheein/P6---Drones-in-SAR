@@ -44,7 +44,7 @@ public class StartRunning : MonoBehaviour
     {
         batteryVal.SetText(batteryPercent.ToString());
 
-        if (batteryPercent <= initialBatteryPercent / 2 || batteryPercent <= 20 && isWarningDisabled == false)
+        if (batteryPercent <= initialBatteryPercent / 2 && isWarningDisabled == false || batteryPercent <= 20 && isWarningDisabled == false)
         {
             LowBatteryWarning.SetActive(true);
         }
@@ -55,6 +55,12 @@ public class StartRunning : MonoBehaviour
             UpdateDroneCoordinates();
         }
     }
+
+    public void DisableWarning ()
+    {
+        isWarningDisabled = true;
+    }
+
 
     //called when play button is clicked
     public void OnPlay()
