@@ -8,7 +8,6 @@ public class StartRunning : MonoBehaviour
 {
     public TMP_InputField field;
     public TMP_Text batteryVal;
-    public TMP_Text distanceVal;
     public TMP_Text xVal;
     public TMP_Text yVal;
     public TMP_Text zVal;
@@ -65,15 +64,10 @@ public class StartRunning : MonoBehaviour
     //called when play button is clicked
     public void OnPlay()
     {
-        InsertDist();
         onPlay = true;
     }
 
     //insert the input distance in the info panel
-    private void InsertDist()
-    {
-        distanceVal.text = field.text == "" ? "0" : field.text;
-    }
 
     private void UpdateDroneCoordinates()
     {
