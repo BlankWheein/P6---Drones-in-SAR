@@ -10,11 +10,14 @@ public class ShowGoldenPath : MonoBehaviour
 {
     public Transform target;
     public float targetY;
+    public bool IsTargetReachable;
+    public NavMeshPathStatus status;
 
     private float droneY;
     private NavMeshPath path;
     private float elapsed = 0.0f;
     private LineRenderer lineRenderer;
+
 
     public class CalculatedGoldenPathEventArgs : EventArgs
     {
@@ -29,11 +32,14 @@ public class ShowGoldenPath : MonoBehaviour
         lineRenderer = GetComponent<LineRenderer>();
     }
 
+    public float GetDistanceToTargetTransform() => Vector3.Distance(transform.position, target.position);
+
     void Update()
     {
         droneY = transform.rotation.eulerAngles.y;
         if (path.corners.Length > 0)
         {
+
             var gmo = new GameObject();
             var newTrans = gmo.transform;
             newTrans.SetPositionAndRotation(transform.position, transform.rotation);
@@ -50,8 +56,8 @@ public class ShowGoldenPath : MonoBehaviour
         elapsed += Time.deltaTime;
         if (elapsed > 0.01f)
         {
-            Debug.Log(target.position);
-            NavMesh.CalculatePath(transform.position, target.position, NavMesh.AllAreas, path);
+            IsTargetReachable = NavMesh.CalculatePath(transform.position, target.position, NavMesh.AllAreas, path);
+            status = path.status;
             elapsed -= 0.01f;
         }
         lineRenderer.positionCount = path.corners.Length;

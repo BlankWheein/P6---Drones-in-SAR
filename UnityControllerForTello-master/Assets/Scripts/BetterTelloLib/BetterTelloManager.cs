@@ -13,10 +13,17 @@ using UnityEngine.UIElements;
 public class BetterTelloManager : MonoBehaviour
 {
     [Header("Variables")]
-    public float DegreePrecision = 2f;
-
+    [Min(3)]
+    public float DegreePrecision = 3f;
+    public float TargetTransformPrecision = 2f;
+    [Min(3)]
+    public int ScanDegrees = 5;
+    public int ExtTofDistance = 800;
+    [Min(10)]
+    public int ForwardDistance = 70;
 
     [Header("State")]
+    public float DistanceToTarget = 0;
     public TelloConnectionState ConnectionState = TelloConnectionState.Disconnected;
     public FlyingState FlyingState = FlyingState.Grounded;
     public float TempH = 0;
@@ -26,6 +33,7 @@ public class BetterTelloManager : MonoBehaviour
     public int Tof;
     public Vector3 PositionVel = Vector3.zero;
     public Quaternion PYR = new();
+    public Vector3 PositionMissionPad = Vector3.zero;
     private float Pitch = 0;
     private float Roll = 0;
     private float Yaw = 0;
@@ -36,12 +44,11 @@ public class BetterTelloManager : MonoBehaviour
     private float Height = 0;
     private RenderVideoStream telloVideoTexture;
     private FlightPathController flightPathController;
-    private Vector3 PositionAcc = Vector3.zero;
-    private Vector3 PositionMissionPad = Vector3.zero;
 
     private List<int> Timestamps = new();
     private List<Vector3> Vels = new();
     private bool waitingForOk = false;
+    private bool IsPathfinding = false;
 
 
 
@@ -51,7 +58,7 @@ public class BetterTelloManager : MonoBehaviour
         ConnectToTello();
         Transform = GetComponent<Transform>();
     }
-    public void ConnectToTello()
+    public async void ConnectToTello()
     {
         flightPathController.drawFlightPath = false;
         ConnectionState = TelloConnectionState.Connecting;
@@ -60,6 +67,14 @@ public class BetterTelloManager : MonoBehaviour
         BetterTello.Events.OnOkRecieved += OkRecieved;
         BetterTello.Connect();
         BetterTello.Commands.SetBitrate(0);
+        StartCoroutine(CheckConnected());
+
+    }
+    IEnumerator CheckConnected()
+    {
+        yield return new WaitForSeconds(10);
+        if (ConnectionState != TelloConnectionState.Connected)
+            ConnectionState = TelloConnectionState.CouldNotConnect;
     }
 
     private void OkRecieved(object? sender, TaskRecievedEventArgs e)
@@ -91,7 +106,6 @@ public class BetterTelloManager : MonoBehaviour
     {
         BetterTello.Commands.Stop();
         BetterTello.Commands.Land();
-        //CustomOnApplicationQuit();
     }
 
     private void Update()
@@ -99,9 +113,11 @@ public class BetterTelloManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.L))
             BetterTello.Commands.Land();
         else if (Input.GetKeyDown(KeyCode.T))
-            Task.Factory.StartNew(async () => await Run());
+            Task.Factory.StartNew(async () => await Takeoff());
         else if (Input.GetKeyDown(KeyCode.P))
             Task.Factory.StartNew(async () => await PathFind());
+        else if (Input.GetKeyDown(KeyCode.S))
+            Task.Factory.StartNew(async () => await Forward(ForwardDistance));
         UpdateTransform();
         if (BetterTello?.State != null)
             FlyingState = BetterTello.State.FlyingState;
@@ -109,6 +125,7 @@ public class BetterTelloManager : MonoBehaviour
     private void FixedUpdate()
     {
         flightPathController.CreateFlightPoint();
+        DistanceToTarget = ShowGoldenPath.GetDistanceToTargetTransform();
     }
     public async Task<int> Takeoff()
     {
@@ -118,6 +135,7 @@ public class BetterTelloManager : MonoBehaviour
     }
     public async Task<int> Land()
     {
+        IsPathfinding = false;
         flightPathController.drawFlightPath = false;
         var r = await RunCommand(BetterTello.Commands.Land);
         return r;
@@ -139,31 +157,46 @@ public class BetterTelloManager : MonoBehaviour
     public async Task<int> Back(int x) => await RunCommand(BetterTello.Commands.Back, x);
     public async Task PathFind()
     {
-        await RotateToTarget();
+        IsPathfinding = true;
+        Debug.Log("Started Pathfinding");
+        await RotateToTarget(Scan: false);
+        Debug.Log("Target Found");
     }
 
-    private async Task RotateToTarget()
+    public async Task Step()
     {
+        if (DistanceToTarget > TargetTransformPrecision 
+                && ShowGoldenPath.IsTargetReachable
+                && ShowGoldenPath.status != UnityEngine.AI.NavMeshPathStatus.PathInvalid 
+                && ExtTof > ExtTofDistance
+        )
+        {
+            await Forward(Math.Clamp(ForwardDistance, 10, 70));
+            Debug.Log("Stepping");
+        }
+    }
+
+    private async Task RotateToTarget(bool Scan)
+    {
+        Debug.Log("Rotating");
         float rot = ShowGoldenPath.targetY;
         if (rot < 0)
             await Ccw((int)Math.Abs(rot));
         else
             await Cw((int)rot);
         if (Math.Abs(ShowGoldenPath.targetY) > DegreePrecision)
-            await RotateToTarget();
+            await RotateToTarget(Scan);
+        if (Scan)
+            await ScanXDegrees();
+    }
+    private async Task ScanXDegrees()
+    {
+        Debug.Log("Scanning");
+        await Ccw(ScanDegrees);
+        await Cw(ScanDegrees * 2);
+        await RotateToTarget(false);
     }
 
-    public async Task Run()
-    {
-        await Takeoff();
-        //BetterTello.Commands.Emergency();
-    }
-
-    public async Task Scan()
-    {
-        for (int i = 0; i < 100; i++)
-            await Cw(30);
-    }
     public async Task<int> RunCommand(Func<int, int> Function, int x)
     {
         Debug.Log("Sending command: " + Function.Method.Name + $"({x})");
@@ -187,22 +220,10 @@ public class BetterTelloManager : MonoBehaviour
         await Task.Delay(500);
     }
 
-
-    public void TakeOff()
-    {
-        Debug.Log("TakeOff!");
-        var preFlightPanel = GameObject.Find("Pre Flight Panel");
-        if (preFlightPanel)
-            preFlightPanel.SetActive(false);
-        BetterTello.Commands.Takeoff();
-        flightPathController.TakeOff(this);
-    }
-
     public void OnStateUpdate(object? sender, StateEventArgs e)
     {
         var state = e.State;
-        var vel = new Vector3(state.Vgx, state.Vgy, state.Vgz);
-        PositionAcc += new Vector3(state.Agx, state.Agy, state.Agz);
+        var vel = new Vector3(-state.Vgx, state.Vgy, state.Vgz);
         PositionMissionPad = new Vector3(state.X, state.Y, state.Z);
         Pitch = state.Pitch;
         Roll = state.Roll;

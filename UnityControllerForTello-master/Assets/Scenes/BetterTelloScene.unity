@@ -6272,7 +6272,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &647646636
 Transform:
   m_ObjectHideFlags: 0
@@ -8343,16 +8343,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20f5aa9d4fd509b4f81060f5918154b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DegreePrecision: 2
+  DegreePrecision: 4
+  TargetTransformPrecision: 2
+  ScanDegrees: 8
+  ExtTofDistance: 800
+  ForwardDistance: 50
+  DistanceToTarget: 0
   ConnectionState: 0
   FlyingState: 0
   TempH: 0
+  TempL: 0
   ExtTof: 200
   Bat: 0
   Tof: 0
-  Transform: {fileID: 0}
-  PYR: {x: 0, y: 0, z: 0, w: 0}
   PositionVel: {x: 0, y: 0, z: 0}
+  PYR: {x: 0, y: 0, z: 0, w: 0}
+  PositionMissionPad: {x: 0, y: 0, z: 0}
 --- !u!114 &849881868
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8422,8 +8428,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 2018341336}
-  droneY: 0
   targetY: 0
+  IsTargetReachable: 0
+  status: 0
 --- !u!120 &849881872
 LineRenderer:
   serializedVersion: 2
@@ -18417,7 +18424,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1853969833}
-  m_Enabled: 0
+  m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -18468,7 +18475,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1853969833}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.76, y: 86.4, z: 13.04}
+  m_LocalPosition: {x: -284.8, y: 86.4, z: 13.04}
   m_LocalScale: {x: 1, y: 100, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -20074,7 +20081,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2018341335}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 26.2, y: 0.58, z: 43.9}
+  m_LocalPosition: {x: 0.16, y: 0.58, z: -6.32}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
