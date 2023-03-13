@@ -14,12 +14,14 @@ public class ExtTofSensor : MonoBehaviour
     private Transform telloTransform;
     public LayerMask ObstacleMask;
     public GameObject Parent;
+    private ShowGoldenPath showGolden;
 
     private bool UpdateRecieved = false;
     public int ExtTof;
 
     private void Awake()
     {
+        showGolden = GetComponent<ShowGoldenPath>();
         tello = GetComponent<BetterTelloManager>();
         telloTransform = GetComponent<Transform>();
     }
@@ -46,7 +48,6 @@ public class ExtTofSensor : MonoBehaviour
             Obstacle s = Instantiate(Prefab, new Vector3(spawnPos.x, 0, spawnPos.z), playerRotation, Parent.GetComponent<Transform>().transform);
             s.ExtTof = ExtTof;
             s.Transform = telloTransform;
-
         }
 
         RaycastHit[] hit = Physics.RaycastAll(transform.position, transform.TransformDirection(Vector3.forward), maxDistance: 1.2f * 100, layerMask: ObstacleMask);

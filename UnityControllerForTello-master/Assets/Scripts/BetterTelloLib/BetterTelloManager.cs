@@ -12,30 +12,37 @@ using UnityEngine.UIElements;
 
 public class BetterTelloManager : MonoBehaviour
 {
-    public BetterTello BetterTello = new();
+    [Header("Variables")]
+    public float DegreePrecision = 2f;
+
+
+    [Header("State")]
     public TelloConnectionState ConnectionState = TelloConnectionState.Disconnected;
     public FlyingState FlyingState = FlyingState.Grounded;
-    public float Height = 0;
-    public Vector3 PositionVel = Vector3.zero;
-    public Vector3 PositionAcc = Vector3.zero;
-    public Vector3 PositionMissionPad = Vector3.zero;
     public float TempH = 0;
     public float TempL = 0;
     public float ExtTof = 0;
     public int Bat = 0;
     public int Tof;
+    public Vector3 PositionVel = Vector3.zero;
     public Quaternion PYR = new();
     private float Pitch = 0;
     private float Roll = 0;
     private float Yaw = 0;
+
+    public BetterTello BetterTello = new();
+    private Transform Transform;
+    private ShowGoldenPath ShowGoldenPath;
+    private float Height = 0;
     private RenderVideoStream telloVideoTexture;
     private FlightPathController flightPathController;
-    public Transform Transform;
+    private Vector3 PositionAcc = Vector3.zero;
+    private Vector3 PositionMissionPad = Vector3.zero;
 
     private List<int> Timestamps = new();
     private List<Vector3> Vels = new();
-
     private bool waitingForOk = false;
+
 
 
     private void Start()
@@ -51,7 +58,6 @@ public class BetterTelloManager : MonoBehaviour
         BetterTello.Events.OnStateRecieved += OnStateUpdate;
         BetterTello.Events.OnVideoDataRecieved += Tello_onVideoData;
         BetterTello.Events.OnOkRecieved += OkRecieved;
-        ConnectionState = TelloConnectionState.Connected;
         BetterTello.Connect();
         BetterTello.Commands.SetBitrate(0);
     }
@@ -76,6 +82,7 @@ public class BetterTelloManager : MonoBehaviour
     void Awake()
     {
         this.flightPathController = GetComponent<FlightPathController>();
+        ShowGoldenPath = GetComponent<ShowGoldenPath>();
         if (telloVideoTexture == null)
             telloVideoTexture = FindObjectOfType<RenderVideoStream>();
     }
@@ -91,8 +98,10 @@ public class BetterTelloManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.L))
             BetterTello.Commands.Land();
-        if (Input.GetKeyDown(KeyCode.T))
+        else if (Input.GetKeyDown(KeyCode.T))
             Task.Factory.StartNew(async () => await Run());
+        else if (Input.GetKeyDown(KeyCode.P))
+            Task.Factory.StartNew(async () => await PathFind());
         UpdateTransform();
         if (BetterTello?.State != null)
             FlyingState = BetterTello.State.FlyingState;
@@ -120,12 +129,33 @@ public class BetterTelloManager : MonoBehaviour
         var res = await RunCommand(BetterTello.Commands.Cw, x);
         return res;
     }
+    public async Task<int> Ccw(int x)
+    {
+        BetterTello.Factories.ExtTofDelay = 10;
+        var res = await RunCommand(BetterTello.Commands.Ccw, x);
+        return res;
+    }
     public async Task<int> Forward(int x) => await RunCommand(BetterTello.Commands.Forward, Math.Clamp(x, 1, 70));
     public async Task<int> Back(int x) => await RunCommand(BetterTello.Commands.Back, x);
+    public async Task PathFind()
+    {
+        await RotateToTarget();
+    }
+
+    private async Task RotateToTarget()
+    {
+        float rot = ShowGoldenPath.targetY;
+        if (rot < 0)
+            await Ccw((int)Math.Abs(rot));
+        else
+            await Cw((int)rot);
+        if (Math.Abs(ShowGoldenPath.targetY) > DegreePrecision)
+            await RotateToTarget();
+    }
+
     public async Task Run()
     {
         await Takeoff();
-        await Scan();
         //BetterTello.Commands.Emergency();
     }
 
