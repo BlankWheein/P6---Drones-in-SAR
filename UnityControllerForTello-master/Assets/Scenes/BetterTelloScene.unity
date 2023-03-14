@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748171, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6272,7 +6272,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &647646636
 Transform:
   m_ObjectHideFlags: 0
@@ -8345,9 +8345,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DegreePrecision: 4
   TargetTransformPrecision: 2
-  ScanDegrees: 8
+  ScanDegrees: 100
   ExtTofDistance: 800
-  ForwardDistance: 50
+  ForwardDistance: 70
   DistanceToTarget: 0
   ConnectionState: 0
   FlyingState: 0
@@ -8452,7 +8452,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9aff5a1887d9129439041c49c9411c75, type: 2}
+  - {fileID: 2100000, guid: 0f672ea38a64ab44f84d8be6f149a61b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -19478,7 +19478,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 69
+  orthographic size: 100
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -20081,7 +20081,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2018341335}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.16, y: 0.58, z: -6.32}
+  m_LocalPosition: {x: 0.3, y: 0.58, z: -84.7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

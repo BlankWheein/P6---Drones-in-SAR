@@ -44,10 +44,7 @@ public class ShowGoldenPath : MonoBehaviour
             var newTrans = gmo.transform;
             newTrans.SetPositionAndRotation(transform.position, transform.rotation);
             newTrans.LookAt(path.corners[1]);
-            if (newTrans.rotation.eulerAngles.y < 180)
-                targetY = newTrans.rotation.eulerAngles.y - droneY;
-            else
-                targetY = newTrans.rotation.eulerAngles.y - 360 - droneY;
+            targetY = newTrans.rotation.eulerAngles.y - droneY;
             Destroy(gmo);
         } else
         {

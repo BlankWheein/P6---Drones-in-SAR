@@ -18,6 +18,7 @@ public class BetterTelloManager : MonoBehaviour
     public float TargetTransformPrecision = 2f;
     [Min(3)]
     public int ScanDegrees = 5;
+    [Min(750)]
     public int ExtTofDistance = 800;
     [Min(10)]
     public int ForwardDistance = 70;
@@ -117,7 +118,7 @@ public class BetterTelloManager : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.P))
             Task.Factory.StartNew(async () => await PathFind());
         else if (Input.GetKeyDown(KeyCode.S))
-            Task.Factory.StartNew(async () => await Forward(ForwardDistance));
+            Task.Factory.StartNew(async () => await Step());
         UpdateTransform();
         if (BetterTello?.State != null)
             FlyingState = BetterTello.State.FlyingState;
@@ -159,7 +160,9 @@ public class BetterTelloManager : MonoBehaviour
     {
         IsPathfinding = true;
         Debug.Log("Started Pathfinding");
-        await RotateToTarget(Scan: false);
+        await RotateToTarget(Scan: true);
+        if (DistanceToTarget < TargetTransformPrecision)
+            IsPathfinding = false;
         Debug.Log("Target Found");
     }
 
@@ -171,21 +174,22 @@ public class BetterTelloManager : MonoBehaviour
                 && ExtTof > ExtTofDistance
         )
         {
-            await Forward(Math.Clamp(ForwardDistance, 10, 70));
             Debug.Log("Stepping");
+            await Forward(Math.Clamp(ForwardDistance, 10, 70));
+            await ScanXDegrees();
         }
     }
 
     private async Task RotateToTarget(bool Scan)
     {
-        Debug.Log("Rotating");
+        Debug.Log($"Rotating... Scan:{Scan}");
         float rot = ShowGoldenPath.targetY;
         if (rot < 0)
             await Ccw((int)Math.Abs(rot));
         else
             await Cw((int)rot);
         if (Math.Abs(ShowGoldenPath.targetY) > DegreePrecision)
-            await RotateToTarget(Scan);
+            await RotateToTarget(false);
         if (Scan)
             await ScanXDegrees();
     }
@@ -199,14 +203,12 @@ public class BetterTelloManager : MonoBehaviour
 
     public async Task<int> RunCommand(Func<int, int> Function, int x)
     {
-        Debug.Log("Sending command: " + Function.Method.Name + $"({x})");
         var ret = Function(x);
         await WaitForOk();
         return ret;
     }
     public async Task<int> RunCommand(Func<int> Function)
     {
-        Debug.Log("Sending command: " + Function.Method.Name + "()");
         var ret = Function();
         await WaitForOk();
         return ret;
@@ -223,8 +225,8 @@ public class BetterTelloManager : MonoBehaviour
     public void OnStateUpdate(object? sender, StateEventArgs e)
     {
         var state = e.State;
-        var vel = new Vector3(-state.Vgx, state.Vgy, state.Vgz);
-        PositionMissionPad = new Vector3(state.X, state.Y, state.Z);
+        var vel = new Vector3(state.Vgx, state.Vgy, state.Vgz);
+        PositionMissionPad = new Vector3(state.X, state.Y, -state.Z);
         Pitch = state.Pitch;
         Roll = state.Roll;
         Yaw = state.Yaw;
@@ -252,7 +254,7 @@ public class BetterTelloManager : MonoBehaviour
             {
                 x = localvel.Select(p => p.y).Sum() / 100,
                 y = 1, //localvel.Select(p => p.z).Sum() / 100,
-                z = localvel.Select(p => p.x).Sum() / 100,
+                z = -(localvel.Select(p => p.x).Sum() / 100),
             };
         }
     }
