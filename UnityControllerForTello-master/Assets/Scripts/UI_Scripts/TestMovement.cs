@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.UIElements;
 using UnityEngine;
 
 public class TestMovement : MonoBehaviour
@@ -12,18 +13,18 @@ public class TestMovement : MonoBehaviour
 
         if (Input.GetKey("w"))
         {
-            transform.position += new Vector3(0, 0, 1);
+            transform.position += transform.forward;
         }
 
 
         if (Input.GetKey("d"))
         {
-            transform.position += new Vector3(1, 0, 0);
+            transform.Rotate(0, 1, 0);
         }
 
         if (Input.GetKey("a"))
         {
-            transform.position += new Vector3(-1, 0, 0);
+            transform.Rotate(0, -1, 0);
         }
 
 

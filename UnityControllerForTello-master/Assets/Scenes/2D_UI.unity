@@ -526,10 +526,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8004870786121596540, guid: c53e58c59cba20e4ab6f2080fbdafb5f,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 589372058}
-    - targetCorrespondingSourceObject: {fileID: 8004870786121596540, guid: c53e58c59cba20e4ab6f2080fbdafb5f,
-        type: 3}
-      insertIndex: -1
       addedObject: {fileID: 176066377}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 7231887364440564934, guid: c53e58c59cba20e4ab6f2080fbdafb5f,
@@ -687,7 +683,7 @@ Transform:
   - {fileID: 1106507653}
   - {fileID: 2063570993}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &360453126
 GameObject:
@@ -1044,13 +1040,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 589372055}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -0.25, y: 46.77704, z: 0.4166667}
-  m_LocalScale: {x: 0.083333336, y: 0.083333336, z: 0.083333336}
+  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 3057, y: 688, z: 5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 218293126}
-  m_RootOrder: -1
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &668165313
 GameObject:
@@ -2551,7 +2547,7 @@ GameObject:
   - component: {fileID: 1521128088}
   - component: {fileID: 1521128087}
   m_Layer: 5
-  m_Name: Full-Stop
+  m_Name: FlyBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

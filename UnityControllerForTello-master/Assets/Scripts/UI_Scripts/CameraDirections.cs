@@ -33,8 +33,10 @@ public class CameraDirections : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        RotateX();
        if(is3D) {
-            RotateCamera();
+            RotateY();
         }
         
         //zoom in/out
@@ -48,27 +50,31 @@ public class CameraDirections : MonoBehaviour
         }
     }
 
-    void RotateCamera()
+    void RotateX()
     {
         float xAxis;
-        float yAxis;
+       
 
-        if (Input.GetMouseButton(1))
-        {
-            yAxis = Input.GetAxis("Mouse Y") * 10;
-            DroneCam.transform.RotateAround(drone.position, Vector3.right, yAxis);
-
-        }
         if (Input.GetMouseButton(0))
         {
 
-            xAxis = Input.GetAxis("Mouse X") * -10;
-            DroneCam.transform.RotateAround(drone.position, Vector3.down, xAxis);
+            xAxis = Input.GetAxis("Mouse X") * 10;
+            DroneCam.transform.RotateAround(drone.position, Vector3.up, xAxis);
 
         }
     }
 
-    public void toggle3D()
+    void RotateY()
+    {
+        float yAxis;
+        if (Input.GetMouseButton(1))
+        {
+            yAxis = Input.GetAxis("Mouse Y") * 10;
+            DroneCam.transform.RotateAround(drone.position, Vector3.right, yAxis);
+        }
+    }
+
+        public void toggle3D()
     {
         is3D= !is3D;
         if (is3D == false)
