@@ -6,7 +6,6 @@ using TMPro;
 
 public class StartRunning : MonoBehaviour
 {
-    public TMP_InputField field;
     public TMP_Text batteryVal;
     public TMP_Text xVal;
     public TMP_Text yVal;
