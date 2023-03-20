@@ -784,8 +784,8 @@ GameObject:
   - component: {fileID: 287130214}
   - component: {fileID: 287130216}
   - component: {fileID: 287130215}
-  - component: {fileID: 287130218}
   - component: {fileID: 287130217}
+  - component: {fileID: 287130218}
   m_Layer: 5
   m_Name: Screen
   m_TagString: Untagged
@@ -875,12 +875,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2850d0a93fccd514c9706e66af160a86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  parentCanvas: {fileID: 0}
-  rect: {fileID: 0}
+  UICamera: {fileID: 1384788984}
+  textureRectTransform: {fileID: 287130214}
+  RenderToTextureCamera: {fileID: 589372057}
   directionObject: {fileID: 4602978450464789088, guid: 5e1f0d7d7b05fb54682b6792f1be69db,
     type: 3}
-  drone: {fileID: 1010374598}
-  droneCam: {fileID: 589372057}
 --- !u!1 &299165246
 GameObject:
   m_ObjectHideFlags: 0
@@ -3360,7 +3359,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 24.761312
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -3386,7 +3385,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1384788982}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -325.96906, y: -261.38232, z: -683.40607}
+  m_LocalPosition: {x: -152.96906, y: -98.382324, z: -683.40607}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
