@@ -44,7 +44,7 @@ public class ShowGoldenPath : MonoBehaviour
             var newTrans = gmo.transform;
             newTrans.SetPositionAndRotation(transform.position, transform.rotation);
             newTrans.LookAt(path.corners[1]);
-            targetY = newTrans.rotation.eulerAngles.y - droneY;
+            targetY = AngleDifference(newTrans.rotation.eulerAngles.y, droneY);
             Destroy(gmo);
         } else
         {
@@ -64,5 +64,10 @@ public class ShowGoldenPath : MonoBehaviour
             lineRenderer.SetPosition(i, path.corners[i]);
             lineRenderer.SetPosition(i + 1, path.corners[i + 1]);
         }
+    }
+    public float AngleDifference(float angle1, float angle2)
+    {
+        float diff = (angle2 - angle1 + 180) % 360 - 180;
+        return diff < -180f ? diff + 360f : diff;
     }
 }

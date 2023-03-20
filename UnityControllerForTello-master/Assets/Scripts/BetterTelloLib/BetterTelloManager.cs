@@ -117,8 +117,8 @@ public class BetterTelloManager : MonoBehaviour
             Task.Factory.StartNew(async () => await Takeoff());
         else if (Input.GetKeyDown(KeyCode.P))
             Task.Factory.StartNew(async () => await PathFind());
-        else if (Input.GetKeyDown(KeyCode.S))
-            Task.Factory.StartNew(async () => await Step());
+        else if (Input.GetKeyDown(KeyCode.W))
+            Task.Factory.StartNew(async () => await Up(50));
         UpdateTransform();
         if (BetterTello?.State != null)
             FlyingState = BetterTello.State.FlyingState;
@@ -160,9 +160,13 @@ public class BetterTelloManager : MonoBehaviour
     {
         IsPathfinding = true;
         Debug.Log("Started Pathfinding");
-        await RotateToTarget(Scan: true);
-        if (DistanceToTarget < TargetTransformPrecision)
-            IsPathfinding = false;
+        while(IsPathfinding)
+        {
+            await RotateToTarget(Scan: true);
+            await Step();
+            if (DistanceToTarget < TargetTransformPrecision)
+                IsPathfinding = false;
+        }
         Debug.Log("Target Found");
     }
 
@@ -252,7 +256,7 @@ public class BetterTelloManager : MonoBehaviour
             }
             PositionVel = new Vector3()
             {
-                x = localvel.Select(p => p.y).Sum() / 100,
+                x = -(localvel.Select(p => p.y).Sum() / 100),
                 y = 1, //localvel.Select(p => p.z).Sum() / 100,
                 z = -(localvel.Select(p => p.x).Sum() / 100),
             };
