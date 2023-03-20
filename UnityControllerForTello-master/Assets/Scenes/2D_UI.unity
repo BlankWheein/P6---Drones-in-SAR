@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.4964127, b: 0.57481724, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -784,8 +784,8 @@ GameObject:
   - component: {fileID: 287130214}
   - component: {fileID: 287130216}
   - component: {fileID: 287130215}
-  - component: {fileID: 287130217}
   - component: {fileID: 287130218}
+  - component: {fileID: 287130217}
   m_Layer: 5
   m_Name: Screen
   m_TagString: Untagged
@@ -857,7 +857,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 287130213}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7624728b41291e4b923e163bfddf677, type: 3}
+  m_Script: {fileID: 11500000, guid: 50cd599363cceca418ca72f3e1d42c1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   drone: {fileID: 218293126}
@@ -872,12 +872,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 287130213}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c94593dd112300d42b9724be0b1e0cd5, type: 3}
+  m_Script: {fileID: 11500000, guid: 2850d0a93fccd514c9706e66af160a86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   parentCanvas: {fileID: 0}
   rect: {fileID: 0}
-  directionObject: {fileID: 4602978450464789088, guid: 952b76b92318b1340880a6506230c25d,
+  directionObject: {fileID: 4602978450464789088, guid: 5e1f0d7d7b05fb54682b6792f1be69db,
     type: 3}
   drone: {fileID: 1010374598}
   droneCam: {fileID: 589372057}
@@ -1725,9 +1725,9 @@ GameObject:
   - component: {fileID: 763390899}
   - component: {fileID: 763390901}
   - component: {fileID: 763390900}
-  - component: {fileID: 763390903}
   - component: {fileID: 763390902}
   - component: {fileID: 763390904}
+  - component: {fileID: 763390905}
   m_Layer: 5
   m_Name: Play
   m_TagString: Untagged
@@ -1775,7 +1775,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2e867321104b14d4383259381b349606, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 01c77f6ab211fb747a549e2a4b2a869f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1837,7 +1837,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 763390903}
+      - m_Target: {fileID: 763390905}
         m_TargetAssemblyTypeName: StartRunning, Assembly-CSharp
         m_MethodName: OnPlay
         m_Mode: 1
@@ -1861,25 +1861,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &763390903
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 763390898}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4aa078e01afa5a7419f3fca55204f411, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  batteryVal: {fileID: 984541647}
-  xVal: {fileID: 107570553}
-  yVal: {fileID: 1791771835}
-  zVal: {fileID: 1280387443}
-  drone: {fileID: 218293126}
-  LowBatteryWarning: {fileID: 528683587}
-  batteryPercent: 100
 --- !u!114 &763390904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1889,13 +1870,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 763390898}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f4c1628c86f7024cad6d6edd7566962, type: 3}
+  m_Script: {fileID: 11500000, guid: c7f8dd6078ca99a45a3326ba27086edf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   SearchPatternDropdown: {fileID: 686978184}
   PlayPause: {fileID: 763390900}
-  Takeoff: {fileID: 21300000, guid: 2e867321104b14d4383259381b349606, type: 3}
-  Land: {fileID: 21300000, guid: 5010953b0212c1541ab8b4787537593e, type: 3}
+  Takeoff: {fileID: 21300000, guid: 01c77f6ab211fb747a549e2a4b2a869f, type: 3}
+  Land: {fileID: 21300000, guid: a3c23aebf5ea2834694cfe2edfbf32e3, type: 3}
+--- !u!114 &763390905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 763390898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36e9ed7311d3aa3498b87876df8a359f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  batteryVal: {fileID: 984541647}
+  xVal: {fileID: 107570553}
+  yVal: {fileID: 1791771835}
+  zVal: {fileID: 1280387443}
+  drone: {fileID: 218293126}
+  LowBatteryWarning: {fileID: 528683587}
+  batteryPercent: 100
 --- !u!1 &774607852
 GameObject:
   m_ObjectHideFlags: 0
@@ -2318,7 +2318,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1010374598}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27041511c4713b44fbbf50e870c7bb06, type: 3}
+  m_Script: {fileID: 11500000, guid: cf8dd59a73645554d9f9fa0b11c78fa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!96 &1010374603
@@ -3639,7 +3639,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a533dde4042a9634a96d1b5be63fd4d1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 552d22db77cec064784f7a342c273b61, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
