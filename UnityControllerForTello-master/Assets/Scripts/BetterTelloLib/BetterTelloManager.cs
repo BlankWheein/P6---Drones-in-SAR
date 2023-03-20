@@ -187,11 +187,11 @@ public class BetterTelloManager : MonoBehaviour
     private async Task RotateToTarget(bool Scan)
     {
         Debug.Log($"Rotating... Scan:{Scan}");
-        float rot = ShowGoldenPath.targetY;
+        int rot = (int)ShowGoldenPath.targetY;
         if (rot < 0)
-            await Ccw((int)Math.Abs(rot));
+            await Ccw(Math.Abs(rot));
         else
-            await Cw((int)rot);
+            await Cw(rot);
         if (Math.Abs(ShowGoldenPath.targetY) > DegreePrecision)
             await RotateToTarget(false);
         if (Scan)
