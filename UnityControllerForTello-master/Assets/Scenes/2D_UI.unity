@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.4964127, b: 0.57481724, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1011,11 +1011,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2850d0a93fccd514c9706e66af160a86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  UICamera: {fileID: 1384788984}
-  textureRectTransform: {fileID: 287130214}
-  RenderToTextureCamera: {fileID: 589372057}
+  screen: {fileID: 287130214}
+  droneCam: {fileID: 589372057}
   directionObject: {fileID: 4602978450464789088, guid: 5e1f0d7d7b05fb54682b6792f1be69db,
     type: 3}
+  drone: {fileID: 1010374598}
 --- !u!1 &299165246
 GameObject:
   m_ObjectHideFlags: 0
