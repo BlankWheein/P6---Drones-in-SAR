@@ -66,13 +66,18 @@ public class StartRunning : MonoBehaviour
         onPlay = true;
     }
 
-    //insert the input distance in the info panel
-
     private void UpdateDroneCoordinates()
     {
         //update the infofield witht the coordinates, starting form (0,0,0)
-        xVal.SetText((drone.transform.position.x - xValInitial).ToString());
-        yVal.SetText((drone.transform.position.y - yValInitial).ToString());
-        zVal.SetText((drone.transform.position.z - zValInitial).ToString());
+        float xValNew = drone.transform.position.x - xValInitial;
+        float yValNew = drone.transform.position.y - yValInitial;
+        float zValNew = drone.transform.position.z - zValInitial;
+
+        
+        xVal.SetText((xValNew).ToString("0.##"));
+        yVal.SetText((yValNew).ToString("0.##"));
+        zVal.SetText((zValNew).ToString("0.##"));
+
+       
     }
 }
