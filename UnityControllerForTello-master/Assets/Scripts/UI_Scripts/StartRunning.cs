@@ -12,6 +12,7 @@ public class StartRunning : MonoBehaviour
     public TMP_Text zVal;
     public Transform drone;
     public GameObject LowBatteryWarning;
+    public GameObject LowBatteryIcon;
     public float batteryPercent = 100;
 
     private bool isWarningDisabled = false;
@@ -57,6 +58,7 @@ public class StartRunning : MonoBehaviour
     public void DisableWarning ()
     {
         isWarningDisabled = true;
+        LowBatteryIcon.SetActive(true);
     }
 
 
