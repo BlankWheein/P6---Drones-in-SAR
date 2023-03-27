@@ -42,6 +42,7 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
+
     y: 30
     width: 1536
     height: 730.8
@@ -117,6 +118,7 @@ MonoBehaviour:
   m_Position:
     serializedVersion: 2
     x: 0
+
     y: 499.2
     width: 1172.8
     height: 231.59998
@@ -173,7 +175,7 @@ MonoBehaviour:
     serializedVersion: 2
     x: 0
     y: 0
-    width: 1920
+    width: 1536
     height: 30
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
@@ -225,6 +227,7 @@ MonoBehaviour:
     height: 20
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
+
 --- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -238,7 +241,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Children:
-  - {fileID: 9}
   - {fileID: 10}
   - {fileID: 5}
   m_Position:
@@ -603,6 +605,7 @@ MonoBehaviour:
   m_TitleContent:
     m_Text: Hierarchy
     m_Image: {fileID: -3734745235275155857, guid: 0000000000000000d000000000000000,
+
       type: 0}
     m_Tooltip: 
   m_Pos:
@@ -611,6 +614,7 @@ MonoBehaviour:
     y: 73.6
     width: 289.4
     height: 478.2
+
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
