@@ -2,5 +2,6 @@
 {
     Disconnected,
     Connecting,
-    Connected
+    Connected,
+    CouldNotConnect
 }

@@ -10,6 +10,10 @@ public class Obstacle : MonoBehaviour
 
     private void Awake()
     {
-        Transform = GetComponent<Transform>();
+    }
+
+    private void Start()
+    {
+        GetComponent<MeshRenderer>().enabled = false;
     }
 }
