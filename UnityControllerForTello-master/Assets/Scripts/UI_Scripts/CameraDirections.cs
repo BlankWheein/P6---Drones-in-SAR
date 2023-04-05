@@ -40,11 +40,11 @@ public class CameraDirections : MonoBehaviour
         }
         
         //zoom in/out
-        if (DroneCam.orthographicSize >= 100 && DroneCam.orthographicSize <= 500)
+        if (DroneCam.orthographicSize >= 5 && DroneCam.orthographicSize <= 500)
         {
             DroneCam.orthographicSize += Input.GetAxis("Mouse ScrollWheel") * -100;
         }
-        if(DroneCam.orthographicSize < 100 || DroneCam.orthographicSize > 500)
+        if(DroneCam.orthographicSize < 5 || DroneCam.orthographicSize > 500)
         {
             DroneCam.orthographicSize += Input.GetAxis("Mouse ScrollWheel") * 100;
         }
