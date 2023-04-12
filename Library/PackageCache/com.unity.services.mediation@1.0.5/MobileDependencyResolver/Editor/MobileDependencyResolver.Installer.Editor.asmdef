@@ -1,0 +1,17 @@
+{
+    "name": "PlayServicesResolver.Installer.Editor",
+    "references": [
+	"Unity.Mediation"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

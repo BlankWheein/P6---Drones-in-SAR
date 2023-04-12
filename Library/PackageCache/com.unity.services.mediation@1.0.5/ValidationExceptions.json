@@ -1,0 +1,10 @@
+{
+"ErrorExceptions": [
+{
+"ValidationTest": "API Validation",
+"ExceptionMessage": "For Experimental or Preview Packages, breaking changes require a new minor version.",
+"PackageVersion": "0.5.1-preview.1"
+}
+],
+"WarningExceptions": []
+}
