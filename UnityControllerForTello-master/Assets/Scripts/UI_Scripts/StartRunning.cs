@@ -7,52 +7,41 @@ using TMPro;
 public class StartRunning : MonoBehaviour
 {
     public TMP_Text batteryVal;
+    public TMP_Text distance;
     public TMP_Text xVal;
     public TMP_Text yVal;
     public TMP_Text zVal;
-    public Transform drone;
+    public Transform DroneTransform;
     public GameObject LowBatteryWarning;
     public GameObject LowBatteryIcon;
     public float batteryPercent = 100;
+    BetterTelloManager Drone;
 
     private bool isWarningDisabled = false;
-    private bool onPlay = false;
-    private float xValInitial;
-    private float yValInitial;
-    private float zValInitial;
-  
     private float initialBatteryPercent;
 
-    // Start is called before the first frame update
     void Start()
     {
+        Drone = GameObject.Find("Drone").GetComponent<BetterTelloManager>();
+        DroneTransform = Drone.GetComponent<Transform>();
         //Set the battery percent of the drone when it started 
         initialBatteryPercent = batteryPercent;
 
         //Disable the Warning panel from showing
         LowBatteryWarning.SetActive(false);
-
-        //set the start coordinates of the drone
-        xValInitial = drone.transform.position.x;
-        yValInitial = drone.transform.position.y;
-        zValInitial = drone.transform.position.z;
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+        batteryPercent = Drone.Bat;
         batteryVal.SetText(batteryPercent.ToString());
-
-        if (batteryPercent <= initialBatteryPercent / 2 && isWarningDisabled == false || batteryPercent <= 20 && isWarningDisabled == false)
-        {
+        distance.SetText(Drone.DistanceToTarget.ToString("0.##"));
+        if ((batteryPercent <= initialBatteryPercent / 2 && isWarningDisabled == false || batteryPercent <= 20 && isWarningDisabled == false) 
+            && batteryPercent != -1 && Drone.ConnectionState == TelloConnectionState.Connected)
             LowBatteryWarning.SetActive(true);
-        }
-        else { LowBatteryWarning.SetActive(false); }
-
-        if (onPlay)
-        {
-            UpdateDroneCoordinates();
-        }
+        else 
+            LowBatteryWarning.SetActive(false);
+        UpdateDroneCoordinates();
     }
 
     public void DisableWarning ()
@@ -61,25 +50,10 @@ public class StartRunning : MonoBehaviour
         LowBatteryIcon.SetActive(true);
     }
 
-
-    //called when play button is clicked
-    public void OnPlay()
-    {
-        onPlay = true;
-    }
-
     private void UpdateDroneCoordinates()
     {
-        //update the infofield witht the coordinates, starting form (0,0,0)
-        float xValNew = drone.transform.position.x - xValInitial;
-        float yValNew = drone.transform.position.y - yValInitial;
-        float zValNew = drone.transform.position.z - zValInitial;
-
-        
-        xVal.SetText((xValNew).ToString("0.##"));
-        yVal.SetText((yValNew).ToString("0.##"));
-        zVal.SetText((zValNew).ToString("0.##"));
-
-       
+        xVal.SetText((DroneTransform.position.x).ToString("0.##"));
+        yVal.SetText((DroneTransform.position.y).ToString("0.##"));
+        zVal.SetText((DroneTransform.position.z).ToString("0.##"));
     }
 }

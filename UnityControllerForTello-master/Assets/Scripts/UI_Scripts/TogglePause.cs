@@ -8,39 +8,63 @@ public class TogglePause : MonoBehaviour
 {
     public TMP_Dropdown SearchPatternDropdown;
     public Image PlayPause;
-    public Sprite Takeoff;
-    public Sprite Land;
-    
+    public Texture2D Takeoff;
+    public Texture2D Land;
+    public Texture2D NotConnected;
+    BetterTelloManager BetterTelloManager;
 
-    private void ChangeImage()
+    private Sprite _takeoff, _land, _notConnected;
+
+    private void Start()
     {
-        if(PlayPause.sprite == Takeoff)
+        BetterTelloManager = GameObject.Find("Drone").GetComponent<BetterTelloManager>();
+        _takeoff = Sprite.Create(Takeoff, new Rect(0, 0, Takeoff.width, Takeoff.height), new Vector2());
+        _land = Sprite.Create(Land, new Rect(0, 0, Land.width, Land.height), new Vector2());
+        _notConnected = Sprite.Create(NotConnected, new Rect(0, 0, NotConnected.width, NotConnected.height), new Vector2());
+    }
+
+
+    private void FixedUpdate()
+    {
+        if (BetterTelloManager.ConnectionState == TelloConnectionState.Connected)
         {
-            PlayPause.sprite = Land;
+            if (BetterTelloManager.FlyingState == BetterTelloLib.Commander.FlyingState.Flying)
+            {
+                PlayPause.sprite = _land;
+            }
+            else
+            {
+                PlayPause.sprite = _takeoff;
+            }
         }
-        else
-        {
-            PlayPause.sprite = Takeoff;
+        else { 
+            PlayPause.sprite = _notConnected;
         }
     }
 
-    private void ChangeInteractibility () {
 
-        
-        if(PlayPause.sprite == Land) 
+    private async void UpdateState()
+    {
+        if (BetterTelloManager.ConnectionState == TelloConnectionState.Connected)
         {
-            SearchPatternDropdown.interactable = true;
+            if (BetterTelloManager.FlyingState == BetterTelloLib.Commander.FlyingState.Flying)
+            {
+                await BetterTelloManager.Land();
+            }
+            else if (BetterTelloManager.FlyingState == BetterTelloLib.Commander.FlyingState.Grounded)
+            {
+                await BetterTelloManager.Takeoff();
+            } 
         }
-        else if (PlayPause.sprite == Takeoff) 
-        { 
-            SearchPatternDropdown.interactable = false; 
+        else
+        {
+            Debug.Log("Not connected to tello drone");
         }
     }
 
     public void OnClick()
     {
-        ChangeImage();
-        ChangeInteractibility();
+        UpdateState();
     }
 
 }

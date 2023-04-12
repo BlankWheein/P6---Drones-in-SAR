@@ -30,7 +30,7 @@ public class BetterTelloManager : MonoBehaviour
     public float TempH = 0;
     public float TempL = 0;
     public float ExtTof = 0;
-    public int Bat = 0;
+    public int Bat = -1;
     public int Tof;
     public Vector3 PositionVel = Vector3.zero;
     public Quaternion PYR = new();
@@ -130,12 +130,14 @@ public class BetterTelloManager : MonoBehaviour
     }
     public async Task<int> Takeoff()
     {
+        Debug.Log("Takeoff!!!");
         var r = await RunCommand(BetterTello.Commands.Takeoff);
         flightPathController.drawFlightPath = true;
         return r;
     }
     public async Task<int> Land()
     {
+        Debug.Log("Land!!!");
         IsPathfinding = false;
         flightPathController.drawFlightPath = false;
         var r = await RunCommand(BetterTello.Commands.Land);

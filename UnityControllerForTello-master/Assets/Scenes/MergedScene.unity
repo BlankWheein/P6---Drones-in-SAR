@@ -470,6 +470,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &805625961 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1295978858255375298, guid: 0b0e98a296156104d81d322e8bd0b073,
+    type: 3}
+  m_PrefabInstance: {fileID: 1827729717}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1203418601 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7393042718126720216, guid: 9bbaf63046a887149b54cd190f356407,
@@ -582,6 +594,16 @@ PrefabInstance:
       propertyPath: m_CullTransparentMesh
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7218067727793922598, guid: 0b0e98a296156104d81d322e8bd0b073,
+        type: 3}
+      propertyPath: distance
+      value: 
+      objectReference: {fileID: 805625961}
+    - target: {fileID: 7218067727793922598, guid: 0b0e98a296156104d81d322e8bd0b073,
+        type: 3}
+      propertyPath: DroneTransform
+      value: 
+      objectReference: {fileID: 1542386946}
     - target: {fileID: 7748227824714339674, guid: 0b0e98a296156104d81d322e8bd0b073,
         type: 3}
       propertyPath: orthographic
@@ -612,6 +634,21 @@ PrefabInstance:
       propertyPath: directionObject
       value: 
       objectReference: {fileID: 1203418601}
+    - target: {fileID: 9017524635650536752, guid: 0b0e98a296156104d81d322e8bd0b073,
+        type: 3}
+      propertyPath: Land
+      value: 
+      objectReference: {fileID: 2800000, guid: f3ba06b10961b1e47a8b6fc1f276cbab, type: 3}
+    - target: {fileID: 9017524635650536752, guid: 0b0e98a296156104d81d322e8bd0b073,
+        type: 3}
+      propertyPath: Takeoff
+      value: 
+      objectReference: {fileID: 2800000, guid: fbeea29b00acb6b4eb4b960e05254bab, type: 3}
+    - target: {fileID: 9017524635650536752, guid: 0b0e98a296156104d81d322e8bd0b073,
+        type: 3}
+      propertyPath: NotConnected
+      value: 
+      objectReference: {fileID: 2800000, guid: 95dd8d74653fd6348bde9e5dfadd63f9, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
