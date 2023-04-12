@@ -1,0 +1,46 @@
+{
+  "name": "com.unity.services.mediation",
+  "displayName": "Advertisement with Mediation",
+  "version": "1.0.5",
+  "unity": "2019.4",
+  "description": "NOTE: Unity has joined forces with ironSource and recommends using LevelPlay for ad mediation (instead of this package). Learn how to integrate the LevelPlay plug-in at https://developers.is.com/developer-docs/unity/ \n\nThe Advertisement with Mediation package contains Unity’s own ad mediation solution, which is no longer being enhanced. You may still download and use until further notice, but we recommend using Unity LevelPlay for longer term support and improvements.\n\nSupported platforms:\n- Android\n- iOS",
+  "_upm": {
+    "gameService": {
+      "groupIndex": 4,
+      "groupName": "Monetize",
+      "genericDashboardUrl": "https://dashboard.unity3d.com/monetization",
+      "projectDashboardUrl": "https://dashboard.unity3d.com/organizations/{0}/monetization/mediation/waterfall-management",
+      "projectDashboardUrlType": "OrganizationKey",
+      "useCasesUrl": "https://dashboard.unity3d.com/monetization/use-cases.md",
+      "configurePath": "Project/Services/Mediation"
+    },
+    "supportedPlatforms": [
+      "Android",
+      "iOS"
+    ]
+  },
+  "dependencies": {
+    "com.unity.settings-manager": "1.0.3",
+    "com.unity.modules.ui": "1.0.0",
+    "com.unity.services.core": "1.4.0",
+    "com.unity.ugui": "1.0.0"
+  },
+  "samples": [
+    {
+      "displayName": "Example Usage",
+      "description": "A Sample Integration with a Demo Scene and C# Implementation",
+      "path": "Samples~/ExampleUsage"
+    }
+  ],
+  "relatedPackages": {
+    "com.unity.services.mediation.tests": "1.0.5"
+  },
+  "upmCi": {
+    "footprint": "6ac07d8734a2ed13a80a7402faf32ee2586db0b2"
+  },
+  "repository": {
+    "url": "https://github.cds.internal.unity3d.com/unity/operate-services-sdk.git",
+    "type": "git",
+    "revision": "610fdc3d37b9dd745e475fbf817705e08f19687e"
+  }
+}
