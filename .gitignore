@@ -16,7 +16,9 @@
 *.meta
 /[Mm]emoryCaptures/
 .dwlt
-
+*/DroneTest/*
+*/C# Drone test/*
+*/BetterTelloLib/
 # Recordings can get excessive in size
 */[Rr]ecordings/
 
