@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748171, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -556,6 +556,11 @@ PrefabInstance:
       propertyPath: DroneCam
       value: 
       objectReference: {fileID: 1990423920}
+    - target: {fileID: 1386113415215156924, guid: 0b0e98a296156104d81d322e8bd0b073,
+        type: 3}
+      propertyPath: m_text
+      value: k
+      objectReference: {fileID: 0}
     - target: {fileID: 1386113415215156924, guid: 0b0e98a296156104d81d322e8bd0b073,
         type: 3}
       propertyPath: m_fontSize
