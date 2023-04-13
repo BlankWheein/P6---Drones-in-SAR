@@ -496,9 +496,9 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!114 &805625961 stripped
+--- !u!114 &732937989 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1295978858255375298, guid: 0b0e98a296156104d81d322e8bd0b073,
+  m_CorrespondingSourceObject: {fileID: 1386113415215156924, guid: 0b0e98a296156104d81d322e8bd0b073,
     type: 3}
   m_PrefabInstance: {fileID: 1827729717}
   m_PrefabAsset: {fileID: 0}
@@ -556,6 +556,16 @@ PrefabInstance:
       propertyPath: DroneCam
       value: 
       objectReference: {fileID: 1990423920}
+    - target: {fileID: 1386113415215156924, guid: 0b0e98a296156104d81d322e8bd0b073,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1386113415215156924, guid: 0b0e98a296156104d81d322e8bd0b073,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 1828767367072848664, guid: 0b0e98a296156104d81d322e8bd0b073,
         type: 3}
       propertyPath: m_Enabled
@@ -626,11 +636,21 @@ PrefabInstance:
       propertyPath: m_CullTransparentMesh
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5685890980319550694, guid: 0b0e98a296156104d81d322e8bd0b073,
+        type: 3}
+      propertyPath: m_Name
+      value: Dump
+      objectReference: {fileID: 0}
     - target: {fileID: 7218067727793922598, guid: 0b0e98a296156104d81d322e8bd0b073,
         type: 3}
       propertyPath: distance
       value: 
-      objectReference: {fileID: 805625961}
+      objectReference: {fileID: 0}
+    - target: {fileID: 7218067727793922598, guid: 0b0e98a296156104d81d322e8bd0b073,
+        type: 3}
+      propertyPath: dumpText
+      value: 
+      objectReference: {fileID: 732937989}
     - target: {fileID: 7218067727793922598, guid: 0b0e98a296156104d81d322e8bd0b073,
         type: 3}
       propertyPath: DroneTransform

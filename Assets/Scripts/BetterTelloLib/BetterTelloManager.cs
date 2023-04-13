@@ -41,7 +41,7 @@ public class BetterTelloManager : MonoBehaviour
 
     public BetterTello BetterTello = new();
     private Transform Transform;
-    private ShowGoldenPath ShowGoldenPath;
+    public ShowGoldenPath ShowGoldenPath;
     private float Height = 0;
     private RenderVideoStream telloVideoTexture;
     private FlightPathController flightPathController;
@@ -49,7 +49,7 @@ public class BetterTelloManager : MonoBehaviour
     private List<int> Timestamps = new();
     private List<Vector3> Vels = new();
     private bool waitingForOk = false;
-    private bool IsPathfinding = false;
+    public bool IsPathfinding = false;
 
 
 

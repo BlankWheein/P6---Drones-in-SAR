@@ -7,13 +7,10 @@ using TMPro;
 public class StartRunning : MonoBehaviour
 {
     public TMP_Text batteryVal;
-    public TMP_Text distance;
-    public TMP_Text xVal;
-    public TMP_Text yVal;
-    public TMP_Text zVal;
     public Transform DroneTransform;
     public GameObject LowBatteryWarning;
     public GameObject LowBatteryIcon;
+    public TMP_Text dumpText;
     public float batteryPercent = 100;
     BetterTelloManager Drone;
 
@@ -34,26 +31,18 @@ public class StartRunning : MonoBehaviour
     void FixedUpdate()
     {
         batteryPercent = Drone.Bat;
+        dumpText.SetText($" Distance: {Drone.DistanceToTarget} \n IsPathfinding: {Drone.IsPathfinding} \n ExtTof: {Drone.ExtTof} \n Pos: {Drone.transform.position} \n Temp: {Drone.BetterTello.State.Templ}/{Drone.BetterTello.State.Temph}\n Path: {Drone.ShowGoldenPath.status}");
         batteryVal.SetText(batteryPercent.ToString());
-        distance.SetText(Drone.DistanceToTarget.ToString("0.##"));
         if ((batteryPercent <= initialBatteryPercent / 2 && isWarningDisabled == false || batteryPercent <= 20 && isWarningDisabled == false) 
             && batteryPercent != -1 && Drone.ConnectionState == TelloConnectionState.Connected)
             LowBatteryWarning.SetActive(true);
         else 
             LowBatteryWarning.SetActive(false);
-        UpdateDroneCoordinates();
     }
 
     public void DisableWarning ()
     {
         isWarningDisabled = true;
         LowBatteryIcon.SetActive(true);
-    }
-
-    private void UpdateDroneCoordinates()
-    {
-        xVal.SetText((DroneTransform.position.x).ToString("0.##"));
-        yVal.SetText((DroneTransform.position.y).ToString("0.##"));
-        zVal.SetText((DroneTransform.position.z).ToString("0.##"));
     }
 }
