@@ -406,6 +406,8 @@
 "Assets/Scripts/UnityTelloController/FlightPoint.cs"
 "Assets/SetTexture.cs"
 "Assets/ShowGoldenPath.cs"
+"Assets/TargetController.cs"
+"Assets/TargetDrawer.cs"
 "Assets/_Heathen Engineering/Samples/UX Examples/Flat Icons [Free]/ToggleSetAnimatorBoolean.cs"
 -langversion:9.0
 
