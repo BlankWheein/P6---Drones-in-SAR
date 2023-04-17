@@ -23,6 +23,10 @@ public class BetterTelloManager : MonoBehaviour
     [Min(10)]
     public int ForwardDistance = 70;
 
+    public static List<GameObject> Targets = new();
+    public GameObject TargetPrefab;
+    public Transform TargetParent;
+
     [Header("State")]
     public float DistanceToTarget = 0;
     public TelloConnectionState ConnectionState = TelloConnectionState.Disconnected;
@@ -51,14 +55,53 @@ public class BetterTelloManager : MonoBehaviour
     private bool waitingForOk = false;
     public bool IsPathfinding = false;
 
-
-
     private void Start()
     {
         gameObject.SetActive(true);
         ConnectToTello();
         Transform = GetComponent<Transform>();
     }
+
+    public GameObject? GetNextTarget()
+    {
+        return Targets.FirstOrDefault();
+    }
+    private void UpdateTargetPaths()
+    {
+        TargetDrawer? last = null;
+        for (int i = 0; i < Targets.Count; i++)
+        {
+            var current = Targets[i].GetComponent<TargetDrawer>();
+            if (last != null)
+                current.target = last.GetComponent<Transform>();
+            else
+                current.target = null;
+            last = current;
+        }
+    }
+    public void RemoveTarget(GameObject target)
+    {
+        Targets.Remove(target);
+        Destroy(target);
+        UpdateTargetPaths();
+    }
+    public void PopTarget()
+    {
+        if (Targets.Count == 0) return;
+        Destroy(Targets[0]);
+        Targets.RemoveAt(0);
+        UpdateTargetPaths();
+    }
+    public void AddTarget(Vector3 pos)
+    {
+        GameObject x = Instantiate(TargetPrefab, TargetParent);
+        x.transform.position = pos;
+        x.name = "target";
+        Targets.Add(x);
+        if (Targets.Count > 1)
+            Targets[^2].GetComponent<TargetDrawer>().target = x.GetComponent<Transform>();
+    }
+
     public async void ConnectToTello()
     {
         flightPathController.drawFlightPath = false;
@@ -102,7 +145,7 @@ public class BetterTelloManager : MonoBehaviour
         if (telloVideoTexture == null)
             telloVideoTexture = FindObjectOfType<RenderVideoStream>();
     }
-        
+
     public void EmergencyStop()
     {
         BetterTello.Commands.Stop();
