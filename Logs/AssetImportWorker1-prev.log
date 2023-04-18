@@ -1,6 +1,6 @@
 Using pre-set license
 Built from '2022.2/staging' branch; Version is '2022.2.8f1 (996aee41dc57) revision 10054382'; Using compiler version '192829333'; Build Type 'Release'
-OS: 'Windows 11  (10.0.22621) 64bit Core' Language: 'en' Physical Memory: 32640 MB
+OS: 'Windows 10  (10.0.19045) 64bit Core' Language: 'da' Physical Memory: 8148 MB
 BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 1
 
 COMMAND LINE ARGUMENTS:
@@ -11,13 +11,13 @@ C:\Program Files\Unity\Hub\Editor\2022.2.8f1\Editor\Unity.exe
 -name
 AssetImportWorker1
 -projectPath
-C:/Users/noobs/OneDrive/Documents/GitHub/P6---Drones-in-SAR
+D:/Documents/UniMappe/6 semester/P6/P6Github
 -logFile
 Logs/AssetImportWorker1.log
 -srvPort
-52136
-Successfully changed project path to: C:/Users/noobs/OneDrive/Documents/GitHub/P6---Drones-in-SAR
-C:/Users/noobs/OneDrive/Documents/GitHub/P6---Drones-in-SAR
+63862
+Successfully changed project path to: D:/Documents/UniMappe/6 semester/P6/P6Github
+D:/Documents/UniMappe/6 semester/P6/P6Github
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
     "memorysetup-bucket-allocator-granularity=16"
     "memorysetup-bucket-allocator-bucket-count=8"
@@ -47,65 +47,61 @@ C:/Users/noobs/OneDrive/Documents/GitHub/P6---Drones-in-SAR
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [20952] Host "[IP] 192.168.1.39 [Port] 0 [Flags] 2 [Guid] 1600559671 [EditorId] 1600559671 [Version] 1048832 [Id] WindowsEditor(7,Blank) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+Player connection [17932] Host "[IP] 192.168.0.103 [Port] 0 [Flags] 2 [Guid] 1651533581 [EditorId] 1651533581 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-0PHSHCB) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
 
-Player connection [20952] Host "[IP] 192.168.1.39 [Port] 0 [Flags] 2 [Guid] 1600559671 [EditorId] 1600559671 [Version] 1048832 [Id] WindowsEditor(7,Blank) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [17932] Host "[IP] 192.168.0.103 [Port] 0 [Flags] 2 [Guid] 1651533581 [EditorId] 1651533581 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-0PHSHCB) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
 
-Refreshing native plugins compatible for Editor in 20.35 ms, found 10 plugins.
+Refreshing native plugins compatible for Editor in 959.60 ms, found 10 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2022.2.8f1 (996aee41dc57)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2022.2.8f1/Editor/Data/Resources/UnitySubsystems
-[Subsystems] Discovering subsystems at path C:/Users/noobs/OneDrive/Documents/GitHub/P6---Drones-in-SAR/Assets
+[Subsystems] Discovering subsystems at path D:/Documents/UniMappe/6 semester/P6/P6Github/Assets
 GfxDevice: creating device client; threaded=0; jobified=0
 Direct3D:
     Version:  Direct3D 11.0 [level 11.1]
-    Renderer: AMD Radeon RX 6600 (ID=0x73ff)
-    Vendor:   ATI
-    VRAM:     8147 MB
-    Driver:   31.0.14043.1000
+    Renderer: NVIDIA GeForce GTX 1070 (ID=0x1be1)
+    Vendor:   NVIDIA
+    VRAM:     8081 MB
+    Driver:   30.0.15.1215
 Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2022.2.8f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2022.2.8f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2022.2.8f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56100
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56896
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
-Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.2.8f1/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.2.8f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.009151 seconds.
-- Loaded All Assemblies, in  0.323 seconds
+Registered in 0.023985 seconds.
+- Loaded All Assemblies, in  0.840 seconds
 Native extension for WindowsStandalone target not found
-[usbmuxd] Start listen thread
-[usbmuxd] Listen thread started
-Native extension for iOS target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.285 seconds
+- Finished resetting the current domain, in  0.547 seconds
 Domain Reload Profiling:
-	ReloadAssembly (185ms)
-		BeginReloadAssembly (74ms)
+	ReloadAssembly (580ms)
+		BeginReloadAssembly (303ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (0ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
 			CreateAndSetChildDomain (1ms)
 		LoadAllAssembliesAndSetupDomain (0ms)
-			LoadAssemblies (72ms)
+			LoadAssemblies (281ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (130ms)
-				TypeCache.Initialize (129ms)
-					TypeCache.ScanAssembly (128ms)
-				ResolveRequiredComponents (0ms)
+			SetupTypeCache (241ms)
+				TypeCache.Initialize (239ms)
+					TypeCache.ScanAssembly (236ms)
+				ResolveRequiredComponents (1ms)
 		FinalizeReload (0ms)
 			ReleaseScriptCaches (0ms)
 			RebuildScriptCaches (0ms)
-			SetupLoadedEditorAssemblies (228ms)
+			SetupLoadedEditorAssemblies (431ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (27ms)
-				SetLoadedEditorAssemblies (6ms)
+				InitializePlatformSupportModulesInManaged (23ms)
+				SetLoadedEditorAssemblies (18ms)
 				RefreshPlugins (0ms)
-				BeforeProcessingInitializeOnLoad (1ms)
-				ProcessInitializeOnLoadAttributes (147ms)
-				ProcessInitializeOnLoadMethodAttributes (46ms)
+				BeforeProcessingInitializeOnLoad (2ms)
+				ProcessInitializeOnLoadAttributes (290ms)
+				ProcessInitializeOnLoadMethodAttributes (98ms)
 				AfterProcessingInitializeOnLoad (0ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
@@ -113,49 +109,51 @@ Domain Reload Profiling:
 ========================================================================
 Worker process is ready to serve import requests
 Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.815 seconds
-Refreshing native plugins compatible for Editor in 14.46 ms, found 10 plugins.
+Assembly 'Assets/MobileDependencyResolver/Editor/Google.IOSResolver.dll' will not be loaded due to errors:
+Unable to resolve reference 'UnityEditor.iOS.Extensions.Xcode'. Is the assembly missing or incompatible with the current platform?
+Reference validation can be disabled in the Plugin Inspector.
+- Loaded All Assemblies, in  3.096 seconds
+Refreshing native plugins compatible for Editor in 251.75 ms, found 10 plugins.
 Native extension for WindowsStandalone target not found
-Native extension for iOS target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.907 seconds
+- Finished resetting the current domain, in  1.167 seconds
 Domain Reload Profiling:
-	ReloadAssembly (204ms)
-		BeginReloadAssembly (122ms)
+	ReloadAssembly (397ms)
+		BeginReloadAssembly (281ms)
 			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (5ms)
+			DisableScriptedObjects (10ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (24ms)
-		LoadAllAssembliesAndSetupDomain (607ms)
-			LoadAssemblies (321ms)
+			CreateAndSetChildDomain (35ms)
+		LoadAllAssembliesAndSetupDomain (2695ms)
+			LoadAssemblies (2212ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (339ms)
-				TypeCache.Initialize (193ms)
-					TypeCache.ScanAssembly (189ms)
-				ResolveRequiredComponents (4ms)
+			SetupTypeCache (652ms)
+				TypeCache.Initialize (348ms)
+					TypeCache.ScanAssembly (340ms)
+				ResolveRequiredComponents (5ms)
 		FinalizeReload (0ms)
 			ReleaseScriptCaches (0ms)
 			RebuildScriptCaches (0ms)
-			SetupLoadedEditorAssemblies (763ms)
+			SetupLoadedEditorAssemblies (932ms)
 				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (23ms)
+				InitializePlatformSupportModulesInManaged (11ms)
 				SetLoadedEditorAssemblies (8ms)
 				RefreshPlugins (0ms)
-				BeforeProcessingInitializeOnLoad (97ms)
-				ProcessInitializeOnLoadAttributes (477ms)
-				ProcessInitializeOnLoadMethodAttributes (153ms)
-				AfterProcessingInitializeOnLoad (6ms)
-				EditorAssembliesLoaded (0ms)
+				BeforeProcessingInitializeOnLoad (153ms)
+				ProcessInitializeOnLoadAttributes (494ms)
+				ProcessInitializeOnLoadMethodAttributes (251ms)
+				AfterProcessingInitializeOnLoad (14ms)
+				EditorAssembliesLoaded (1ms)
 			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (6ms)
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.04 seconds
-Refreshing native plugins compatible for Editor in 13.47 ms, found 10 plugins.
+			AwakeInstancesAfterBackupRestoration (14ms)
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.26 seconds
+Refreshing native plugins compatible for Editor in 13.57 ms, found 10 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 2507 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 74 unused Assets / (89.6 KB). Loaded Objects now: 2949.
-Memory consumption went from 401.7 MB to 401.6 MB.
-Total: 8.639900 ms (FindLiveObjects: 0.217100 ms CreateObjectMapping: 0.154900 ms MarkObjects: 8.035000 ms  DeleteObjects: 0.231800 ms)
+Unloading 2509 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 75 unused Assets / (90.0 KB). Loaded Objects now: 2950.
+Memory consumption went from 402.0 MB to 401.9 MB.
+Total: 9.796600 ms (FindLiveObjects: 0.587100 ms CreateObjectMapping: 0.527800 ms MarkObjects: 8.309900 ms  DeleteObjects: 0.370100 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
@@ -171,22 +169,238 @@ AssetImportParameters requested are different than current active one (requested
   custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
 ========================================================================
 Received Import Request.
-  Time since last request: 6064.992410 seconds.
-  path: Assets/Tree 1.prefab
-  artifactKey: Guid(311aa9c3c3dd25f4dafa107bdc18152d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Tree 1.prefab using Guid(311aa9c3c3dd25f4dafa107bdc18152d) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fe90ad53338280bbc2d1012c630dbef5') in 0.181347 seconds 
+  Time since last request: 23599.400084 seconds.
+  path: Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/d_icondeletedremoteoverlay.png
+  artifactKey: Guid(3de8a0634e55df8499c88204001cb0dd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/d_icondeletedremoteoverlay.png using Guid(3de8a0634e55df8499c88204001cb0dd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bfc7f0523a8dd3f5cb8d48db5cfeba8f') in 0.220399 seconds 
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 15
+Number of asset objects unloaded after import = 3
 ========================================================================
 Received Import Request.
-  Time since last request: 12.225815 seconds.
-  path: Assets/Prefabs/UIPref.prefab
-  artifactKey: Guid(0b0e98a296156104d81d322e8bd0b073) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Prefabs/UIPref.prefab using Guid(0b0e98a296156104d81d322e8bd0b073) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '369ef585621d6afa1d6a5d5f03f0e702') in 0.051366 seconds 
+  Time since last request: 0.000202 seconds.
+  path: Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/iconoutofsync.png
+  artifactKey: Guid(636d03a8834e3ed4cac3a1cb4b82deaf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/iconoutofsync.png using Guid(636d03a8834e3ed4cac3a1cb4b82deaf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e80e2a3f8fd97cca8b796f854987a5f1') in 0.181031 seconds 
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 163
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/iconplasticnotifyincoming.png
+  artifactKey: Guid(1e6c9635b80f973488d8335a081c905f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/iconplasticnotifyincoming.png using Guid(1e6c9635b80f973488d8335a081c905f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f88244f6779a28a61d95d61c7af818bf') in 0.087118 seconds 
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000629 seconds.
+  path: Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/iconmergelink.png
+  artifactKey: Guid(120bf54dff785a0429b068b814e9c12a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/iconmergelink.png using Guid(120bf54dff785a0429b068b814e9c12a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ec94a55c810d7b0aa000f53991477e08') in 0.237935 seconds 
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/secondarytabclose.png
+  artifactKey: Guid(03cefa94d5aa9d74993fb2138af9d607) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/secondarytabclose.png using Guid(03cefa94d5aa9d74993fb2138af9d607) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3f971a3439c6636bafbe7d3a0fd480ca') in 0.316047 seconds 
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000145 seconds.
+  path: Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/iconplastic.png
+  artifactKey: Guid(3042b019b052942a1baf7aa49d7ca6bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/iconplastic.png using Guid(3042b019b052942a1baf7aa49d7ca6bb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c8e15363cef179bcc249d045b3e8c8ea') in 0.074001 seconds 
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000056 seconds.
+  path: Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/iconplasticnotifyconflict@2x.png
+  artifactKey: Guid(6e0a54826ffc3ee46b0aa3e1c1575a69) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/iconplasticnotifyconflict@2x.png using Guid(6e0a54826ffc3ee46b0aa3e1c1575a69) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4e396122c45e8caa7badb6433903c124') in 0.028825 seconds 
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000030 seconds.
+  path: Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/d_iconoutofsync.png
+  artifactKey: Guid(0e80bd0b4a8196f46acf73711b9505ec) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/d_iconoutofsync.png using Guid(0e80bd0b4a8196f46acf73711b9505ec) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '4270d822d4e1bab6f8bdf2781a326525') in 0.169364 seconds 
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/d_iconconflicted@2x.png
+  artifactKey: Guid(65f0e363b74cf5845ab8c3fbc14f39ac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/d_iconconflicted@2x.png using Guid(65f0e363b74cf5845ab8c3fbc14f39ac) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'da616b30536201c90075488f9f5b4801') in 0.503366 seconds 
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000074 seconds.
+  path: Assets/Ground textures pack/Grass 04/Grass pattern 04.mat
+  artifactKey: Guid(059cceb0ba6e50741bfe6ec2c755d5f4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Ground textures pack/Grass 04/Grass pattern 04.mat using Guid(059cceb0ba6e50741bfe6ec2c755d5f4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '6d4d8f053f9e9dbe2713d85a81496d52') in 0.772076 seconds 
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000022 seconds.
+  path: Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/step1.png
+  artifactKey: Guid(9ce84ff0fdeb13d4a83f077d075dd9a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/step1.png using Guid(9ce84ff0fdeb13d4a83f077d075dd9a5) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '99c14e5facfee316f9c4643fc08102a2') in 0.444710 seconds 
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000080 seconds.
+  path: Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/ignoredoverlay@2x.png
+  artifactKey: Guid(999d04c0ea94ccc41b3d80788160695b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/ignoredoverlay@2x.png using Guid(999d04c0ea94ccc41b3d80788160695b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '87681349fa4f38cdcdf925d92cf00d5c') in 0.071511 seconds 
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000040 seconds.
+  path: Assets/Images/Materials/bullseye.mat
+  artifactKey: Guid(ebe6f3326c4d3ce4cb19520bdba26e83) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Images/Materials/bullseye.mat using Guid(ebe6f3326c4d3ce4cb19520bdba26e83) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'fcd99fcb6d9c46343a5b1d670c672e35') in 0.166219 seconds 
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000028 seconds.
+  path: Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/iconmoved.png
+  artifactKey: Guid(8a6cca56e2b63344eb4769cd92d93ffb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/iconmoved.png using Guid(8a6cca56e2b63344eb4769cd92d93ffb) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '97a3239dfc8024d78d4f6d6f94e938f1') in 0.061305 seconds 
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000035 seconds.
+  path: Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/d_iconplasticnotifyconflict.png
+  artifactKey: Guid(51582ae5ea51fa14996791a550f89473) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/d_iconplasticnotifyconflict.png using Guid(51582ae5ea51fa14996791a550f89473) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '212b8a8305cda740e0f634aa01b7380b') in 0.113153 seconds 
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000135 seconds.
+  path: Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/step3@2x.png
+  artifactKey: Guid(36e6970b84831434a9eac79abd03700b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/step3@2x.png using Guid(36e6970b84831434a9eac79abd03700b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '43c4718c6e17c199ef34379dfe6a800e') in 0.167073 seconds 
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000037 seconds.
+  path: Assets/PBR Materials Lite/Materials/Brick Wall_01.mat
+  artifactKey: Guid(2310e624b7a0873499a7edde64622419) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/PBR Materials Lite/Materials/Brick Wall_01.mat using Guid(2310e624b7a0873499a7edde64622419) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3c1cfa5a9756b9ee59e782a070b18b84') in 6.766344 seconds 
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 7
+========================================================================
+Received Import Request.
+  Time since last request: 0.000045 seconds.
+  path: Assets/Ground textures pack/Dry ground/Dry ground pattern.mat
+  artifactKey: Guid(d805d830c4023774cb6259aca09f431e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Ground textures pack/Dry ground/Dry ground pattern.mat using Guid(d805d830c4023774cb6259aca09f431e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '72f924caa5ded5b1f0c726940f4a2662') in 1.026338 seconds 
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/d_iconconflictedoverlay.png
+  artifactKey: Guid(a892bcc7ae1871447926b3c44d158763) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/d_iconconflictedoverlay.png using Guid(a892bcc7ae1871447926b3c44d158763) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3d0e530e188f38ded7734c8bbbb7cc78') in 0.656932 seconds 
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000126 seconds.
+  path: Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/iconplasticview@2x.png
+  artifactKey: Guid(97a4e2b6ae08b1140a5ba9e22953e029) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/iconplasticview@2x.png using Guid(97a4e2b6ae08b1140a5ba9e22953e029) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd7a9996426d5b8c1d2de9072841bf4f8') in 0.115685 seconds 
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000250 seconds.
+  path: Assets/Ground textures pack/Grass 02/Grass pattern 02.mat
+  artifactKey: Guid(15654a743eccf384fb2312048db767f0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Ground textures pack/Grass 02/Grass pattern 02.mat using Guid(15654a743eccf384fb2312048db767f0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '547a74b2963e7293f092ebd1beddad91') in 0.461893 seconds 
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000045 seconds.
+  path: Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/d_icondeletedlocaloverlay@2x.png
+  artifactKey: Guid(92b204cca46037444ab18ba6701f86f7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/d_icondeletedlocaloverlay@2x.png using Guid(92b204cca46037444ab18ba6701f86f7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bfcb44156be3613a2e71f52d99b86d66') in 0.060606 seconds 
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000025 seconds.
+  path: Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/iconplasticnotifyconflict.png
+  artifactKey: Guid(a916ed6819efd014588f58e3cfc48196) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/iconplasticnotifyconflict.png using Guid(a916ed6819efd014588f58e3cfc48196) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e0e009fe430edee1ff6f26a47e3a44da') in 0.146195 seconds 
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000023 seconds.
+  path: Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/step2.png
+  artifactKey: Guid(cd0b17b71a5c498428ee91dee8a78a88) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/step2.png using Guid(cd0b17b71a5c498428ee91dee8a78a88) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'c3ad53ceec955a383f5f1ce134b31dad') in 0.163776 seconds 
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000077 seconds.
+  path: Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/iconplasticviewnotify.png
+  artifactKey: Guid(fcbb76d583fe7ee4e80e7e47c0593c4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/iconplasticviewnotify.png using Guid(fcbb76d583fe7ee4e80e7e47c0593c4a) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '9e3316af765442b516c23f1d5a3a9740') in 0.272220 seconds 
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/d_iconlockedremoteoverlay.png
+  artifactKey: Guid(1046ed65e6aaffb4391378f6d08d6c14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/d_iconlockedremoteoverlay.png using Guid(1046ed65e6aaffb4391378f6d08d6c14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e58b9b9cb3eee209f1f243d7bf6ef952') in 0.039865 seconds 
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000042 seconds.
+  path: Assets/Ground textures pack/Grass & dead leafs 01/Materials/diffuse.mat
+  artifactKey: Guid(a1f227a9f8eee8048aad19493a022122) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Ground textures pack/Grass & dead leafs 01/Materials/diffuse.mat using Guid(a1f227a9f8eee8048aad19493a022122) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '432aa24a4ed89f799f9b492d8a939d43') in 0.400103 seconds 
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 2
+========================================================================
+Received Import Request.
+  Time since last request: 0.000026 seconds.
+  path: Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/d_iconlockedremoteoverlay@2x.png
+  artifactKey: Guid(2bb4e96f5d0b02c468932d665a015c54) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/d_iconlockedremoteoverlay@2x.png using Guid(2bb4e96f5d0b02c468932d665a015c54) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '531dafb3e111337944176348bf008cf5') in 0.132355 seconds 
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
+========================================================================
+Received Import Request.
+  Time since last request: 0.000040 seconds.
+  path: Assets/Ground textures pack/Grass 01/Grass pattern 01.mat
+  artifactKey: Guid(2c6f5ab601d22834883d3c7e18f8be41) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Ground textures pack/Grass 01/Grass pattern 01.mat using Guid(2c6f5ab601d22834883d3c7e18f8be41) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '336db2420526721822e6fb6a46f29a09') in 0.346064 seconds 
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 3
 Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
-TcpMessagingSession - receive error: operation aborted. errorcode: 995, details: The I/O operation has been aborted because of either a thread exit or an application request.
+TcpMessagingSession - receive error: operation aborted. errorcode: 995, details: I/O-handlingen er blevet afbrudt pga. en afsluttende tråd eller programanmodning.
 AssetImportWorker is now disconnected from the server
 Process exiting
 Exiting without the bug reporter. Application will terminate with return code 0

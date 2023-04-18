@@ -331,6 +331,8 @@
 -r:"Library/PackageCache/com.unity.analytics@3.8.1/Unity.Analytics.Tracker.dll"
 -r:"Library/PackageCache/com.unity.nuget.newtonsoft-json@3.0.2/Runtime/Newtonsoft.Json.dll"
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/Analytics.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aEDbg.dag/Nobi.UiRoundedCorners.Editor.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aEDbg.dag/Nobi.UiRoundedCorners.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/Purchasing.Common.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/Unity.2D.Sprite.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/Unity.2D.Tilemap.Editor.ref.dll"

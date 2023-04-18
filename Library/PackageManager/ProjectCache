@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638170547994461221
-    m_Hash: 1389500322
+      ticks: 638174018340461216
+    m_Hash: 2082167493
   m_LockFileStatus:
     m_FilePath: D:/Documents/UniMappe/6 semester/P6/P6Github/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638170547994461221
-    m_Hash: 1388643874
+      ticks: 638174018340901212
+    m_Hash: 3891926314
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
@@ -22,6 +22,63 @@ m_LocalPackages:
 m_ProjectPath: D:/Documents/UniMappe/6 semester/P6/P6Github/Packages
 m_EditorVersion: 2022.2.8f1 (996aee41dc57)
 m_ResolvedPackages:
+- packageId: com.nobi.roundedcorners@https://github.com/kirevdokimov/Unity-UI-Rounded-Corners.git
+  testable: 0
+  isDirectDependency: 1
+  version: 3.3.0
+  source: 5
+  resolvedPath: D:\Documents\UniMappe\6 semester\P6\P6Github\Library\PackageCache\com.nobi.roundedcorners@f80f59f64d
+  assetPath: Packages/com.nobi.roundedcorners
+  name: com.nobi.roundedcorners
+  displayName: UI Rounded Corners
+  author:
+    name: 
+    email: 
+    url: 
+  category: UI
+  type: 
+  description: This package provides components and shaders that allow you to add
+    rounded corners to UI elements!
+  status: 0
+  errors: []
+  versions:
+    all: []
+    compatible: []
+    recommended: 
+    deprecated: []
+  dependencies: []
+  resolvedDependencies: []
+  keywords:
+  - UI
+  - Shader
+  - Cg
+  - Hlsl
+  registry:
+    id: main
+    name: 
+    url: https://packages.unity.com
+    scopes: []
+    isDefault: 1
+    capabilities: 7
+    configSource: 0
+  hideInEditor: 1
+  isAssetStorePackage: 0
+  datePublishedTicks: 0
+  documentationUrl: 
+  hasRepository: 0
+  repository:
+    type: 
+    url: 
+    revision: 
+    path: 
+  unityLifecycle:
+    version: 
+    nextVersion: 
+    recommendedVersion: 
+    isDeprecated: 0
+    deprecationMessage: 
+  isDeprecated: 0
+  deprecationMessage: 
 - packageId: com.unity.2d.sprite@1.0.0
   testable: 0
   isDirectDependency: 1
@@ -181,9 +238,11 @@ m_ResolvedPackages:
     - 1.1.0-pre.1
     - 1.1.0-pre.2
     - 1.1.1
+    - 1.1.3
     compatible:
     - 1.1.1
-    recommended: 1.1.1
+    - 1.1.3
+    recommended: 1.1.3
     deprecated: []
   dependencies:
   - name: com.unity.modules.ai
@@ -527,9 +586,11 @@ m_ResolvedPackages:
     - 3.0.16
     - 3.0.17
     - 3.0.18
+    - 3.0.20
     compatible:
     - 3.0.18
-    recommended: 3.0.18
+    - 3.0.20
+    recommended: 3.0.20
     deprecated: []
   dependencies:
   - name: com.unity.ext.nunit
@@ -606,9 +667,11 @@ m_ResolvedPackages:
     - 2.0.15
     - 2.0.16
     - 2.0.17
+    - 2.0.18
     compatible:
     - 2.0.17
-    recommended: 2.0.17
+    - 2.0.18
+    recommended: 2.0.18
     deprecated: []
   dependencies:
   - name: com.unity.test-framework
