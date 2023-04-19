@@ -315,6 +315,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7388085353276283980, guid: 9bbaf63046a887149b54cd190f356407,
         type: 3}
+      propertyPath: ScanDegrees
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 7388085353276283980, guid: 9bbaf63046a887149b54cd190f356407,
+        type: 3}
       propertyPath: TargetParent
       value: 
       objectReference: {fileID: 715343005}
@@ -324,6 +329,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3124403206888570649, guid: 8993aa4f9659e144684eaea6b57450b8,
         type: 3}
+    - target: {fileID: 7388085353276283980, guid: 9bbaf63046a887149b54cd190f356407,
+        type: 3}
+      propertyPath: ForwardDistance
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 8713898228193900450, guid: 9bbaf63046a887149b54cd190f356407,
         type: 3}
       propertyPath: m_Name
@@ -674,6 +684,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_CullTransparentMesh
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4576065240858962940, guid: 0b0e98a296156104d81d322e8bd0b073,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5685890980319550694, guid: 0b0e98a296156104d81d322e8bd0b073,
         type: 3}

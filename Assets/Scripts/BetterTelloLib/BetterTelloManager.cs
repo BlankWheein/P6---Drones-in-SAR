@@ -243,7 +243,7 @@ public class BetterTelloManager : MonoBehaviour
         {
             Debug.Log("Stepping");
             await Forward(Math.Clamp(ForwardDistance, 10, 70));
-            await ScanXDegrees();
+            await Task.Delay(20);
         }
     }
 

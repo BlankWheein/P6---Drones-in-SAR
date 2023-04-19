@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 public enum SearchPattern
 {
-    Spiral
+    Spiral = 1 << 0,
+    Parallel = 1 << 1,
 }
 public class SearchPatternBase : MonoBehaviour
 {
@@ -13,31 +14,28 @@ public class SearchPatternBase : MonoBehaviour
     public void Instantiate()
     {
         if (BetterTelloManager.Targets.Count == 0)
-        if (GetPattern() != null)
-        {
-            Debug.Log("Creating pattern!!!");
-            GetPattern().Instantiate(m_transform, (v) => {
-                Debug.Log($"Adding target {v}");
+        Pattern?.Instantiate(m_transform, (v) => {
                 m_manager.AddTarget(v);
             });
-            Debug.Log("Done with pattern");
+    }
+    #nullable enable
+    public ISearchPattern? Pattern
+    {
+        get
+        {
+            if (SelectedPattern == SearchPattern.Spiral)
+                return new SpiralSearchPattern();
+            else if (SelectedPattern == SearchPattern.Parallel)
+                return new ParallelSearchPattern();
+            else return null;
         }
     }
-
-    private void Start()
-    {
-        
-    }
-    public ISearchPattern? GetPattern()
-    {
-        if (SelectedPattern == SearchPattern.Spiral)
-            return new SpiralSearchPattern();
-        else return null;
-    }
+    #nullable disable
 
     void Awake()
     {
         m_transform = GetComponent<Transform>();
         m_manager = GetComponent<BetterTelloManager>();
+        SelectedPattern = SearchPattern.Spiral;
     }
 }

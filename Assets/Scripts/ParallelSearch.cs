@@ -5,28 +5,45 @@ using UnityEngine;
 
 public class ParallelSearchPattern : MonoBehaviour, ISearchPattern
 {
-    int X = 20, Y = 20;
-    int scale = 10;
+    int Points = 10;
+    int scale = 20;
+    int zA = 1; int xA = 5;
     public void Instantiate(Transform trans, Action<Vector3> Initiater)
     {
-        int x, y, dx, dy;
-        x = y = dx = 0;
-        dy = -1;
-        int t = Mathf.Max(X, Y);
-        int maxI = t * t;
-        for (int i = 0; i < maxI; i++)
+        int x = 0; int z = 0;
+        bool forward = false;
+        bool backward = false;
+        bool first = true;
+        scale /= 2;
+        for (int i = 0; i < Points; i++)
         {
-            if ((x == y) || ((x < 0) && (x == -y)) || ((x > 0) && (x == 1 - y)))
+            
+            if (forward)
             {
-                Initiater(new Vector3(trans.position.x + (x * scale), 0.1f, trans.position.z + (y * scale)));
-                t = dx;
-                dx = -dy;
-                dy = t;
+                forward = false;
+                if (backward)
+                {
+                    x -= xA * scale;
+                    backward = false;
+                }
+                else
+                {
+                    x += xA * scale;
+                    backward = true;
+                }
+                if (first)
+                {
+                    scale *= 2;
+                    first = false;
+                }
+            } else
+            {
+                forward = true;
+                z += zA * scale;
             }
-            x += dx;
-            y += dy;
+            
+            Initiater(new Vector3(trans.position.x + x, 0.1f, trans.position.z + z));
         }
-        
     }
 
 }

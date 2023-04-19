@@ -6,7 +6,7 @@ using UnityEngine;
 public class SpiralSearchPattern : MonoBehaviour, ISearchPattern
 {
     int X = 6, Y = 6;
-    int scale = 15;
+    int scale = 30;
     public void Instantiate(Transform trans, Action<Vector3> Initiater)
     {
         int x, y, dx, dy;
