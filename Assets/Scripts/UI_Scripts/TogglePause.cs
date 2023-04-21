@@ -3,24 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEditorInternal;
 
 public class TogglePause : MonoBehaviour
 {
     public TMP_Dropdown SearchPatternDropdown;
-    public Image PlayPause;
-    public Texture2D Takeoff;
-    public Texture2D Land;
-    public Texture2D NotConnected;
+    public Button TakeOff;
+    //public Texture2D Takeoff;
+  //  public Texture2D Land;
+  //  public Texture2D NotConnected;
     BetterTelloManager BetterTelloManager;
+    TMP_Text TakeOffText;
 
-    private Sprite _takeoff, _land, _notConnected;
+   // private Sprite _takeoff, _land, _notConnected;
 
     private void Start()
     {
         BetterTelloManager = GameObject.Find("Drone").GetComponent<BetterTelloManager>();
-        _takeoff = Sprite.Create(Takeoff, new Rect(0, 0, Takeoff.width, Takeoff.height), new Vector2());
-        _land = Sprite.Create(Land, new Rect(0, 0, Land.width, Land.height), new Vector2());
-        _notConnected = Sprite.Create(NotConnected, new Rect(0, 0, NotConnected.width, NotConnected.height), new Vector2());
+
+        TakeOffText= TakeOff.GetComponentInChildren<TMP_Text>();
+    
+        /* _takeoff = Sprite.Create(Takeoff, new Rect(0, 0, Takeoff.width, Takeoff.height), new Vector2());
+         _land = Sprite.Create(Land, new Rect(0, 0, Land.width, Land.height), new Vector2());
+         _notConnected = Sprite.Create(NotConnected, new Rect(0, 0, NotConnected.width, NotConnected.height), new Vector2());
+        */
     }
 
 
@@ -30,15 +36,15 @@ public class TogglePause : MonoBehaviour
         {
             if (BetterTelloManager.FlyingState == BetterTelloLib.Commander.FlyingState.Flying)
             {
-                PlayPause.sprite = _land;
+                TakeOffText.text = "Land";
             }
             else
             {
-                PlayPause.sprite = _takeoff;
+                TakeOffText.text = "TakeOff";
             }
         }
         else { 
-            PlayPause.sprite = _notConnected;
+           
         }
     }
 

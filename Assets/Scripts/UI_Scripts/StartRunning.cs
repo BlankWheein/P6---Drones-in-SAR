@@ -34,7 +34,7 @@ public class StartRunning : MonoBehaviour
 
     void FixedUpdate()
     {
-        dumpText.SetText($" Distance: {Drone.DistanceToTarget} \n IsPathfinding: {Drone.IsPathfinding} \n ExtTof: {Drone.ExtTof} \n Pos: {Drone.transform.position} \n Temp: {Drone.BetterTello.State.Templ}/{Drone.BetterTello.State.Temph}\n Path: {Drone.ShowGoldenPath.status}");
+        dumpText.SetText($" Distance: {Drone.DistanceToTarget} \n IsPathfinding: {Drone.IsPathfinding} \n ExtTof: {Drone.ExtTof} \n Pos: {Drone.transform.position} \n Temp: {Drone.BetterTello.State.Templ}/{Drone.BetterTello.State.Temph}\n Path: {Drone.ShowGoldenPath.status}\n Connection :{Drone.ConnectionState}");
         
 
         if ((Drone.Bat <= initialBatteryPercent / 2 && isWarningDisabled == false || Drone.Bat <= 20 && isWarningDisabled == false) 
