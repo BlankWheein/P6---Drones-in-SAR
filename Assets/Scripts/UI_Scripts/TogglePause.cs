@@ -7,26 +7,22 @@ using UnityEditorInternal;
 
 public class TogglePause : MonoBehaviour
 {
-    public TMP_Dropdown SearchPatternDropdown;
     public Button TakeOff;
-    //public Texture2D Takeoff;
-  //  public Texture2D Land;
-  //  public Texture2D NotConnected;
+    public Button Return;
+    public TMP_Dropdown Pattern;
+
     BetterTelloManager BetterTelloManager;
     TMP_Text TakeOffText;
-
-   // private Sprite _takeoff, _land, _notConnected;
+    TMP_Text ReturnText;
+    TMP_Text PatternText;
 
     private void Start()
     {
         BetterTelloManager = GameObject.Find("Drone").GetComponent<BetterTelloManager>();
 
         TakeOffText= TakeOff.GetComponentInChildren<TMP_Text>();
-    
-        /* _takeoff = Sprite.Create(Takeoff, new Rect(0, 0, Takeoff.width, Takeoff.height), new Vector2());
-         _land = Sprite.Create(Land, new Rect(0, 0, Land.width, Land.height), new Vector2());
-         _notConnected = Sprite.Create(NotConnected, new Rect(0, 0, NotConnected.width, NotConnected.height), new Vector2());
-        */
+        ReturnText = Return.GetComponentInChildren<TMP_Text>();
+        PatternText = Pattern.GetComponentInChildren<TMP_Text>();
     }
 
 
@@ -34,17 +30,32 @@ public class TogglePause : MonoBehaviour
     {
         if (BetterTelloManager.ConnectionState == TelloConnectionState.Connected)
         {
+            TakeOff.interactable = true;
+            TakeOffText.color = Color.black;
             if (BetterTelloManager.FlyingState == BetterTelloLib.Commander.FlyingState.Flying)
             {
                 TakeOffText.text = "Land";
+                Return.interactable= true;
+                ReturnText.color = Color.black;
+                Pattern.interactable= true;
+                PatternText.color = Color.black;
             }
             else
             {
                 TakeOffText.text = "TakeOff";
+                Return.interactable = false;
+                ReturnText.color = Color.grey;
+               Pattern.interactable = false;
+                PatternText.color = Color.grey;
             }
         }
         else { 
-           
+           TakeOff.interactable=false;
+            TakeOffText.color = Color.grey;
+            Return.interactable = false;
+            ReturnText.color = Color.grey;
+            Pattern.interactable=false;
+            PatternText.color= Color.grey;
         }
     }
 
@@ -64,6 +75,7 @@ public class TogglePause : MonoBehaviour
         }
         else
         {
+
             Debug.Log("Not connected to tello drone");
         }
     }
