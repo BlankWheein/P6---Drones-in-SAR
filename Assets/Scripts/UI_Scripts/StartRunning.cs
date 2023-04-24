@@ -13,9 +13,11 @@ public class StartRunning : MonoBehaviour
     public TMP_Text dumpText;
     public TMP_Text InfoField;
     public RectTransform InfoFieldBG;
-    
+    public GameObject expandBtn;
+
     BetterTelloManager Drone;
 
+    
     private bool expandInputfield = true;
     private bool showInputField = false;
     private bool isWarningDisabled = false;
@@ -69,6 +71,7 @@ public class StartRunning : MonoBehaviour
             InfoField.SetText("Not connected to drone");
             InfoField.color = Color.red;
             InfoFieldBG.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, InfoField.renderedHeight + 15);
+            expandBtn.SetActive(false);
         }
     }
     public void ExpandInfofield()
