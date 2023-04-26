@@ -13,8 +13,7 @@ public class SearchPatternBase : MonoBehaviour
     private BetterTelloManager m_manager;
     public void Instantiate()
     {
-        if (BetterTelloManager.Targets.Count == 0)
-        Pattern?.Instantiate(m_transform, (v) => {
+        Pattern?.Instantiate(m_manager.GetTargetSpawnTransform(), (v) => {
                 m_manager.AddTarget(v);
             });
     }

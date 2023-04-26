@@ -45,7 +45,7 @@ public class ShowGoldenPath : MonoBehaviour
         }
 
         droneY = transform.rotation.eulerAngles.y;
-        if (path.corners.Length > 0)
+        if (path.corners.Length > 1)
         {
             var gmo = new GameObject();
             var newTrans = gmo.transform;

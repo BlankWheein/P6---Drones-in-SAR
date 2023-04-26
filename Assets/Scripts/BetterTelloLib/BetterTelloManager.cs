@@ -171,7 +171,13 @@ public class BetterTelloManager : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.T))
             Task.Factory.StartNew(async () => await Takeoff());
         else if (Input.GetKeyDown(KeyCode.P))
-            Task.Factory.StartNew(async () => await PathFind());
+        {
+            if (IsPathfinding == false)
+                Task.Factory.StartNew(async () => await PathFind());
+            else
+                IsPathfinding = false;
+
+        }
         else if (Input.GetKeyDown(KeyCode.W))
             Task.Factory.StartNew(async () => await Up(50));
         else if (Input.GetKeyDown(KeyCode.O))
@@ -226,12 +232,16 @@ public class BetterTelloManager : MonoBehaviour
         while(IsPathfinding)
         {
             await RotateToTarget(Scan: true);
+            if (!IsPathfinding)
+                break;
             await Step();
             if (DistanceToTarget < TargetTransformPrecision)
                 IsPathfinding = false;
         }
-        Debug.Log("Target Found");
+        Debug.Log("Stopped pathfinding");
     }
+
+    public Transform GetTargetSpawnTransform() => Targets.Count == 0 ? transform : Targets[^1].transform;
 
     public async Task Step()
     {
