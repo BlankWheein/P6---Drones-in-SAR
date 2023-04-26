@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Reflection;
+using System;
 
-public class StartRunning : MonoBehaviour
+public class ManageInfofield : MonoBehaviour
 {
     public Transform DroneTransform;
     public GameObject LowBatteryWarning;
@@ -16,10 +17,9 @@ public class StartRunning : MonoBehaviour
     public GameObject expandBtn;
 
     BetterTelloManager Drone;
-
-    
-    private bool expandInputfield = true;
-    private bool showInputField = false;
+ 
+    private bool IsInfofieldExpanded = false;
+    private bool showFullInfoField = false;
     private bool isWarningDisabled = false;
     private int initialBatteryPercent;
 
@@ -52,11 +52,13 @@ public class StartRunning : MonoBehaviour
     {
         if (Drone.ConnectionState == TelloConnectionState.Connected)
         {
-            showInputField=true;
-            if (!expandInputfield)
+            showFullInfoField=true;
+            InfoField.color = Color.black;
+            expandBtn.SetActive(true);
+            if (IsInfofieldExpanded)
             {
                 InfoField.SetText($"Connected to drone \n Battery:{Drone.Bat}\n State: {Drone.FlyingState}\n Coordinates: {Drone.transform.position}\n Target distance: {Drone.DistanceToTarget}");
-                InfoFieldBG.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, InfoField.renderedHeight + 25);
+                InfoFieldBG.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, InfoField.renderedHeight + 25);          
             }
             else
             {
@@ -66,19 +68,22 @@ public class StartRunning : MonoBehaviour
         }
         else
         {
-            showInputField = false;
-            expandInputfield = true;
-            InfoField.SetText("Not connected to drone");
-            InfoField.color = Color.red;
-            InfoFieldBG.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, InfoField.renderedHeight + 15);
+            showFullInfoField = false;
+            IsInfofieldExpanded = false;
             expandBtn.SetActive(false);
+            InfoField.color = Color.red;
+
+            InfoField.SetText("Not connected to drone");
+            InfoFieldBG.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, InfoField.renderedHeight + 15);
+            
         }
     }
     public void ExpandInfofield()
     {
-        if (showInputField) {
-            expandInputfield = !expandInputfield;
-                
+        if (showFullInfoField) {
+            IsInfofieldExpanded = !IsInfofieldExpanded;
+            Console.WriteLine("jfioejoiefjeijeoefo");
+            expandBtn.transform.Rotate(Vector3.forward * 180, Space.Self);
         }
     }
 

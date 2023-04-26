@@ -6,7 +6,7 @@ using TMPro;
 using UnityEditorInternal;
 using System.CodeDom;
 
-public class TogglePause : MonoBehaviour
+public class ManageButtons : MonoBehaviour
 {
     public Button TakeOff;
     public Button Return;
@@ -76,13 +76,13 @@ public class TogglePause : MonoBehaviour
         // if there are no targets(i.e. no path), you can't reset path
         if (BetterTelloManager.Targets.Count == 0)
         {
-            Pattern.interactable = false;
-            PatternText.color = customColor;
+            Clear.interactable = false;
+            ClearText.color = customColor;
         }
         else
         {
-            Pattern.interactable = true;
-            PatternText.color = Color.black;
+            Clear.interactable = true;
+            ClearText.color = Color.black;
         }
     }
 
@@ -110,7 +110,7 @@ public class TogglePause : MonoBehaviour
 
 
 
-    public void OnClick()
+    public void OnTakeOffClick()
     {
         UpdateFlightState();
     }
@@ -118,6 +118,10 @@ public class TogglePause : MonoBehaviour
     public void OnClearClick()
     {
         //call the clear target function
+    }
+
+    public void OnReturnClick() {
+    // call the return drone to home function
     }
 
 }
