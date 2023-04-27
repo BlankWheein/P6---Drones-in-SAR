@@ -38,7 +38,7 @@ public class ExtTofSensor : MonoBehaviour
 
     private void Update()
     {
-        if (UpdateRecieved && Prefab != null && ExtTof < 4000 && ExtTof >= 200)
+        if (UpdateRecieved && Prefab != null && ExtTof < 4000)
         {
             UpdateRecieved = false;
             Vector3 playerPos = telloTransform.position;

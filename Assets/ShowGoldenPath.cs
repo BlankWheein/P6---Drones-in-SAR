@@ -45,13 +45,13 @@ public class ShowGoldenPath : MonoBehaviour
         }
 
         droneY = transform.rotation.eulerAngles.y;
-        if (path.corners.Length > 1)
+        if (path.corners.Length > 0)
         {
             var gmo = new GameObject();
             var newTrans = gmo.transform;
             newTrans.SetPositionAndRotation(transform.position, transform.rotation);
             newTrans.LookAt(path.corners[1]);
-            targetY = AngleDifference(transform.rotation.eulerAngles.y, newTrans.rotation.eulerAngles.y);
+            targetY = newTrans.rotation.eulerAngles.y - droneY;
             Destroy(gmo);
         }
         else
@@ -72,7 +72,6 @@ public class ShowGoldenPath : MonoBehaviour
 
         elapsed += Time.deltaTime;
     }
-
     public float AngleDifference(float angle1, float angle2)
     {
         float diff = (angle2 - angle1 + 180) % 360 - 180;
