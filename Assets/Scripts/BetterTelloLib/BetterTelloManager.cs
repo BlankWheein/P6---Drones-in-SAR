@@ -23,6 +23,8 @@ public class BetterTelloManager : MonoBehaviour
     [Min(10)]
     public int ForwardDistance = 70;
 
+    [Header("Targets")]
+    public float DistanceBetweenTargets = 10;
     public static List<GameObject> Targets = new();
     public GameObject TargetPrefab;
     public Transform TargetParent;
@@ -100,6 +102,7 @@ public class BetterTelloManager : MonoBehaviour
         Targets.Add(x);
         if (Targets.Count > 1)
             Targets[^2].GetComponent<TargetDrawer>().target = x.GetComponent<Transform>();
+        UpdateTargetPaths();
     }
 
     public async void ConnectToTello()
