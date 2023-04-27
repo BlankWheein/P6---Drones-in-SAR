@@ -3,15 +3,18 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.Profiling;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class CameraDirections : MonoBehaviour
+public class CameraDirections : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
 
     public Transform drone;
     public Camera DroneCam;
-    public TMP_Text modeName;
+    public GameObject mainScreen;
+    
     private Transform droneInit;
-    private bool is3D=false;
+
+    private bool isMouseOverScreen=false;
 
     // Start is called before the first frame update
     void Start()
@@ -33,58 +36,42 @@ public class CameraDirections : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        RotateX();
-       if(is3D) {
-            RotateY();
-        }
-        
-        //zoom in/out
-        if (DroneCam.orthographicSize >= 5 && DroneCam.orthographicSize <= 500)
+        if (isMouseOverScreen)
         {
-            DroneCam.orthographicSize += Input.GetAxis("Mouse ScrollWheel") * -100;
-        }
-        if(DroneCam.orthographicSize < 5 || DroneCam.orthographicSize > 500)
-        {
-            DroneCam.orthographicSize += Input.GetAxis("Mouse ScrollWheel") * 100;
+            RotateX();
+            //zoom in/out
+            if (DroneCam.orthographicSize >= 5 && DroneCam.orthographicSize <= 500)
+            {
+                DroneCam.orthographicSize += Input.GetAxis("Mouse ScrollWheel") * -100;
+            }
+            if (DroneCam.orthographicSize < 5 || DroneCam.orthographicSize > 500)
+            {
+                DroneCam.orthographicSize += Input.GetAxis("Mouse ScrollWheel") * 100;
+            }
         }
     }
 
     void RotateX()
     {
         float xAxis;
-       
-
         if (Input.GetMouseButton(0))
         {
-
             xAxis = Input.GetAxis("Mouse X") * 10;
             DroneCam.transform.RotateAround(drone.position, Vector3.up, xAxis);
-
         }
     }
 
-    void RotateY()
+
+    public void OnPointerEnter(PointerEventData eventData)
     {
-        float yAxis;
-        if (Input.GetMouseButton(1))
-        {
-            yAxis = Input.GetAxis("Mouse Y") * 10;
-            DroneCam.transform.RotateAround(drone.position, Vector3.right, yAxis);
-        }
+       
+        isMouseOverScreen = true;
+
     }
 
-        public void toggle3D()
+    public void OnPointerExit(PointerEventData eventData)
     {
-        is3D= !is3D;
-        if (is3D == false)
-        {
-            DroneCam.transform.SetLocalPositionAndRotation(droneInit.position,droneInit.rotation);
-            modeName.text = "2D";
-        }
-        else
-        {
-            modeName.text = "3D";
-        }
+       
+        isMouseOverScreen = false;
     }
-}
+    }
