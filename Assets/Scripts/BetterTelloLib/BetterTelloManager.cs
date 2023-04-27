@@ -23,6 +23,8 @@ public class BetterTelloManager : MonoBehaviour
     [Min(10)]
     public int ForwardDistance = 70;
 
+    [Header("Targets")]
+    public float DistanceBetweenTargets = 10;
     public static List<GameObject> Targets = new();
     public GameObject TargetPrefab;
     public Transform TargetParent;
@@ -49,6 +51,7 @@ public class BetterTelloManager : MonoBehaviour
     private float Height = 0;
     private RenderVideoStream telloVideoTexture;
     private FlightPathController flightPathController;
+    private SearchPatternBase searchPatterns;
 
     private List<int> Timestamps = new();
     private List<Vector3> Vels = new();
@@ -62,6 +65,11 @@ public class BetterTelloManager : MonoBehaviour
         Transform = GetComponent<Transform>();
     }
 
+    public void ReturnHome()
+    {
+        ClearTargets();
+        AddTarget(new Vector3(0, 0.1f, 0));
+    }
     public GameObject? GetNextTarget()
     {
         return Targets.FirstOrDefault();
@@ -85,6 +93,11 @@ public class BetterTelloManager : MonoBehaviour
         Destroy(target);
         UpdateTargetPaths();
     }
+    public void ClearTargets()
+    {
+        while (Targets.Count > 0)
+            PopTarget();
+    }
     public void PopTarget()
     {
         if (Targets.Count == 0) return;
@@ -100,6 +113,7 @@ public class BetterTelloManager : MonoBehaviour
         Targets.Add(x);
         if (Targets.Count > 1)
             Targets[^2].GetComponent<TargetDrawer>().target = x.GetComponent<Transform>();
+        UpdateTargetPaths();
     }
 
     public async void ConnectToTello()
@@ -141,6 +155,7 @@ public class BetterTelloManager : MonoBehaviour
     void Awake()
     {
         this.flightPathController = GetComponent<FlightPathController>();
+        searchPatterns = GetComponent<SearchPatternBase>();
         ShowGoldenPath = GetComponent<ShowGoldenPath>();
         if (telloVideoTexture == null)
             telloVideoTexture = FindObjectOfType<RenderVideoStream>();
@@ -159,9 +174,21 @@ public class BetterTelloManager : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.T))
             Task.Factory.StartNew(async () => await Takeoff());
         else if (Input.GetKeyDown(KeyCode.P))
-            Task.Factory.StartNew(async () => await PathFind());
+        {
+            if (IsPathfinding == false)
+                Task.Factory.StartNew(async () => await PathFind());
+            else
+                IsPathfinding = false;
+
+        }
         else if (Input.GetKeyDown(KeyCode.W))
             Task.Factory.StartNew(async () => await Up(50));
+        else if (Input.GetKeyDown(KeyCode.O))
+            searchPatterns.Instantiate();
+        else if (Input.GetKeyDown(KeyCode.C))
+            ClearTargets();
+        else if (Input.GetKeyDown(KeyCode.H))
+            ReturnHome();
         UpdateTransform();
         if (BetterTello?.State != null)
             FlyingState = BetterTello.State.FlyingState;
@@ -208,12 +235,16 @@ public class BetterTelloManager : MonoBehaviour
         while(IsPathfinding)
         {
             await RotateToTarget(Scan: true);
+            if (!IsPathfinding)
+                break;
             await Step();
             if (DistanceToTarget < TargetTransformPrecision)
                 IsPathfinding = false;
         }
-        Debug.Log("Target Found");
+        Debug.Log("Stopped pathfinding");
     }
+
+    public Transform GetTargetSpawnTransform() => Targets.Count == 0 ? transform : Targets[^1].transform;
 
     public async Task Step()
     {
@@ -225,7 +256,7 @@ public class BetterTelloManager : MonoBehaviour
         {
             Debug.Log("Stepping");
             await Forward(Math.Clamp(ForwardDistance, 10, 70));
-            await ScanXDegrees();
+            await Task.Delay(20);
         }
     }
 

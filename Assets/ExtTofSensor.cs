@@ -38,7 +38,7 @@ public class ExtTofSensor : MonoBehaviour
 
     private void Update()
     {
-        if (UpdateRecieved && Prefab != null && ExtTof < 4000)
+        if (UpdateRecieved && Prefab != null && ExtTof < 4000 && ExtTof >= 200)
         {
             UpdateRecieved = false;
             Vector3 playerPos = telloTransform.position;
@@ -50,7 +50,7 @@ public class ExtTofSensor : MonoBehaviour
             s.Transform = telloTransform;
         }
 
-        RaycastHit[] hit = Physics.RaycastAll(transform.position, transform.TransformDirection(Vector3.forward), maxDistance: 1.2f * 100, layerMask: ObstacleMask);
+        RaycastHit[] hit = Physics.RaycastAll(transform.position, transform.TransformDirection(Vector3.forward), maxDistance: 0.2f * 100, layerMask: ObstacleMask);
         if (hit.Length > 0)
         {
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit[0].distance, Color.green);
@@ -60,7 +60,7 @@ public class ExtTofSensor : MonoBehaviour
         }
         else
         {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 1.2f * 10f, Color.red);
+            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * 0.2f * 100f, Color.red);
         }
 
     }
