@@ -342,7 +342,12 @@ PrefabInstance:
     - target: {fileID: 7388085353276283980, guid: 9bbaf63046a887149b54cd190f356407,
         type: 3}
       propertyPath: ForwardDistance
-      value: 60
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 7388085353276283980, guid: 9bbaf63046a887149b54cd190f356407,
+        type: 3}
+      propertyPath: DistanceBetweenTargets
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8713898228193900450, guid: 9bbaf63046a887149b54cd190f356407,
         type: 3}

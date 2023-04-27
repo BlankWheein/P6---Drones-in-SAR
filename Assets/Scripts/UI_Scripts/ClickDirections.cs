@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -24,7 +25,12 @@ public class ClickDirections : MonoBehaviour, IPointerClickHandler
 
             plane.Raycast(ray, out float d);
             Vector3 hit = ray.GetPoint(d);
-            betterTelloManager.AddTarget(new Vector3(hit.x, drone.transform.position.y, hit.z));
+            var targets = BetterTelloManager.Targets.Where(p => Vector3.Distance(p.transform.position, new Vector3(hit.x, drone.transform.position.y, hit.z)) <= betterTelloManager.DistanceBetweenTargets).ToList();
+            if (!targets.Any())
+                betterTelloManager.AddTarget(new Vector3(hit.x, drone.transform.position.y, hit.z));
+            else
+                foreach (var target in targets)
+                    betterTelloManager.RemoveTarget(target);
 
         }
 

@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Hierarchy
+  m_Title: Game
   m_RootView: {fileID: 3}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -147,7 +147,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 75
+  controlID: 27
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -757,7 +757,7 @@ MonoBehaviour:
   m_Rotation:
     m_Target: {x: 0.5328076, y: 0.07369844, z: -0.04661594, w: 0.8417526}
     speed: 2
-    m_Value: {x: -0.5328076, y: -0.07369844, z: 0.04661594, w: -0.8417525}
+    m_Value: {x: 0.53279805, y: 0.07369712, z: -0.046615105, w: 0.8417375}
   m_Size:
     m_Target: 18.18654
     speed: 2
@@ -972,9 +972,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: 20fbffff
+      m_SelectedIDs: 78550000
+      m_LastClickedID: 21880
+      m_ExpandedIDs: f4f9ffff1afbffff1efbffff20fbffff80550000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
