@@ -5,6 +5,8 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEditorInternal;
 using System.CodeDom;
+using System;
+using static SearchPatternBase;
 
 public class ManageButtons : MonoBehaviour
 {
@@ -63,15 +65,16 @@ public class ManageButtons : MonoBehaviour
                 ReturnText.color = customColor;
             }
         }
-        else
-        {
-            TakeOff.interactable = false;
-            TakeOffText.color = customColor;
-            Return.interactable = false;
-            ReturnText.color = customColor;
-            Pattern.interactable = false;
-            PatternText.color = customColor;
-        }
+        //else
+        //{
+
+        //    TakeOff.interactable = false;
+        //    TakeOffText.color = customColor;
+        //    Return.interactable = false;
+        //    ReturnText.color = customColor;
+        //    Pattern.interactable = false;
+        //    PatternText.color = customColor;
+        //}
 
         // if there are no targets(i.e. no path), you can't reset path
         if (BetterTelloManager.Targets.Count == 0)
@@ -117,11 +120,23 @@ public class ManageButtons : MonoBehaviour
 
     public void OnClearClick()
     {
-        //call the clear target function
+        Debug.Log("Clearing targets");
+        BetterTelloManager.RemoveAllTargets();
     }
 
     public void OnReturnClick() {
-    // call the return drone to home function
+        BetterTelloManager.ReturnHome();
+    }
+
+    public void OnSearchPatternChanged()
+    {
+        Debug.Log(PatternText.text);
+        if (Enum.TryParse(PatternText.text, out ESearchPattern res))
+        {
+            BetterTelloManager.GetComponent<SearchPatternBase>().SelectedPattern = res;
+            BetterTelloManager.GetComponent<SearchPatternBase>().InstantiatePattern();
+            Pattern.value = 0;
+        }
     }
 
 }

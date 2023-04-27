@@ -94,6 +94,21 @@ public class BetterTelloManager : MonoBehaviour
         Targets.RemoveAt(0);
         UpdateTargetPaths();
     }
+
+
+    public void ReturnHome()
+    {
+        RemoveAllTargets();
+        AddTarget(new Vector3(0, 0.1f, 0));
+    }
+
+
+    public void RemoveAllTargets()
+    {
+        while (Targets.Count > 0)
+            PopTarget();
+    }
+
     public void AddTarget(Vector3 pos)
     {
         GameObject x = Instantiate(TargetPrefab, TargetParent);
@@ -165,6 +180,8 @@ public class BetterTelloManager : MonoBehaviour
             Task.Factory.StartNew(async () => await PathFind());
         else if (Input.GetKeyDown(KeyCode.W))
             Task.Factory.StartNew(async () => await Up(50));
+        else if (Input.GetKeyDown(KeyCode.O))
+            GetComponent<SearchPatternBase>().InstantiatePattern();
         UpdateTransform();
         if (BetterTello?.State != null)
             FlyingState = BetterTello.State.FlyingState;
