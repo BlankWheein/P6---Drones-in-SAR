@@ -27,7 +27,7 @@ public class Obstacle : MonoBehaviour
     {
         obstacle = GetComponent<NavMeshObstacle>();
         var normal = NormalizedExtTof();
-        var res = Mathf.Clamp(normal * Radius, Radius/4, Radius);
+        var res = Mathf.Clamp(normal * Radius, Radius/2, Radius);
         obstacle.radius = res;
     }
 }

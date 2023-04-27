@@ -61,6 +61,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  betterTelloManager: {fileID: 0}
 --- !u!120 &4904268419473020979
 LineRenderer:
   serializedVersion: 2

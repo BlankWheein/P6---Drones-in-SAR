@@ -7,7 +7,6 @@ using UnityEngine.EventSystems;
 
 public class ClickDirections : MonoBehaviour, IPointerClickHandler
 {
-
     [SerializeField] private RectTransform screen;
     [SerializeField] private Camera droneCam;
     [SerializeField] private GameObject drone;
@@ -21,11 +20,11 @@ public class ClickDirections : MonoBehaviour, IPointerClickHandler
             localPoint.x = (localPoint.x / rect.width) + screen.pivot.x;
             localPoint.y = (localPoint.y / rect.height) + screen.pivot.y;
             Ray ray = droneCam.GetComponent<Camera>().ViewportPointToRay(localPoint);
-            Plane plane = new Plane(Vector2.down, Vector2.left);
-
+            Plane plane = new(Vector2.down, Vector2.left);
             plane.Raycast(ray, out float d);
             Vector3 hit = ray.GetPoint(d);
-            var targets = BetterTelloManager.Targets.Where(p => Vector3.Distance(p.transform.position, new Vector3(hit.x, drone.transform.position.y, hit.z)) <= betterTelloManager.DistanceBetweenTargets).ToList();
+            var targetPos = new Vector3(hit.x, drone.transform.position.y, hit.z);
+            var targets = BetterTelloManager.Targets.Where(p => Vector3.Distance(p.transform.position, targetPos) <= betterTelloManager.DistanceBetweenTargets).ToList();
             if (!targets.Any())
                 betterTelloManager.AddTarget(new Vector3(hit.x, drone.transform.position.y, hit.z));
             else
