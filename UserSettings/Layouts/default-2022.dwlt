@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Inspector
+  m_Title: Game
   m_RootView: {fileID: 3}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -43,8 +43,8 @@ MonoBehaviour:
     y: 0
     width: 705
     height: 939
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 100}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 28
+  controlID: 18
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -192,8 +192,8 @@ MonoBehaviour:
     y: 0
     width: 856
     height: 349
-  m_MinSize: {x: 201, y: 221}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 12}
   m_Panes:
   - {fileID: 12}
@@ -707,9 +707,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -129.81961, y: 84.235214, z: -108.93394}
+    m_Target: {x: -24.701086, y: 89.142044, z: -70.06576}
     speed: 2
-    m_Value: {x: -129.81961, y: 84.235214, z: -108.93394}
+    m_Value: {x: -24.701086, y: 89.142044, z: -70.06576}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -755,9 +755,9 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.21014819, y: -0.41363063, z: 0.09871646, w: -0.8803746}
+    m_Target: {x: -0.40755218, y: -0.08721064, z: 0.039133336, w: -0.90820086}
     speed: 2
-    m_Value: {x: -0.2101422, y: -0.41361886, z: 0.09871365, w: -0.8803495}
+    m_Value: {x: -0.407539, y: -0.087207824, z: 0.039132074, w: -0.90817153}
   m_Size:
     m_Target: 6.0621824
     speed: 2
