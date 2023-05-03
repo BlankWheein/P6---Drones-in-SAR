@@ -4,6 +4,7 @@ using BetterTelloLib.Commander.Factories;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
@@ -22,6 +23,7 @@ public class BetterTelloManager : MonoBehaviour
     public int ExtTofDistance = 800;
     [Min(10)]
     public int ForwardDistance = 70;
+    [SerializeField] private float droneSpeed;
 
     [Header("Targets")]
     public float DistanceBetweenTargets = 10;
@@ -56,6 +58,12 @@ public class BetterTelloManager : MonoBehaviour
     private List<Vector3> Vels = new();
     private bool waitingForOk = false;
     public bool IsPathfinding = false;
+
+    public bool MoveDrone { get; private set; }
+
+    private int DroneMoveCount;
+    private int DroneRotateCountCw;
+    private int DroneRotateCountCcw;
 
     private void Start()
     {
@@ -182,9 +190,24 @@ public class BetterTelloManager : MonoBehaviour
             Task.Factory.StartNew(async () => await Up(50));
         else if (Input.GetKeyDown(KeyCode.O))
             GetComponent<SearchPatternBase>().InstantiatePattern();
-        UpdateTransform();
+        else if (Input.GetKeyDown(KeyCode.I))
+            Yes();
+        if (ConnectionState == TelloConnectionState.Connected)
+            UpdateTransform();
+        else
+        {
+            MoveVirtualDroneForward();
+            RotateVirtualDrone();
+        }
         if (BetterTello?.State != null)
             FlyingState = BetterTello.State.FlyingState;
+    }
+
+    
+
+    public async void Yes()
+    {
+        await Cw(90);
     }
     private void FixedUpdate()
     {
@@ -207,19 +230,76 @@ public class BetterTelloManager : MonoBehaviour
         return r;
     }
     public async Task<int> Up(int x) => await RunCommand(BetterTello.Commands.Up, x);
+    public async Task<int> SetSpeed(int x) => await RunCommand(BetterTello.Commands.SetSpeed, x);
+    public async Task<int> Go(int x, int y, int z, int speed) => await RunCommand(BetterTello.Commands.GoSpeed, x, y, z, speed);
     public async Task<int> Cw(int x)
     {
-        BetterTello.Factories.ExtTofDelay = 10;
-        var res = await RunCommand(BetterTello.Commands.Cw, x);
-        return res;
+        if (ConnectionState == TelloConnectionState.Connected)
+        {
+            BetterTello.Factories.ExtTofDelay = 10;
+            var res = await RunCommand(BetterTello.Commands.Cw, x);
+            return res;
+        } else
+        {
+            DroneRotateCountCw = x;
+            while (DroneRotateCountCw >= 1)
+                await Task.Delay(10);
+            return 1;
+        }
     }
     public async Task<int> Ccw(int x)
     {
-        BetterTello.Factories.ExtTofDelay = 10;
-        var res = await RunCommand(BetterTello.Commands.Ccw, x);
-        return res;
+        if (ConnectionState == TelloConnectionState.Connected)
+        {
+            BetterTello.Factories.ExtTofDelay = 10;
+            var res = await RunCommand(BetterTello.Commands.Ccw, x);
+            return res;
+        }
+        else
+        {
+            DroneRotateCountCcw = x;
+            while (DroneRotateCountCcw >= 1)
+                await Task.Delay(10);
+            return 1;
+        }
     }
-    public async Task<int> Forward(int x) => await RunCommand(BetterTello.Commands.Forward, Math.Clamp(x, 1, 70));
+    public async Task<int> Forward(int x)
+    {
+
+        if (ConnectionState == TelloConnectionState.Connected)
+            return await RunCommand(BetterTello.Commands.Forward, Math.Clamp(x, 20, 70));
+        else
+        {
+            Debug.Log("Stepping");
+            DroneMoveCount = Math.Clamp(x, 20, 500);
+            while (DroneMoveCount >= 1)
+                await Task.Delay(10);
+            return 1;
+        }
+    }
+    private void RotateVirtualDrone()
+    {
+        RotateVirtualDroneCcw();
+        RotateVirtualDroneCw();
+    }
+    private void RotateVirtualDroneCw()
+    {
+        if (DroneRotateCountCw == 0) return;
+        transform.Rotate(0, 0.3f, 0);
+        DroneRotateCountCw -= 1;
+    }
+    private void RotateVirtualDroneCcw()
+    {
+        if (DroneRotateCountCcw == 0) return;
+        transform.Rotate(0, -0.3f, 0);
+        DroneRotateCountCcw -= 1;
+    }
+    private void MoveVirtualDroneForward()
+    {
+        if (DroneMoveCount == 0) return;
+        transform.position += transform.forward * Time.deltaTime * droneSpeed;
+        DroneMoveCount -= 1;
+    }
     public async Task<int> Back(int x) => await RunCommand(BetterTello.Commands.Back, x);
     public async Task PathFind()
     {
@@ -240,7 +320,7 @@ public class BetterTelloManager : MonoBehaviour
         if (DistanceToTarget > TargetTransformPrecision 
                 && ShowGoldenPath.IsTargetReachable
                 && ShowGoldenPath.status != UnityEngine.AI.NavMeshPathStatus.PathInvalid 
-                && ExtTof > ExtTofDistance
+                && (ExtTof > ExtTofDistance || ConnectionState != TelloConnectionState.Connected)
         )
         {
             Debug.Log("Stepping");
@@ -261,6 +341,10 @@ public class BetterTelloManager : MonoBehaviour
             await RotateToTarget(false);
         if (Scan)
             await ScanXDegrees();
+        if (DroneRotateCountCw > 0)
+            DroneRotateCountCw = 0;
+        if (DroneRotateCountCcw > 0)
+            DroneRotateCountCcw= 0;
     }
     private async Task ScanXDegrees()
     {
@@ -273,6 +357,12 @@ public class BetterTelloManager : MonoBehaviour
     public async Task<int> RunCommand(Func<int, int> Function, int x)
     {
         var ret = Function(x);
+        await WaitForOk();
+        return ret;
+    }
+    public async Task<int> RunCommand(Func<int, int, int, int, int> Function, int x, int y, int z, int speed)
+    {
+        var ret = Function(x, y, z, speed);
         await WaitForOk();
         return ret;
     }
@@ -317,7 +407,7 @@ public class BetterTelloManager : MonoBehaviour
             List<Vector3> localvel = Vels.ToArray()[1..^0].ToList();
             for (int i = 0; i < localvel.Count; i++)
             {
-                localvel[i] = new Vector3(localvel[i].x * localtime[i], localvel[i].y * localtime[i], localvel[i].z * localtime[i]);
+                localvel[i] = new Vector3(localvel[i].x * localtime[i] * 1.75f, localvel[i].y * localtime[i] * 1.75f, localvel[i].z * localtime[i] * 1.75f);
             }
             PositionVel = new Vector3()
             {
