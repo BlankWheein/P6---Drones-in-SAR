@@ -8,11 +8,16 @@ public class TargetDrawer : MonoBehaviour
     private LineRenderer lineRenderer;
     public BetterTelloManager betterTelloManager;
     
-
+    Color lineColor= new Color32(117, 184, 255, 255);
     void Start()
     {
         lineRenderer = GetComponent<LineRenderer>();
         betterTelloManager = GameObject.Find("Drone").GetComponent<BetterTelloManager>();
+
+        Material mat = new Material(Shader.Find("Legacy Shaders/Particles/Alpha Blended Premultiply"));
+        lineRenderer.material = mat;
+        lineRenderer.startColor = lineColor;
+        lineRenderer.endColor = lineColor;
     }
     
     void FixedUpdate()
@@ -29,6 +34,8 @@ public class TargetDrawer : MonoBehaviour
         {
             lineRenderer.positionCount = 2;
         }
+       
+
         lineRenderer.SetPosition(0, transform.position);
         lineRenderer.SetPosition(1, target.position);
     }

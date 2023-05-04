@@ -7,6 +7,7 @@ using UnityEditorInternal;
 using System.CodeDom;
 using System;
 using static SearchPatternBase;
+using System.Linq;
 
 public class ManageButtons : MonoBehaviour
 {
@@ -14,8 +15,12 @@ public class ManageButtons : MonoBehaviour
     public Button Return;
     public TMP_Dropdown Pattern;
     public Button Clear;
+    public GameObject DroneFans;
 
-    
+
+    List<Animator> fans = new List<Animator>();
+
+
     TMP_Text TakeOffText;
     TMP_Text ReturnText;
     TMP_Text PatternText;
@@ -29,11 +34,16 @@ public class ManageButtons : MonoBehaviour
     {
         BetterTelloManager = GameObject.Find("Drone").GetComponent<BetterTelloManager>();
 
-        TakeOffText= TakeOff.GetComponentInChildren<TMP_Text>();
+        TakeOffText = TakeOff.GetComponentInChildren<TMP_Text>();
         ReturnText = Return.GetComponentInChildren<TMP_Text>();
         PatternText = Pattern.GetComponentInChildren<TMP_Text>();
         ClearText = Clear.GetComponentInChildren<TMP_Text>();
 
+        foreach (Animator a in DroneFans.GetComponentsInChildren<Animator>())
+        {
+            fans.Add(a);
+            a.enabled=false;
+        }
     }
 
 
@@ -41,7 +51,7 @@ public class ManageButtons : MonoBehaviour
     {
 
         updateButtons();
-     
+
     }
 
     private void updateButtons()
@@ -57,30 +67,34 @@ public class ManageButtons : MonoBehaviour
                 ReturnText.color = Color.black;
                 Pattern.interactable = true;
                 PatternText.color = Color.black;
+                ShouldAnimationRun(true);
+
             }
             else
             {
                 TakeOffText.text = "TakeOff";
                 Return.interactable = false;
                 ReturnText.color = customColor;
+               ShouldAnimationRun(false);
             }
         }
-        //else
-        //{
+        else
+        {
 
-        //    TakeOff.interactable = false;
-        //    TakeOffText.color = customColor;
-        //    Return.interactable = false;
-        //    ReturnText.color = customColor;
-        //    Pattern.interactable = false;
-        //    PatternText.color = customColor;
-        //}
+            TakeOff.interactable = false;
+            TakeOffText.color = customColor;
+            Return.interactable = false;
+            ReturnText.color = customColor;
+            Pattern.interactable = false;
+            PatternText.color = customColor;
+            ShouldAnimationRun(false);
+        }
 
         // if there are no targets(i.e. no path), you can't reset path
         if (BetterTelloManager.Targets.Count == 0)
         {
             Clear.interactable = false;
-            ClearText.color = customColor;
+            ClearText.color = customColor;  
         }
         else
         {
@@ -89,6 +103,23 @@ public class ManageButtons : MonoBehaviour
         }
     }
 
+    private void ShouldAnimationRun (bool shouldRun){
+        if (shouldRun)
+        {
+            foreach(Animator  a in fans)
+            {
+                a.enabled = true;
+            }
+        }
+        else
+        {
+            foreach (Animator a in fans)
+            {
+                a.enabled = false;
+            }
+        }
+
+        }
 
     private async void UpdateFlightState()
     {
@@ -109,9 +140,6 @@ public class ManageButtons : MonoBehaviour
             Debug.Log("Not connected to tello drone");
         }
     }
-
-
-
 
     public void OnTakeOffClick()
     {
