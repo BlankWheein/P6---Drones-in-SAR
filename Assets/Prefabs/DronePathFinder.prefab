@@ -230,6 +230,8 @@ MonoBehaviour:
   ScanDegrees: 45
   ExtTofDistance: 800
   ForwardDistance: 45
+  droneSpeed: 0
+  DistanceBetweenTargets: 10
   TargetPrefab: {fileID: 0}
   TargetParent: {fileID: 0}
   DistanceToTarget: 0
@@ -667,11 +669,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3000342813365462400}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -1.3, y: 70.97, z: 0}
+  m_LocalPosition: {x: 0, y: 71.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 9170565736666578729}
+  m_Father: {fileID: 4155081566443413430}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!20 &2057930045865721815
@@ -1020,7 +1022,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 385b28a6c08f66548b24c3613b9812a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ExtTof: -1
+  Radius: 4
+  Min: 0
+  Max: 1300
   Transform: {fileID: 0}
 --- !u!208 &6172355000047635974
 NavMeshObstacle:
@@ -1074,6 +1078,7 @@ Transform:
   - {fileID: 8603053599978468587}
   - {fileID: 3323583504146413664}
   - {fileID: 6014988618613155379}
+  - {fileID: 1950026560662443592}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1192,11 +1197,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 6300711760044347364, guid: 6fc5b3c173580a44e8058b87e0ec8007,
-        type: 3}
-      insertIndex: 0
-      addedObject: {fileID: 1950026560662443592}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6fc5b3c173580a44e8058b87e0ec8007, type: 3}
 --- !u!4 &9170565736666578729 stripped

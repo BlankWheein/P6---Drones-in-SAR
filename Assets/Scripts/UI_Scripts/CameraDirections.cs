@@ -49,6 +49,10 @@ public class CameraDirections : MonoBehaviour, IPointerEnterHandler, IPointerExi
                 DroneCam.orthographicSize += Input.GetAxis("Mouse ScrollWheel") * 100;
             }
         }
+
+        //make the camera follow the drone
+        DroneCam.transform.position = new Vector3(drone.position.x, DroneCam.transform.position.y, drone.position.z);
+
     }
 
     void RotateX()

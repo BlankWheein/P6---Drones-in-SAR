@@ -10,7 +10,6 @@ public class ManageInfofield : MonoBehaviour
 {
     public Transform DroneTransform;
     public GameObject LowBatteryWarning;
-    public GameObject LowBatteryIcon;
     public TMP_Text dumpText;
     public TMP_Text InfoField;
     public RectTransform InfoFieldBG;
@@ -36,6 +35,10 @@ public class ManageInfofield : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (initialBatteryPercent == 0)
+        {
+            initialBatteryPercent = Drone.Bat;
+        }
         dumpText.SetText($" Distance: {Drone.DistanceToTarget} \n IsPathfinding: {Drone.IsPathfinding} \n ExtTof: {Drone.ExtTof} \n Pos: {Drone.transform.position} \n Temp: {Drone.BetterTello.State.Templ}/{Drone.BetterTello.State.Temph}\n Path: {Drone.ShowGoldenPath.status}\n Connection :{Drone.ConnectionState}");
         
 
@@ -90,6 +93,6 @@ public class ManageInfofield : MonoBehaviour
     public void DisableWarning ()
     {
         isWarningDisabled = true;
-        LowBatteryIcon.SetActive(true);
+        //LowBatteryIcon.SetActive(true);
     }
 }
