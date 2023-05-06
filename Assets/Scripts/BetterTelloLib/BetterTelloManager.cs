@@ -219,6 +219,7 @@ public class BetterTelloManager : MonoBehaviour
         Debug.Log("Takeoff!!!");
         var r = await RunCommand(BetterTello.Commands.Takeoff);
         flightPathController.drawFlightPath = true;
+        await PathFind();
         return r;
     }
     public async Task<int> Land()
