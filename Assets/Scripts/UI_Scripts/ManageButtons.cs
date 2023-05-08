@@ -158,8 +158,18 @@ public class ManageButtons : MonoBehaviour
 
     public void OnSearchPatternChanged()
     {
-        Debug.Log(PatternText.text);
-        if (Enum.TryParse(PatternText.text, out ESearchPattern res))
+        string PatternName="";
+        if (PatternText.text=="Parallel Track")
+        {
+            PatternName = "SpiralSearch";
+        }
+        else if( PatternText.text=="Expanding Square")
+        {
+            PatternName = "ParallelSearch";
+        }
+     
+
+        if (Enum.TryParse(PatternName, out ESearchPattern res))
         {
             BetterTelloManager.GetComponent<SearchPatternBase>().SelectedPattern = res;
             BetterTelloManager.GetComponent<SearchPatternBase>().InstantiatePattern();

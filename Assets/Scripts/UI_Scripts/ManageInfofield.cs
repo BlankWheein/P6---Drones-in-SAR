@@ -44,7 +44,7 @@ public class ManageInfofield : MonoBehaviour
 
         if ((Drone.Bat <= initialBatteryPercent / 2 && isWarningDisabled == false || Drone.Bat <= 20 && isWarningDisabled == false) 
             && Drone.Bat != -1 && Drone.ConnectionState == TelloConnectionState.Connected)
-            LowBatteryWarning.SetActive(true);
+           LowBatteryWarning.SetActive(false);
         else 
             LowBatteryWarning.SetActive(false);
 
