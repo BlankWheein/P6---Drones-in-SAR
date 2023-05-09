@@ -42,9 +42,9 @@ public class ManageInfofield : MonoBehaviour
         dumpText.SetText($" Distance: {Drone.DistanceToTarget} \n IsPathfinding: {Drone.IsPathfinding} \n ExtTof: {Drone.ExtTof} \n Pos: {Drone.transform.position} \n Temp: {Drone.BetterTello.State.Templ}/{Drone.BetterTello.State.Temph}\n Path: {Drone.ShowGoldenPath.status}\n Connection :{Drone.ConnectionState}");
         
 
-        if ((Drone.Bat <= initialBatteryPercent / 2 && isWarningDisabled == false || Drone.Bat <= 20 && isWarningDisabled == false) 
+        if ((/*Drone.Bat <= initialBatteryPercent / 2 && isWarningDisabled == false ||*/ Drone.Bat <= 20 && isWarningDisabled == false) 
             && Drone.Bat != -1 && Drone.ConnectionState == TelloConnectionState.Connected)
-           LowBatteryWarning.SetActive(false);
+           LowBatteryWarning.SetActive(true);
         else 
             LowBatteryWarning.SetActive(false);
 
@@ -55,18 +55,21 @@ public class ManageInfofield : MonoBehaviour
     {
         if (Drone.ConnectionState == TelloConnectionState.Connected)
         {
-            showFullInfoField=true;
-            InfoField.color = Color.black;
+            showFullInfoField=true; 
             expandBtn.SetActive(true);
             if (IsInfofieldExpanded)
             {
                 InfoField.SetText($"Connected to drone \n Battery:{Drone.Bat}\n State: {Drone.FlyingState}\n Coordinates: {Drone.transform.position}\n Target distance: {Drone.DistanceToTarget}");
-                InfoFieldBG.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, InfoField.renderedHeight + 25);          
+                InfoFieldBG.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, InfoField.renderedHeight + 25);
+                if (isWarningDisabled)
+                    InfoField.SetText($"Connected to drone \n <color=red>Battery:{Drone.Bat}\n</color> State: {Drone.FlyingState}\n Coordinates: {Drone.transform.position}\n Target distance: {Drone.DistanceToTarget}");
             }
             else
             {
                 InfoField.SetText($"Connected to drone \n Battery:{Drone.Bat}");
                 InfoFieldBG.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, InfoField.renderedHeight + 15);
+                if(isWarningDisabled) 
+                    InfoField.SetText($"Connected to drone \n <color=red>Battery:{Drone.Bat}</color>");
             }
         }
         else
@@ -74,25 +77,21 @@ public class ManageInfofield : MonoBehaviour
             showFullInfoField = false;
             IsInfofieldExpanded = false;
             expandBtn.SetActive(false);
-            InfoField.color = Color.red;
 
-            InfoField.SetText("Not connected to drone");
-            InfoFieldBG.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, InfoField.renderedHeight + 15);
-            
+            InfoField.SetText("<color=red>Not connected to drone</color>");
+            InfoFieldBG.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, InfoField.renderedHeight + 15);            
         }
     }
     public void ExpandInfofield()
     {
         if (showFullInfoField) {
             IsInfofieldExpanded = !IsInfofieldExpanded;
-            Console.WriteLine("jfioejoiefjeijeoefo");
             expandBtn.transform.Rotate(Vector3.forward * 180, Space.Self);
         }
     }
 
     public void DisableWarning ()
     {
-        isWarningDisabled = true;
-        //LowBatteryIcon.SetActive(true);
+        isWarningDisabled = true;;
     }
 }
