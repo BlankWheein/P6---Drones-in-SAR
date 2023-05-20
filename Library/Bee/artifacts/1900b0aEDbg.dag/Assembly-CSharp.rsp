@@ -397,6 +397,7 @@
 "Assets/Scripts/BetterTelloLib/UDP/TelloUdpSender.cs"
 "Assets/Scripts/BetterTelloLib/UDP/TelloUdpServer.cs"
 "Assets/Scripts/BetterTelloLib/UDP/Udp.cs"
+"Assets/Scripts/ObstacleSpawner.cs"
 "Assets/Scripts/TelloForUnity/TelloVideoTexture.cs"
 "Assets/Scripts/TelloForUnity/TextUpdater.cs"
 "Assets/Scripts/UI_Scripts/CameraDirections.cs"

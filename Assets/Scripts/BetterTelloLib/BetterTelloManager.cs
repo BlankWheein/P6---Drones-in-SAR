@@ -241,7 +241,7 @@ public class BetterTelloManager : MonoBehaviour
             return res;
         } else
         {
-            DroneRotateCountCw = x;
+            DroneRotateCountCw = x / 4;
             while (DroneRotateCountCw >= 1)
                 await Task.Delay(10);
             return 1;
@@ -257,7 +257,7 @@ public class BetterTelloManager : MonoBehaviour
         }
         else
         {
-            DroneRotateCountCcw = x;
+            DroneRotateCountCcw = x / 4;
             while (DroneRotateCountCcw >= 1)
                 await Task.Delay(10);
             return 1;
@@ -271,7 +271,7 @@ public class BetterTelloManager : MonoBehaviour
         else
         {
             Debug.Log("Stepping");
-            DroneMoveCount = Math.Clamp(x, 20, 500);
+            DroneMoveCount = Math.Clamp(x / 2, 20, 500);
             while (DroneMoveCount >= 1)
                 await Task.Delay(10);
             return 1;
@@ -285,13 +285,13 @@ public class BetterTelloManager : MonoBehaviour
     private void RotateVirtualDroneCw()
     {
         if (DroneRotateCountCw == 0) return;
-        transform.Rotate(0, 0.3f, 0);
+        transform.Rotate(0, 1f, 0);
         DroneRotateCountCw -= 1;
     }
     private void RotateVirtualDroneCcw()
     {
         if (DroneRotateCountCcw == 0) return;
-        transform.Rotate(0, -0.3f, 0);
+        transform.Rotate(0, -1f, 0);
         DroneRotateCountCcw -= 1;
     }
     private void MoveVirtualDroneForward()
@@ -305,7 +305,7 @@ public class BetterTelloManager : MonoBehaviour
     {
         IsPathfinding = true;
         Debug.Log("Started Pathfinding");
-        while(IsPathfinding)
+        while(IsPathfinding && ShowGoldenPath.status == UnityEngine.AI.NavMeshPathStatus.PathComplete)
         {
             await RotateToTarget(Scan: true);
             await Step();
@@ -319,18 +319,18 @@ public class BetterTelloManager : MonoBehaviour
     {
         if (DistanceToTarget > TargetTransformPrecision 
                 && ShowGoldenPath.IsTargetReachable
-                && ShowGoldenPath.status != UnityEngine.AI.NavMeshPathStatus.PathInvalid 
+                && ShowGoldenPath.status == UnityEngine.AI.NavMeshPathStatus.PathComplete 
                 && (ExtTof > ExtTofDistance || ConnectionState != TelloConnectionState.Connected)
         )
         {
             Debug.Log("Stepping");
             await Forward(Math.Clamp(ForwardDistance, 10, 70));
-            await ScanXDegrees();
         }
     }
 
     private async Task RotateToTarget(bool Scan)
     {
+        if (ShowGoldenPath.status != UnityEngine.AI.NavMeshPathStatus.PathComplete) return;
         Debug.Log($"Rotating... Scan:{Scan}");
         int rot = (int)ShowGoldenPath.targetY;
         if (rot < 0)
