@@ -38,7 +38,7 @@ public class CameraDirections : MonoBehaviour, IPointerEnterHandler, IPointerExi
     {
         if (isMouseOverScreen)
         {
-            RotateX();
+            //RotateX();
             //zoom in/out
             if (DroneCam.orthographicSize >= 5 && DroneCam.orthographicSize <= 500)
             {

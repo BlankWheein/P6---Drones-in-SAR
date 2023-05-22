@@ -376,6 +376,7 @@
 "Assets/FlightPathController.cs"
 "Assets/MeshScript.cs"
 "Assets/NavMeshShower.cs"
+"Assets/NoRotate.cs"
 "Assets/Obstacle.cs"
 "Assets/RenderVideoStream.cs"
 "Assets/Scripts/BetterTelloLib/BetterTello.cs"
