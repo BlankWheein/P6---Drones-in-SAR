@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEditorInternal;
 using System.CodeDom;
 using System;
 using static SearchPatternBase;

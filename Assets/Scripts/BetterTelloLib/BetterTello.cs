@@ -8,7 +8,6 @@ using System.Threading;
 using BetterTelloLib.Commander.Events;
 using BetterTelloLib.Commander.Factories;
 using BetterTelloLib.Udp;
-using UnityEditor.PackageManager;
 
 namespace BetterTelloLib.Commander
 {

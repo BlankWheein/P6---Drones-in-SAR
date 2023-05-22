@@ -241,7 +241,7 @@ public class BetterTelloManager : MonoBehaviour
             return res;
         } else
         {
-            DroneRotateCountCw = x / 4;
+            DroneRotateCountCw = 1;
             while (DroneRotateCountCw >= 1)
                 await Task.Delay(10);
             return 1;
@@ -257,7 +257,7 @@ public class BetterTelloManager : MonoBehaviour
         }
         else
         {
-            DroneRotateCountCcw = x / 4;
+            DroneRotateCountCcw = 1;
             while (DroneRotateCountCcw >= 1)
                 await Task.Delay(10);
             return 1;
@@ -285,13 +285,13 @@ public class BetterTelloManager : MonoBehaviour
     private void RotateVirtualDroneCw()
     {
         if (DroneRotateCountCw == 0) return;
-        transform.Rotate(0, 1f, 0);
+        transform.Rotate(0, 3f, 0);
         DroneRotateCountCw -= 1;
     }
     private void RotateVirtualDroneCcw()
     {
         if (DroneRotateCountCcw == 0) return;
-        transform.Rotate(0, -1f, 0);
+        transform.Rotate(0, -3f, 0);
         DroneRotateCountCcw -= 1;
     }
     private void MoveVirtualDroneForward()

@@ -16,6 +16,6 @@ public class NoRotate : MonoBehaviour
     void Update()
     {
         this.transform.rotation = my_rotation;
-        this.transform.position = new(Transform.position.x, 50, Transform.position.z);
+        //this.transform.position = new(Transform.position.x, 50, Transform.position.z);
     }
 }
