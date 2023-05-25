@@ -103,6 +103,15 @@ public class BetterTelloManager : MonoBehaviour
         UpdateTargetPaths();
     }
 
+    public async Task ForwardBack()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            await Forward(100);
+            await Back(100);
+        }
+    }
+
 
     public void ReturnHome()
     {
@@ -207,7 +216,7 @@ public class BetterTelloManager : MonoBehaviour
 
     public async void Yes()
     {
-        await Cw(90);
+        await ForwardBack();
     }
     private void FixedUpdate()
     {
