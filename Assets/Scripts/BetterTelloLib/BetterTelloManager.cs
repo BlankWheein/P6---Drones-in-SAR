@@ -25,6 +25,10 @@ public class BetterTelloManager : MonoBehaviour
     public int ForwardDistance = 70;
     [SerializeField] private float droneSpeed;
 
+    [Header("VirtualDroneVars")]
+    public float VirRotateSpeed = 1;
+    public float VirMoveSpeed = 1;
+
     [Header("Targets")]
     public float DistanceBetweenTargets = 10;
     public static List<GameObject> Targets = new();
@@ -201,13 +205,7 @@ public class BetterTelloManager : MonoBehaviour
             GetComponent<SearchPatternBase>().InstantiatePattern();
         else if (Input.GetKeyDown(KeyCode.I))
             Yes();
-        if (ConnectionState == TelloConnectionState.Connected)
-            UpdateTransform();
-        else
-        {
-            MoveVirtualDroneForward();
-            RotateVirtualDrone();
-        }
+        
         if (BetterTello?.State != null)
             FlyingState = BetterTello.State.FlyingState;
     }
@@ -222,6 +220,13 @@ public class BetterTelloManager : MonoBehaviour
     {
         flightPathController.CreateFlightPoint();
         DistanceToTarget = ShowGoldenPath.GetDistanceToTargetTransform();
+        if (ConnectionState == TelloConnectionState.Connected)
+            UpdateTransform();
+        else
+        {
+            MoveVirtualDroneForward();
+            RotateVirtualDrone();
+        }
     }
     public async Task<int> Takeoff()
     {
@@ -250,7 +255,7 @@ public class BetterTelloManager : MonoBehaviour
             return res;
         } else
         {
-            DroneRotateCountCw = 1;
+            DroneRotateCountCw = x / 4;
             while (DroneRotateCountCw >= 1)
                 await Task.Delay(10);
             return 1;
@@ -266,7 +271,7 @@ public class BetterTelloManager : MonoBehaviour
         }
         else
         {
-            DroneRotateCountCcw = 1;
+            DroneRotateCountCcw = x / 4;
             while (DroneRotateCountCcw >= 1)
                 await Task.Delay(10);
             return 1;
@@ -294,19 +299,19 @@ public class BetterTelloManager : MonoBehaviour
     private void RotateVirtualDroneCw()
     {
         if (DroneRotateCountCw == 0) return;
-        transform.Rotate(0, 3f, 0);
+        transform.Rotate(0, VirRotateSpeed, 0);
         DroneRotateCountCw -= 1;
     }
     private void RotateVirtualDroneCcw()
     {
         if (DroneRotateCountCcw == 0) return;
-        transform.Rotate(0, -3f, 0);
+        transform.Rotate(0, -VirRotateSpeed, 0);
         DroneRotateCountCcw -= 1;
     }
     private void MoveVirtualDroneForward()
     {
         if (DroneMoveCount == 0) return;
-        transform.position += transform.forward * Time.deltaTime * droneSpeed;
+        transform.position += transform.forward * Time.deltaTime * VirMoveSpeed;
         DroneMoveCount -= 1;
     }
     public async Task<int> Back(int x) => await RunCommand(BetterTello.Commands.Back, x);
